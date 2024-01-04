@@ -2,6 +2,44 @@ local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Networ
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimPlant = networkService:WaitForChild("Instancing_FireCustomFromClient")
 local player = game:GetService("Players").LocalPlayer
+local CorRegBuyMerchant = nil
+local CorAdvBuyMerchant = nil
+local CorGarBuyMerchant = nil
+local CorSnoBuyMerchant = nil
+
+local function BuyMerchant(Name, Pos, State, NameFun)
+    while true do
+        playerHumanoid = player.Character
+        if playerHumanoid then
+            RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
+            if RootPart then
+                CFramePart = RootPart.Position
+                RootPart.CFrame = Pos
+                wait(0.1)
+                if NameFun == "Sno" then
+                    for i = 2,6 do
+                        for j = 1,10 do
+                             merchantRequest:InvokeServer(Name, i)
+                             wait(0.001)
+                        end
+                        wait(0.2) 
+                    end
+                else
+                    for i = 1,6 do
+                        for j = 1,10 do
+                             merchantRequest:InvokeServer(Name, i)
+                             wait(0.001)
+                        end
+                        wait(0.2)                    
+                    end
+                    wait(0.1)
+                    RootPart.CFrame = CFrame.new(CFramePart)
+                end
+            end
+        end
+        wait(100)
+    end
+end
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
 
@@ -12,106 +50,62 @@ local Window = Library.CreateLib("Pet Simulator 99", "RJTheme2")
         local Section = Tab:NewSection("AutoBuy Merchant")
 
         Section:NewToggle("AutoBuy Merchant", "...", function(state)
-            while true do
-                if state then
-                    playerHumanoid = player.Character
-                    if playerHumanoid then
-                        RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
-                        if RootPart then
-                            CFramePart = RootPart.Position
-                            RootPart.CFrame = CFrame.new(368.82782, 17.6504326, 543.36051)
-                            wait(0.1)
-                            for i = 1,6 do
-                                for j = 1,10 do
-                                    merchantRequest:InvokeServer("RegularMerchant", i)
-                                    wait(0.001)
-                                end
-                                wait(0.2)                    
-                            end
-                            wait(0.1)
-                            RootPart.CFrame = CFrame.new(CFramePart)
-                        end
-                    end
+            if state then
+                if CorRegBuyMerchant then
+                    coroutine.resume(CorRegBuyMerchant, false)
                 end
-                wait(100)
+                CorRegBuyMerchant = coroutine.create(BuyMerchant)
+                coroutine.resume(CorRegBuyMerchant, true, "RegularMerchant", CFrame.new(368.82782, 17.6504326, 543.36051), state, "Reg")
+            else
+                if CorRegBuyMerchant then
+                    coroutine.resume(CorRegBuyMerchant, false)
+                    CorRegBuyMerchant = nil
+                end
             end
         end)
 
         Section:NewToggle("AutoBuy Advanced Merchant", "...", function(state)
-            while true do
-                if state then
-                    playerHumanoid = player.Character
-                    if playerHumanoid then
-                        RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
-                        if RootPart then
-                            CFramePart = RootPart.Position
-                            RootPart.CFrame = CFrame.new(818.6481323, 17.66573, 1539.2429199)
-                            wait(0.1)
-                            for i = 1,6 do
-                                for j = 1,10 do
-                                    merchantRequest:InvokeServer("AdvancedMerchant", i)
-                                    wait(0.001)
-                                end
-                                wait(0.2)                    
-                            end
-                            wait(0.1)
-                            RootPart.CFrame = CFrame.new(CFramePart)
-                        end
-                    end
+            if state then
+                if CorAdvBuyMerchant then
+                    coroutine.resume(CorAdvBuyMerchant, false)
                 end
-                wait(100)
+                CorAdvBuyMerchant = coroutine.create(BuyMerchant)
+                coroutine.resume(CorAdvBuyMerchant, true, "AdvancedMerchant", CFrame.new(818.6481323, 17.66573, 1539.2429199), state, "Adv")
+            else
+                if CorAdvBuyMerchant then
+                    coroutine.resume(CorAdvBuyMerchant, false)
+                    CorAdvBuyMerchant = nil
+                end
             end
         end)
 
         Section:NewToggle("AutoBuy Garden Merchant", "...", function(state)
-            while true do
-                if state then
-                    playerHumanoid = player.Character
-                    if playerHumanoid then
-                        RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
-                        if RootPart then
-                            CFramePart = RootPart.Position
-                            RootPart.CFrame = CFrame.new(259.746124267, 17.6442584, 2073.28051757)
-                            wait(0.1)
-                            for i = 1,6 do
-                                for j = 1,10 do
-                                    merchantRequest:InvokeServer("GardenMerchant", i)
-                                    wait(0.001)
-                                end
-                                wait(0.2)                    
-                            end
-                            wait(0.1)
-                            RootPart.CFrame = CFrame.new(CFramePart)
-                        end
-                    end
+            if state then
+                if CorGarBuyMerchant then
+                    coroutine.resume(CorGarBuyMerchant, false)
                 end
-                wait(100)
+                CorGarBuyMerchant = coroutine.create(BuyMerchant)
+                coroutine.resume(CorGarBuyMerchant, true, "GardenMerchant", CFrame.new(259.746124267, 17.6442584, 2073.28051757), state, "Gar")
+            else
+                if CorGarBuyMerchant then
+                    coroutine.resume(CorGarBuyMerchant, false)
+                    CorGarBuyMerchant = nil
+                end
             end
         end)
 
         Section:NewToggle("AutoBuy Snow Merchant", "...", function(state)
-            while true do
-                if state then
-                    playerHumanoid = player.Character
-                    if playerHumanoid then
-                        RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
-                        if RootPart then
-                            CFramePart = RootPart.Position
-                            RootPart.CFrame = CFrame.new(1258.35363769531, 17.64980506, 2649.2119140625)
-                            wait(0.1)
-                            for i = 2,6 do
-                                for j = 1,10 do
-                                    merchantRequest:InvokeServer("SnowMerchant", i)
-                                    wait(0.001)
-                                end
-                                wait(0.2)                    
-                            end
-                            wait(0.1)
-                            RootPart.CFrame = CFrame.new(CFramePart)
-                        end
-                    end
+            if state then
+                if CorSnoBuyMerchant then
+                    coroutine.resume(CorSnoBuyMerchant, false)
                 end
-                wait(100)
+                CorSnoBuyMerchant = coroutine.create(BuyMerchant)
+                coroutine.resume(CorSnoBuyMerchant, true, "SnowMerchant", CFrame.new(1258.35363769531, 17.64980506, 2649.2119140625), state, "Sno")
+            else
+                if CorSnoBuyMerchant then
+                    coroutine.resume(CorSnoBuyMerchant, false)
+                    CorSnoBuyMerchant = nil
+                end
             end
         end)
 
