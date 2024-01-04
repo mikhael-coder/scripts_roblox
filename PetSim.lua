@@ -101,7 +101,7 @@ local Window = Library.CreateLib("Pet Simulator 99", "RJTheme2")
                             wait(0.1)
                             for i = 2,6 do
                                 for j = 1,10 do
-                                    merchantRequest:InvokeServer("GardenMerchant", i)
+                                    merchantRequest:InvokeServer("SnowMerchant", i)
                                     wait(0.001)
                                 end
                                 wait(0.2)                    
