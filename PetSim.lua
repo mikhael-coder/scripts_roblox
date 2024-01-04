@@ -2,10 +2,6 @@ local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Networ
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimPlant = networkService:WaitForChild("Instancing_FireCustomFromClient")
 local player = game:GetService("Players").LocalPlayer
-local CorRegBuyMerchant = nil
-local CorAdvBuyMerchant = nil
-local CorGarBuyMerchant = nil
-local CorSnoBuyMerchant = nil
 
 local function BuyMerchant(Name, Pos, State, NameFun)
     while true do
@@ -41,90 +37,16 @@ local function BuyMerchant(Name, Pos, State, NameFun)
     end
 end
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = Library.CreateLib("Pet Simulator 99", "RJTheme2")
+local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!", IntroIcon = "rbxassetid://13074964538", Icon = "rbxassetid://13074964538"})
 
-    local Tab = Window:NewTab("AutoDo")
+    local TabAutoDo = Window:MakeTab({
+	    Name = "AutoDo",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
 
-        local Section = Tab:NewSection("AutoBuy Merchant")
-
-        Section:NewToggle("AutoBuy Merchant", "...", function(state)
-            if state then
-                if CorRegBuyMerchant then
-                    coroutine.resume(CorRegBuyMerchant, false)
-                end
-                CorRegBuyMerchant = coroutine.create(BuyMerchant)
-                coroutine.resume(CorRegBuyMerchant, true, "RegularMerchant", CFrame.new(368.82782, 17.6504326, 543.36051), state, "Reg")
-            else
-                if CorRegBuyMerchant then
-                    coroutine.resume(CorRegBuyMerchant, false)
-                    CorRegBuyMerchant = nil
-                end
-            end
-        end)
-
-        Section:NewToggle("AutoBuy Advanced Merchant", "...", function(state)
-            if state then
-                if CorAdvBuyMerchant then
-                    coroutine.resume(CorAdvBuyMerchant, false)
-                end
-                CorAdvBuyMerchant = coroutine.create(BuyMerchant)
-                coroutine.resume(CorAdvBuyMerchant, true, "AdvancedMerchant", CFrame.new(818.6481323, 17.66573, 1539.2429199), state, "Adv")
-            else
-                if CorAdvBuyMerchant then
-                    coroutine.resume(CorAdvBuyMerchant, false)
-                    CorAdvBuyMerchant = nil
-                end
-            end
-        end)
-
-        Section:NewToggle("AutoBuy Garden Merchant", "...", function(state)
-            if state then
-                if CorGarBuyMerchant then
-                    coroutine.resume(CorGarBuyMerchant, false)
-                end
-                CorGarBuyMerchant = coroutine.create(BuyMerchant)
-                coroutine.resume(CorGarBuyMerchant, true, "GardenMerchant", CFrame.new(259.746124267, 17.6442584, 2073.28051757), state, "Gar")
-            else
-                if CorGarBuyMerchant then
-                    coroutine.resume(CorGarBuyMerchant, false)
-                    CorGarBuyMerchant = nil
-                end
-            end
-        end)
-
-        Section:NewToggle("AutoBuy Snow Merchant", "...", function(state)
-            if state then
-                if CorSnoBuyMerchant then
-                    coroutine.resume(CorSnoBuyMerchant, false)
-                end
-                CorSnoBuyMerchant = coroutine.create(BuyMerchant)
-                coroutine.resume(CorSnoBuyMerchant, true, "SnowMerchant", CFrame.new(1258.35363769531, 17.64980506, 2649.2119140625), state, "Sno")
-            else
-                if CorSnoBuyMerchant then
-                    coroutine.resume(CorSnoBuyMerchant, false)
-                    CorSnoBuyMerchant = nil
-                end
-            end
-        end)
-
-        local Section = Tab:NewSection("AutoPlants")
-
-        Section:NewToggle("AutoClaim Plants", "...", function(state)
-            while state do
-                for i = 1,10 do
-                    claimPlant:InvokeServer("FlowerGarden", "ClaimPlant", i)
-                    wait(0.2)                    
-                end
-                wait(100)
-            end
-        end)
-
-    local Tab = Window:NewTab("Other")
-
-        local Section = Tab:NewSection("Scripts")
-
-        Section:NewButton("Infinite Yield", "...", function()
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
-        end)
+        local Section1 = TabAutoDo:AddSection({
+	        Name = "Merchant"
+        })
