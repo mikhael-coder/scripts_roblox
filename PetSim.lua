@@ -106,7 +106,7 @@ end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!", IntroIcon = "rbxassetid://13074964538", Icon = "rbxassetid://13074964538"})
+local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!", IntroIcon = "rbxassetid://13074964538"})
 
     local TabAutoDo = Window:MakeTab({
 	    Name = "AutoDo",
