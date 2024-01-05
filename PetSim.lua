@@ -164,7 +164,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	    Name = "Scripts"
         })
 
-            Tab:AddButton({
+            TabOther:AddButton({
 	        Name = "IY",
 	        Callback = function()
       		    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
