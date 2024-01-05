@@ -115,7 +115,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
     })
 
         local Section1 = TabAutoDo:AddSection({
-	        Name = "Merchant"
+	    Name = "Merchant"
         })
 
             TabAutoDo:AddToggle({
@@ -152,6 +152,23 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 		    _G.autoBuySnowMerchant = Value
 		    AutoBuySnowMerchant()
 	        end    
+            })
+
+    local TabOther = Window:MakeTab({
+	    Name = "Other",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
+
+        local Section2 = TabOther:AddSection({
+	    Name = "Scripts"
+        })
+
+            Tab:AddButton({
+	        Name = "IY",
+	        Callback = function()
+      		    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
+  	        end    
             })
 
 OrionLib:Init()
