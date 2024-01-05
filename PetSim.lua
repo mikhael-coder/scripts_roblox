@@ -1,12 +1,13 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
-local claimPlant = networkService:WaitForChild("Instancing_FireCustomFromClient")
+local claimGift = networkService:WaitForChild("Redeem Free Gift")
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
 _G.autoBuyGardenMerchant = false
 _G.autoBuySnowMerchant = false
+_G.autoClaimGifts = false
 
 local function AutoBuyRegularMerchant()
     while _G.autoBuyRegularMerchant do
@@ -104,6 +105,13 @@ local function AutoBuySnowMerchant()
     end
 end
 
+local function AutoClaimGifts()
+    for i = 1, 12 do
+        claimGift:InvokeServer(i)
+        wait(0.1)
+    end
+end
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
@@ -151,6 +159,19 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Callback = function(Value)
 		    _G.autoBuySnowMerchant = Value
 		    AutoBuySnowMerchant()
+	        end    
+            })
+
+        local Section3 = TabAutoDo:AddSection({
+	    Name = "Gifts"
+        })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoClaim Gifts",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimGifts = Value
+		    AutoClaimGifts()
 	        end    
             })
 
