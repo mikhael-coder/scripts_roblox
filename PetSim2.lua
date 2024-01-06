@@ -1,126 +1,131 @@
-local ClassNames = {"Script", "ModuleScript", "LocalScript"}
-local PathScript = ""
-print("")
-print("")
+local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
+local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
+local claimGift = networkService:WaitForChild("Redeem Free Gift")
+local player = game:GetService("Players").LocalPlayer
 
-local function printTable(t, indent, maxDepth, currentDepth)
-    indent = indent or 0
-    maxDepth = maxDepth or math.huge -- максимальная глубина по умолчанию (бесконечность)
-    currentDepth = currentDepth or 0
+_G.autoBuyRegularMerchant = false
+_G.autoBuyAdvancedMerchant = false
+_G.autoBuyGardenMerchant = false
+_G.autoBuySnowMerchant = false
+_G.autoClaimGifts = false
+_G.autoClaimSmallDiamonds = false
 
-    local spaces = string.rep(" ", indent)
-    if type(t) == "table" then
-        for k, v in pairs(t) do
-            local keyStr = tostring(k)
-            local valueStr = tostring(v)
-
-            if type(v) == "table" and currentDepth < maxDepth then
-                if keyStr:find("Triple") then
-                    print("Найден ключ Triple в скрипте " .. PathScript)
-                    print(keyStr)
-                end
-                if keyStr:find("108819920") then
-                    print("Найден ключ 108819920 в скрипте " .. PathScript)
-                    print(keyStr)
-                end
-                printTable(v, indent + 4, maxDepth, currentDepth + 1)
-            elseif type(v) == "function" and currentDepth < maxDepth then
-                if keyStr:find("Triple") then
-                    print("Найден ключ Triple в скрипте " .. PathScript)
-                    print(keyStr)
-                end
-                if keyStr:find("108819920") then
-                    print("Найден ключ 108819920 в скрипте " .. PathScript)
-                    print(keyStr)
-                end
-                printTable(v, indent + 4, maxDepth, currentDepth + 1)
-            else
-                if keyStr:find("Triple") then
-                    print("Найден ключ Triple в скрипте " .. PathScript)
-                    print(keyStr .. ": " .. valueStr)
-                end
-                if valueStr:find("Triple") then
-                    print("Найдено значение Triple в скрипте " .. PathScript)
-                    print(keyStr .. ": " .. valueStr)
-                end
-                if keyStr:find("108819920") then
-                    print("Найден ключ 108819920 в скрипте " .. PathScript)
-                    print(keyStr .. ": " .. valueStr)
-                end
-                if valueStr:find("108819920") then
-                    print("Найдено значение 108819920 в скрипте " .. PathScript)
-                    print(keyStr .. ": " .. valueStr)
-                end
-            end
-        end
-    elseif type(t) == "function" then
-        success, result = pcall(t)
-        if success then
-            if type(result) == "table" then
-                for k, v in pairs(result) do
-                    local keyStr = tostring(k)
-                    local valueStr = tostring(v)
-
-                    if type(v) == "table" and currentDepth < maxDepth then
-                        if keyStr:find("Triple") then
-                            print("Найден ключ Triple в скрипте " .. PathScript)
-                            print(keyStr)
-                        end
-                        if keyStr:find("108819920") then
-                            print("Найден ключ 108819920 в скрипте " .. PathScript)
-                            print(keyStr)
-                        end
-                        printTable(v, indent + 4, maxDepth, currentDepth + 1)
-                    elseif type(v) == "function" and currentDepth < maxDepth then
-                        if keyStr:find("Triple") then
-                            print("Найден ключ Triple в скрипте " .. PathScript)
-                            print(keyStr)
-                        end
-                        if keyStr:find("108819920") then
-                            print("Найден ключ 108819920 в скрипте " .. PathScript)
-                            print(keyStr)
-                        end
-                        printTable(v, indent + 4, maxDepth, currentDepth + 1)
-                    else
-                        if keyStr:find("Triple") then
-                            print("Найден ключ Triple в скрипте " .. PathScript)
-                            print(keyStr .. ": " .. valueStr)
-                        end
-                        if valueStr:find("Triple") then
-                            print("Найдено значение Triple в скрипте " .. PathScript)
-                            print(keyStr .. ": " .. valueStr)
-                        end
-                        if keyStr:find("108819920") then
-                            print("Найден ключ 108819920 в скрипте " .. PathScript)
-                            print(keyStr .. ": " .. valueStr)
-                        end
-                        if valueStr:find("108819920") then
-                            print("Найдено значение 108819920 в скрипте " .. PathScript)
-                            print(keyStr .. ": " .. valueStr)
-                        end
-                    end
-                end
-            elseif type(result) == "string" or type(result) == "number" then
-                result = tostring(result)
-                if result:find("Triple") then
-                    print("Найден результат функции Triple в скрипте " .. PathScript)
-                    print(keyStr)
-                end
-                if result:find("108819920") then
-                    print("Найден результат функции 108819920 в скрипте " .. PathScript)
-                    print(keyStr)
-                end
-            end
-        end
+local function GetPlayer()
+    playerHumanoid = player.Character
+    if playerHumanoid then
+        RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
+	return RootPart
+    elseif playerHumanoid == nil then
+	return nil
     end
 end
 
-for k, v in ipairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-    if table.find(ClassNames, v.ClassName) then
-        success, scriptormodule = pcall(require, v)
-        if success and scriptormodule ~= nil then
-            PathScript = v:GetFullName()
-            printTable(scriptormodule, 0, 8, 0)
+local function AutoBuyRegularMerchant()
+    while _G.autoBuyRegularMerchant do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(368.82782, 17.6504326, 543.36051)
+            wait(0.1)
+            for i = 1,6 do
+                for j = 1,10 do
+                    merchantRequest:InvokeServer("RegularMerchant", i)
+                    wait(0.001)
+                end
+                wait(0.2)                    
+            end
+            wait(0.1)
+            RootPart.CFrame = CFrame.new(CFramePart)
         end
+    wait(800)
     end
 end
+
+local function AutoBuyAdvancedMerchant()
+    while _G.autoBuyAdvancedMerchant do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(818.6481323, 17.66573, 1539.2429199)
+            wait(0.1)
+            for i = 1,6 do
+                for j = 1,10 do
+                    merchantRequest:InvokeServer("AdvancedMerchant", i)
+                    wait(0.001)
+                end
+                wait(0.2)                    
+            end
+            wait(0.1)
+            RootPart.CFrame = CFrame.new(CFramePart)
+        end
+    wait(950)
+    end
+end
+
+local function AutoBuyGardenMerchant()
+    while _G.autoBuyGardenMerchant do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(259.746124267, 17.6442584, 2073.28051757)
+            wait(0.1)
+            for i = 1,6 do
+                for j = 1,10 do
+                    merchantRequest:InvokeServer("GardenMerchant", i)
+                    wait(0.001)
+                end
+                wait(0.2)                    
+            end
+            wait(0.1)
+            RootPart.CFrame = CFrame.new(CFramePart)
+        end
+    wait(1000)
+    end
+end
+
+local function AutoBuySnowMerchant()
+    while _G.autoBuySnowMerchant do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(1258.35363769531, 17.64980506, 2649.2119140625)
+            wait(0.1)
+            for i = 2,6 do
+                for j = 1,10 do
+                        merchantRequest:InvokeServer("SnowMerchant", i)
+                    wait(0.001)
+                end
+                wait(0.2)                    
+            end
+            wait(0.1)
+            RootPart.CFrame = CFrame.new(CFramePart)
+        end
+    wait(1100)
+    end
+end
+
+local function AutoClaimGifts()
+    for i = 1, 12 do
+        claimGift:InvokeServer(i)
+        wait(0.1)
+    end
+end
+
+local function AutoClaimSmallDiamonds()
+    while _G.autoClaimSmallDiamonds do
+        RootPart = GetPlayer()
+	if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(561.092224, 17.6505299, -148.544724)
+            wait(0.5)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(900)
+    end
+end
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
+
+OrionLib:Init()
