@@ -1,221 +1,67 @@
-local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
-local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
-local claimGift = networkService:WaitForChild("Redeem Free Gift")
-local player = game:GetService("Players").LocalPlayer
+u2 = require(game:GetService("ReplicatedStorage").__INSTANCE_STORAGE.StairwayToHeaven.ClientModule)
+local kv = ""
+local infofunction = ""
+local info = ""
+local value = ""
+local tablevalues = ""
+local functionvalues = ""
+local threadvalues = ""
+local booleanvalues = ""
+local numbervalues = ""
+local stringvalues = ""
+local userdatavalues = ""
+print("")
 
-_G.autoBuyRegularMerchant = false
-_G.autoBuyAdvancedMerchant = false
-_G.autoBuyGardenMerchant = false
-_G.autoBuySnowMerchant = false
-_G.autoClaimGifts = false
-_G.autoClaimSmallDiamonds = false
-
-local function GetPlayer()
-    playerHumanoid = player.Character
-    if playerHumanoid then
-        RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
-	return RootPart
-    elseif playerHumanoid == nil then
-	return nil
+for k, v in pairs(u2) do
+    infofunction = ""
+    truefalse = ""
+    value = ""
+    if type(v) == "table" then
+        kv = "Таблица"
+        tablevalues = tablevalues .. k .. ": " .. kv .. "\n"
+    elseif type(v) == "function" then
+        kv = "Функция"
+        info = debug.getinfo(v)
+        infofunction = ", количество замыканий " .. tostring(info.nups)
+        functionvalues = functionvalues .. k .. ": " .. kv .. infofunction .. "\n"
+    elseif type(v) == "thread" then
+        kv = "Поток"
+        threadvalues = threadvalues .. k .. ": " .. kv .. "\n"
+    elseif type(v) == "boolean" then
+        kv = "Булево"
+        value = tostring(v)
+        booleanvalues = booleanvalues .. k .. ": " .. kv .. "(Значение: " .. value .. ")" .. "\n"
+    elseif type(v) == "number" then
+        kv = "Число"
+        value = tostring(v)
+        numbervalues = numbervalues .. k .. ": " .. kv .. "(Значение: " .. value .. ")" .. "\n"
+    elseif type(v) == "string" then
+        kv = "Строка"
+        value = v
+        stringvalues = stringvalues .. k .. ": " .. kv .. "(Значение: " .. value .. ")" .. "\n"
+    elseif type(v) == "userdata" then
+        kv = "Пользовательские данные"
+        userdatavalues = userdatavalues .. k .. ": " .. kv .. "\n"
     end
 end
-
-local function AutoBuyRegularMerchant()
-    while _G.autoBuyRegularMerchant do
-        RootPart = GetPlayer()
-        if RootPart then
-            CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(368.82782, 17.6504326, 543.36051)
-            wait(0.1)
-            for i = 1,6 do
-                for j = 1,10 do
-                    merchantRequest:InvokeServer("RegularMerchant", i)
-                    wait(0.001)
-                end
-                wait(0.2)                    
-            end
-            wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
-        end
-    wait(800)
-    end
+if functionvalues ~= "" then
+    print("Все функции:" .. "\n" .. functionvalues .. "\n")
 end
-
-local function AutoBuyAdvancedMerchant()
-    while _G.autoBuyAdvancedMerchant do
-        RootPart = GetPlayer()
-        if RootPart then
-            CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(818.6481323, 17.66573, 1539.2429199)
-            wait(0.1)
-            for i = 1,6 do
-                for j = 1,10 do
-                    merchantRequest:InvokeServer("AdvancedMerchant", i)
-                    wait(0.001)
-                end
-                wait(0.2)                    
-            end
-            wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
-        end
-    wait(950)
-    end
+if threadvalues ~= "" then
+    print("Все потоки:" .. "\n" .. threadvalues .. "\n")
 end
-
-local function AutoBuyGardenMerchant()
-    while _G.autoBuyGardenMerchant do
-        RootPart = GetPlayer()
-        if RootPart then
-            CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(259.746124267, 17.6442584, 2073.28051757)
-            wait(0.1)
-            for i = 1,6 do
-                for j = 1,10 do
-                    merchantRequest:InvokeServer("GardenMerchant", i)
-                    wait(0.001)
-                end
-                wait(0.2)                    
-            end
-            wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
-        end
-    wait(1000)
-    end
+if userdatavalues ~= "" then
+    print("Все переменные пользовательских данных:" .. "\n" .. userdatavalues .. "\n")
 end
-
-local function AutoBuySnowMerchant()
-    while _G.autoBuySnowMerchant do
-        RootPart = GetPlayer()
-        if RootPart then
-            CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(1258.35363769531, 17.64980506, 2649.2119140625)
-            wait(0.1)
-            for i = 2,6 do
-                for j = 1,10 do
-                        merchantRequest:InvokeServer("SnowMerchant", i)
-                    wait(0.001)
-                end
-                wait(0.2)                    
-            end
-            wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
-        end
-    wait(1100)
-    end
+if tablevalues ~= "" then
+    print("Все таблицы:" .. "\n" .. tablevalues .. "\n")
 end
-
-local function AutoClaimGifts()
-    for i = 1, 12 do
-        claimGift:InvokeServer(i)
-        wait(0.1)
-    end
+if stringvalues ~= "" then
+    print("Все строковые переменные:" .. "\n" .. stringvalues .. "\n")
 end
-
-local function AutoClaimSmallDiamonds()
-    while _G.autoClaimSmallDiamonds do
-        RootPart = GetPlayer()
-	if RootPart then
-            CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(561.092224, 17.6505299, -148.544724)
-            wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(900)
-    end
+if booleanvalues ~= "" then
+    print("Все булево значения:" .. "\n" .. booleanvalues .. "\n")
 end
-
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-
-local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
-
-
-    local TabAutoDo = Window:MakeTab({
-	    Name = "AutoDo",
-	    Icon = "rbxassetid://12767693169",
-	    PremiumOnly = false
-    })
-
-        local Section1 = TabAutoDo:AddSection({
-	    Name = "Merchant"
-        })
-
-            TabAutoDo:AddToggle({
-	        Name = "AutoBuy Regular Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuyRegularMerchant = Value
-		    AutoBuyRegularMerchant()
-	        end    
-            })
-
-            TabAutoDo:AddToggle({
-	        Name = "AutoBuy Advanced Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuyAdvancedMerchant = Value
-		    AutoBuyAdvancedMerchant()
-	        end    
-            })
-
-            TabAutoDo:AddToggle({
-	        Name = "AutoBuy Garden Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuyGardenMerchant = Value
-		    AutoBuyGardenMerchant()
-	        end    
-            })
-
-            TabAutoDo:AddToggle({
-	        Name = "AutoBuy Snow Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuySnowMerchant = Value
-		    AutoBuySnowMerchant()
-	        end    
-            })
-
-        local Section3 = TabAutoDo:AddSection({
-	    Name = "Gifts"
-        })
-
-            TabAutoDo:AddToggle({
-	        Name = "AutoClaim Gifts",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimGifts = Value
-		    AutoClaimGifts()
-	        end    
-            })
-
-        local Section4 = TabAutoDo:AddSection({
-	    Name = "Diamonds/Items"
-        })
-
-            TabAutoDo:AddToggle({
-	        Name = "AutoClaim Small Diamonds",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimSmallDiamonds = Value
-		    AutoClaimSmallDiamonds()
-	        end    
-            })
-
-    local TabOther = Window:MakeTab({
-	    Name = "Other",
-	    Icon = "rbxassetid://12767693169",
-	    PremiumOnly = false
-    })
-
-        local Section2 = TabOther:AddSection({
-	    Name = "Scripts"
-        })
-
-            TabOther:AddButton({
-	        Name = "IY",
-	        Callback = function()
-      		    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
-  	        end    
-            })
-
-OrionLib:Init()
+if numbervalues ~= "" then
+    print("Все числовые переменные:" .. "\n" .. numbervalues .. "\n")
+end
