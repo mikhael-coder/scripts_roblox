@@ -128,4 +128,94 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
 
+
+    local TabAutoDo = Window:MakeTab({
+	    Name = "AutoDo",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
+
+        local Section1 = TabAutoDo:AddSection({
+	    Name = "Merchant"
+        })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Regular Merchant",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoBuyRegularMerchant = Value
+		    AutoBuyRegularMerchant()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Advanced Merchant",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoBuyAdvancedMerchant = Value
+		    AutoBuyAdvancedMerchant()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Garden Merchant",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoBuyGardenMerchant = Value
+		    AutoBuyGardenMerchant()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Snow Merchant",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoBuySnowMerchant = Value
+		    AutoBuySnowMerchant()
+	        end    
+            })
+
+        local Section3 = TabAutoDo:AddSection({
+	    Name = "Gifts"
+        })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoClaim Gifts",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimGifts = Value
+		    AutoClaimGifts()
+	        end    
+            })
+
+        local Section4 = TabAutoDo:AddSection({
+	    Name = "Diamonds/Items"
+        })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoClaim Small Diamonds",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimSmallDiamonds = Value
+		    AutoClaimSmallDiamonds()
+	        end    
+            })
+
+    local TabOther = Window:MakeTab({
+	    Name = "Other",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
+
+        local Section2 = TabOther:AddSection({
+	    Name = "Scripts"
+        })
+
+            TabOther:AddButton({
+	        Name = "IY",
+	        Callback = function()
+      		    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
+  	        end    
+            })
+
 OrionLib:Init()
