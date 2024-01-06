@@ -1,7 +1,6 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
-local claimVending = networkServices:WaitForChild("VendingMachines_Purchase")
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
@@ -195,7 +194,7 @@ local function AutoClaimVending1()
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(894.693, 20.556, -11.465)
             wait(0.3)
-	    claimVending:InvokeServer("PotionVendingMachine1", 4)
+	    -- claimVending:InvokeServer("PotionVendingMachine1", 4)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(500)
