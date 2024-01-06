@@ -14,6 +14,13 @@ _G.autoClaimFreePotions = false
 _G.autoClaimFreeEnchants = false
 _G.autoClaimFreeItems = false
 _G.autoClaimBigDiamonds = false
+_G.autoClaimVending1 = false
+_G.autoClaimVending2 = false
+_G.autoClaimVending3 = false
+_G.autoClaimVending4 = false
+_G.autoClaimVending5 = false
+_G.autoClaimVending6 = false
+_G.autoClaimVending7 = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -37,12 +44,12 @@ local function AutoBuyRegularMerchant()
                     merchantRequest:InvokeServer("RegularMerchant", i)
                     wait(0.001)
                 end
-                wait(0.2)                    
+                wait(0.01)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(800)
+    wait(220)
     end
 end
 
@@ -58,12 +65,12 @@ local function AutoBuyAdvancedMerchant()
                     merchantRequest:InvokeServer("AdvancedMerchant", i)
                     wait(0.001)
                 end
-                wait(0.2)                    
+                wait(0.01)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(950)
+    wait(230)
     end
 end
 
@@ -79,12 +86,12 @@ local function AutoBuyGardenMerchant()
                     merchantRequest:InvokeServer("GardenMerchant", i)
                     wait(0.001)
                 end
-                wait(0.2)                    
+                wait(0.01)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(1000)
+    wait(240)
     end
 end
 
@@ -100,12 +107,12 @@ local function AutoBuySnowMerchant()
                         merchantRequest:InvokeServer("SnowMerchant", i)
                     wait(0.001)
                 end
-                wait(0.2)                    
+                wait(0.01)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(1100)
+    wait(250)
     end
 end
 
@@ -125,7 +132,7 @@ local function AutoClaimSmallDiamonds()
             wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(900)
+    wait(260)
     end
 end
 
@@ -138,7 +145,7 @@ local function AutoClaimFreePotions()
             wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1800)
+    wait(270)
     end
 end
 
@@ -151,7 +158,7 @@ local function AutoClaimFreeEnchants()
             wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(2700)
+    wait(280)
     end
 end
 
@@ -164,7 +171,7 @@ local function AutoClaimFreeItems()
             wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(3600)
+    wait(290)
     end
 end
 
@@ -177,7 +184,20 @@ local function AutoClaimBigDiamonds()
             wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(10800)
+    wait(300)
+    end
+end
+
+local function AutoClaimVending1()
+    while _G.autoClaimVending1 do
+        RootPart = GetPlayer()
+	if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(512.058, 20.628, 1316.557)
+            wait(0.5)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(300)
     end
 end
 
