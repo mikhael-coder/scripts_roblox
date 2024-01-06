@@ -193,11 +193,12 @@ local function AutoClaimVending1()
         RootPart = GetPlayer()
 	if RootPart then
             CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(512.058, 20.628, 1316.557)
-            wait(0.5)
+            RootPart.CFrame = CFrame.new(894.693, 20.556, -11.465)
+            wait(0.3)
+	    claimVending:InvokeServer("PotionVendingMachine1", 4)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(300)
+    wait(500)
     end
 end
 
