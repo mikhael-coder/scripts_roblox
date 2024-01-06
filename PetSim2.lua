@@ -1,4 +1,4 @@
-u2 = require(game:GetService("ReplicatedStorage").__INSTANCE_STORAGE.StairwayToHeaven.ClientModule)
+u2 = require(game:GetService("ReplicatedStorage").__INSTANCE_STORAGE.StairwayToHeaven.Common)
 local kv = ""
 local infofunction = ""
 local info = ""
