@@ -9,6 +9,10 @@ _G.autoBuyGardenMerchant = false
 _G.autoBuySnowMerchant = false
 _G.autoClaimGifts = false
 _G.autoClaimSmallDiamonds = false
+_G.autoClaimFreePotions = false
+_G.autoClaimFreeEnchants = false
+_G.autoClaimFreeItems = false
+_G.autoClaimBigDiamonds = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -124,6 +128,58 @@ local function AutoClaimSmallDiamonds()
     end
 end
 
+local function AutoClaimFreePotions()
+    while _G.autoClaimFreePotions do
+        RootPart = GetPlayer()
+	if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(695.568, 21.601, 559.959)
+            wait(0.5)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1800)
+    end
+end
+
+local function AutoClaimFreeEnchants()
+    while _G.autoClaimFreeEnchants do
+        RootPart = GetPlayer()
+	if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(212.173, -29.367, 844.209)
+            wait(0.5)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(2700)
+    end
+end
+
+local function AutoClaimFreeItems()
+    while _G.autoClaimFreeItems do
+        RootPart = GetPlayer()
+	if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(810.242, 20.559, 846.899)
+            wait(0.5)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(3600)
+    end
+end
+
+local function AutoClaimBigDiamonds()
+    while _G.autoClaimBigDiamonds do
+        RootPart = GetPlayer()
+	if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(512.058, 20.628, 1316.557)
+            wait(0.5)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(10800)
+    end
+end
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
@@ -197,6 +253,42 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Callback = function(Value)
 		    _G.autoClaimSmallDiamonds = Value
 		    AutoClaimSmallDiamonds()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoClaim Free Potions",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimFreePotions = Value
+		    AutoClaimFreePotions()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoClaim Free Enchants",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimFreeEnchants = Value
+		    AutoClaimFreeEnchants()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoClaim Free Items",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimFreeItems = Value
+		    AutoClaimFreeItems()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoClaim Big Diamonds",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimBigDiamonds = Value
+		    AutoClaimBigDiamonds()
 	        end    
             })
 
