@@ -1,6 +1,7 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
+local claimVending = networkServices:WaitForChild("VendingMachines_Purchase")
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
