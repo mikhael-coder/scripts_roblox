@@ -15,7 +15,7 @@ local function GetPlayer()
     if playerHumanoid then
         RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
 	return RootPart
-    else playerHumanoid == nil then
+    elseif playerHumanoid == nil then
 	return nil
     end
 end
