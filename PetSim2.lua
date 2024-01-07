@@ -119,6 +119,7 @@ for k, v in ipairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
     if table.find(ClassNames, v.ClassName) then
         success, scriptormodule = pcall(require, v)
         if success and scriptormodule ~= nil then
+            print(v:GetFullName())
             PathScript = v:GetFullName()
             printTable(scriptormodule, 0, 4, 0)
             wait(2)
