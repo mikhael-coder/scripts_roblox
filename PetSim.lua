@@ -1,6 +1,12 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
+local scripts = game:GetService("ReplicatedStorage"):WaitForChild("__DIRECTORY")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
+local claimVending = networkService:WaitForChild("VendingMachines_Purchase")
+local vendingMachines = scripts:WaitForChild("VendingMachines")
+local PotionVendingMachine1 = vendingMachines["VendingMachine | PotionVendingMachine1"]
+local EnchantVendingMachine1 = vendingMachines["VendingMachine | EnchantVendingMachine1"]
+local FruitVendingMachine1 = vendingMachines["VendingMachine | FruitVendingMachine1"]
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
@@ -154,7 +160,7 @@ local function AutoClaimFreeEnchants()
 	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(212.173, -29.367, 844.209)
-            wait(0.5)
+            wait(2)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(280)
@@ -190,11 +196,12 @@ end
 local function AutoClaimVending1()
     while _G.autoClaimVending1 do
         RootPart = GetPlayer()
+	game:GetService("ReplicatedStorage").__DIRECTORY.VendingMachines["VendingMachine | EnchantVendingMachine1"]	
 	if RootPart then
             CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(894.693, 20.556, -11.465)
+            RootPart.CFrame = CFrame.new(894.108, 17.653, -8.541)
             wait(0.3)
-	    -- claimVending:InvokeServer("PotionVendingMachine1", 4)
+	    claimVending:InvokeServer("PotionVendingMachine1", 4)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(500)
