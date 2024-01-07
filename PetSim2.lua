@@ -1,67 +1,127 @@
-u2 = require(game:GetService("ReplicatedStorage").__INSTANCE_STORAGE.StairwayToHeaven.Common)
-local kv = ""
-local infofunction = ""
-local info = ""
-local value = ""
-local tablevalues = ""
-local functionvalues = ""
-local threadvalues = ""
-local booleanvalues = ""
-local numbervalues = ""
-local stringvalues = ""
-local userdatavalues = ""
+local ClassNames = {"ModuleScript"}
+local PathScript = ""
+print("")
 print("")
 
-for k, v in pairs(u2) do
-    infofunction = ""
-    truefalse = ""
-    value = ""
-    if type(v) == "table" then
-        kv = "Таблица"
-        tablevalues = tablevalues .. k .. ": " .. kv .. "\n"
-    elseif type(v) == "function" then
-        kv = "Функция"
-        info = debug.getinfo(v)
-        infofunction = ", количество замыканий " .. tostring(info.nups)
-        functionvalues = functionvalues .. k .. ": " .. kv .. infofunction .. "\n"
-    elseif type(v) == "thread" then
-        kv = "Поток"
-        threadvalues = threadvalues .. k .. ": " .. kv .. "\n"
-    elseif type(v) == "boolean" then
-        kv = "Булево"
-        value = tostring(v)
-        booleanvalues = booleanvalues .. k .. ": " .. kv .. "(Значение: " .. value .. ")" .. "\n"
-    elseif type(v) == "number" then
-        kv = "Число"
-        value = tostring(v)
-        numbervalues = numbervalues .. k .. ": " .. kv .. "(Значение: " .. value .. ")" .. "\n"
-    elseif type(v) == "string" then
-        kv = "Строка"
-        value = v
-        stringvalues = stringvalues .. k .. ": " .. kv .. "(Значение: " .. value .. ")" .. "\n"
-    elseif type(v) == "userdata" then
-        kv = "Пользовательские данные"
-        userdatavalues = userdatavalues .. k .. ": " .. kv .. "\n"
+local function printTable(t, indent, maxDepth, currentDepth)
+    indent = indent or 0
+    maxDepth = maxDepth or math.huge -- максимальная глубина по умолчанию (бесконечность)
+    currentDepth = currentDepth or 0
+
+    local spaces = string.rep(" ", indent)
+    if type(t) == "table" then
+        for k, v in pairs(t) do
+            local keyStr = tostring(k)
+            local valueStr = tostring(v)
+
+            if type(v) == "table" and currentDepth < maxDepth then
+                if keyStr:find("Triple") then
+                    print("Найден ключ Triple в скрипте " .. PathScript)
+                    print(keyStr)
+                end
+                if keyStr:find("108819920") then
+                    print("Найден ключ 108819920 в скрипте " .. PathScript)
+                    print(keyStr)
+                end
+                printTable(v, indent + 4, maxDepth, currentDepth + 1)
+            elseif type(v) == "function" and currentDepth < maxDepth then
+                if keyStr:find("Triple") then
+                    print("Найден ключ Triple в скрипте " .. PathScript)
+                    print(keyStr)
+                end
+                if keyStr:find("108819920") then
+                    print("Найден ключ 108819920 в скрипте " .. PathScript)
+                    print(keyStr)
+                end
+                printTable(v, indent + 4, maxDepth, currentDepth + 1)
+            else
+                if keyStr:find("Triple") then
+                    print("Найден ключ Triple в скрипте " .. PathScript)
+                    print(keyStr .. ": " .. valueStr)
+                end
+                if valueStr:find("Triple") then
+                    print("Найдено значение Triple в скрипте " .. PathScript)
+                    print(keyStr .. ": " .. valueStr)
+                end
+                if keyStr:find("108819920") then
+                    print("Найден ключ 108819920 в скрипте " .. PathScript)
+                    print(keyStr .. ": " .. valueStr)
+                end
+                if valueStr:find("108819920") then
+                    print("Найдено значение 108819920 в скрипте " .. PathScript)
+                    print(keyStr .. ": " .. valueStr)
+                end
+            end
+        end
+    elseif type(t) == "function" then
+        success, result = pcall(t)
+        if success then
+            if type(result) == "table" then
+                for k, v in pairs(result) do
+                    local keyStr = tostring(k)
+                    local valueStr = tostring(v)
+
+                    if type(v) == "table" and currentDepth < maxDepth then
+                        if keyStr:find("Triple") then
+                            print("Найден ключ Triple в скрипте " .. PathScript)
+                            print(keyStr)
+                        end
+                        if keyStr:find("108819920") then
+                            print("Найден ключ 108819920 в скрипте " .. PathScript)
+                            print(keyStr)
+                        end
+                        printTable(v, indent + 4, maxDepth, currentDepth + 1)
+                    elseif type(v) == "function" and currentDepth < maxDepth then
+                        if keyStr:find("Triple") then
+                            print("Найден ключ Triple в скрипте " .. PathScript)
+                            print(keyStr)
+                        end
+                        if keyStr:find("108819920") then
+                            print("Найден ключ 108819920 в скрипте " .. PathScript)
+                            print(keyStr)
+                        end
+                        printTable(v, indent + 4, maxDepth, currentDepth + 1)
+                    else
+                        if keyStr:find("Triple") then
+                            print("Найден ключ Triple в скрипте " .. PathScript)
+                            print(keyStr .. ": " .. valueStr)
+                        end
+                        if valueStr:find("Triple") then
+                            print("Найдено значение Triple в скрипте " .. PathScript)
+                            print(keyStr .. ": " .. valueStr)
+                        end
+                        if keyStr:find("108819920") then
+                            print("Найден ключ 108819920 в скрипте " .. PathScript)
+                            print(keyStr .. ": " .. valueStr)
+                        end
+                        if valueStr:find("108819920") then
+                            print("Найдено значение 108819920 в скрипте " .. PathScript)
+                            print(keyStr .. ": " .. valueStr)
+                        end
+                    end
+                end
+            elseif type(result) == "string" or type(result) == "number" then
+                result = tostring(result)
+                if result:find("Triple") then
+                    print("Найден результат функции Triple в скрипте " .. PathScript)
+                    print(keyStr)
+                end
+                if result:find("108819920") then
+                    print("Найден результат функции 108819920 в скрипте " .. PathScript)
+                    print(keyStr)
+                end
+            end
+        end
     end
 end
-if functionvalues ~= "" then
-    print("Все функции:" .. "\n" .. functionvalues .. "\n")
-end
-if threadvalues ~= "" then
-    print("Все потоки:" .. "\n" .. threadvalues .. "\n")
-end
-if userdatavalues ~= "" then
-    print("Все переменные пользовательских данных:" .. "\n" .. userdatavalues .. "\n")
-end
-if tablevalues ~= "" then
-    print("Все таблицы:" .. "\n" .. tablevalues .. "\n")
-end
-if stringvalues ~= "" then
-    print("Все строковые переменные:" .. "\n" .. stringvalues .. "\n")
-end
-if booleanvalues ~= "" then
-    print("Все булево значения:" .. "\n" .. booleanvalues .. "\n")
-end
-if numbervalues ~= "" then
-    print("Все числовые переменные:" .. "\n" .. numbervalues .. "\n")
+
+for k, v in ipairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+    if table.find(ClassNames, v.ClassName) then
+        success, scriptormodule = pcall(require, v)
+        if success and scriptormodule ~= nil then
+            PathScript = v:GetFullName()
+            printTable(scriptormodule, 0, 4, 0)
+            wait(2)
+        end
+    end
 end
