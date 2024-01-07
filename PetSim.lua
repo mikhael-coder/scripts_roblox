@@ -196,15 +196,45 @@ end
 local function AutoClaimVending1()
     while _G.autoClaimVending1 do
         RootPart = GetPlayer()
-	game:GetService("ReplicatedStorage").__DIRECTORY.VendingMachines["VendingMachine | EnchantVendingMachine1"]	
-	if RootPart then
+	scr = require(PotionVendingMachine1)
+	if RootPart and scr.Stock == 4 then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(894.108, 17.653, -8.541)
             wait(0.3)
 	    claimVending:InvokeServer("PotionVendingMachine1", 4)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(500)
+    wait(1)
+    end
+end
+
+local function AutoClaimVending2()
+    while _G.autoClaimVending2 do
+        RootPart = GetPlayer()
+	scr = require(EnchantVendingMachine1)
+	if RootPart and scr.Stock == 4 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(367.222, 17.650, 78.061)
+            wait(0.3)
+	    claimVending:InvokeServer("EnchantVendingMachine1", 4)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
+    end
+end
+
+local function AutoClaimVending3()
+    while _G.autoClaimVending3 do
+        RootPart = GetPlayer()
+	scr = require(FruitVendingMachine1)
+	if RootPart and scr.Stock == 4 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(695.167, 17.650, 315.120)
+            wait(0.3)
+	    claimVending:InvokeServer("FruitVendingMachine1", 4)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
     end
 end
 
