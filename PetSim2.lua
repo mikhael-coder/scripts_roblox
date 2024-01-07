@@ -55,6 +55,9 @@ local function printTable(t, indent, maxDepth, currentDepth)
         end
     elseif type(t) == "function" then
         success, result = pcall(t)
+        if not success then
+            print("Ошибка при вызове yourFunction: " .. result) -- result содержит сообщение об ошибке.
+        end
         if success then
             if type(result) == "table" then
                 for k, v in pairs(result) do
@@ -118,6 +121,9 @@ end
 for k, v in ipairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
     if table.find(ClassNames, v.ClassName) then
         success, scriptormodule = pcall(require, v)
+        if not success then
+            print("Ошибка при вызове yourFunction: " .. result) -- result содержит сообщение об ошибке.
+        end
         if success and scriptormodule ~= nil then
             print(v:GetFullName())
             PathScript = v:GetFullName()
