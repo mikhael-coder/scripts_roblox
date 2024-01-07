@@ -118,7 +118,7 @@ local function printTable(t, indent, maxDepth, currentDepth)
     end
 end
 
-for k, v in ipairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+for k, v in ipairs(game:GetService("ReplicatedStorage").Network:GetDescendants()) do
     if table.find(ClassNames, v.ClassName) then
         success, scriptormodule = pcall(require, v)
         if not success then
