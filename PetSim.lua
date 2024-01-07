@@ -32,6 +32,8 @@ _G.autoClaimVending4 = false
 _G.autoClaimVending5 = false
 _G.autoClaimVending6 = false
 _G.autoClaimVending7 = false
+_G.autoClaimVending8 = false
+_G.autoClaimVending9 = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -383,6 +385,10 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 		    AutoBuySnowMerchant()
 	        end    
             })
+
+        local Section5 = TabAutoDo:AddSection({
+	    Name = "Vending Machines"
+        })
 
         local Section3 = TabAutoDo:AddSection({
 	    Name = "Gifts"
