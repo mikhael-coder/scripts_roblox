@@ -5,8 +5,14 @@ local claimGift = networkService:WaitForChild("Redeem Free Gift")
 local claimVending = networkService:WaitForChild("VendingMachines_Purchase")
 local vendingMachines = scripts:WaitForChild("VendingMachines")
 local PotionVendingMachine1 = vendingMachines["VendingMachine | PotionVendingMachine1"]
+local PotionVendingMachine2 = vendingMachines["VendingMachine | PotionVendingMachine2"]
+local RarePotionsVendingMachine1 = vendingMachines["VendingMachine | RarePotionsVendingMachine1"]
+local OPPotionsVendingMachine1 = vendingMachines["VendingMachine | OPPotionsVendingMachine1"]
 local EnchantVendingMachine1 = vendingMachines["VendingMachine | EnchantVendingMachine1"]
+local EnchantVendingMachine2 = vendingMachines["VendingMachine | EnchantVendingMachine2"]
+local RareEnchantsVendingMachine1 = vendingMachines["VendingMachine | RareEnchantsVendingMachine1"]
 local FruitVendingMachine1 = vendingMachines["VendingMachine | FruitVendingMachine1"]
+local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachine2"]
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
@@ -232,6 +238,96 @@ local function AutoClaimVending3()
             RootPart.CFrame = CFrame.new(695.167, 17.650, 315.120)
             wait(0.3)
 	    claimVending:InvokeServer("FruitVendingMachine1", 4)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
+    end
+end
+
+local function AutoClaimVending4()
+    while _G.autoClaimVending4 do
+        RootPart = GetPlayer()
+	scr = require(FruitVendingMachine2)
+	if RootPart and scr.Stock == 4 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(1021.298, 17.648, 1032.59)
+            wait(0.3)
+	    claimVending:InvokeServer("FruitVendingMachine2", 4)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
+    end
+end
+
+local function AutoClaimVending5()
+    while _G.autoClaimVending5 do
+        RootPart = GetPlayer()
+	scr = require(PotionVendingMachine2)
+	if RootPart and scr.Stock == 4 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(987.965, 17.665, 1302.139)
+            wait(0.3)
+	    claimVending:InvokeServer("PotionVendingMachine2", 4)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
+    end
+end
+
+local function AutoClaimVending6()
+    while _G.autoClaimVending6 do
+        RootPart = GetPlayer()
+	scr = require(EnchantVendingMachine2)
+	if RootPart and scr.Stock == 4 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(793.054, 17.665, 1779.194)
+            wait(0.3)
+	    claimVending:InvokeServer("EnchantVendingMachine2", 4)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
+    end
+end
+
+local function AutoClaimVending7()
+    while _G.autoClaimVending7 do
+        RootPart = GetPlayer()
+	scr = require(RarePotionsVendingMachine1)
+	if RootPart and scr.Stock == 1 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(1468.531, 17.657, 1927.468)
+            wait(0.3)
+	    claimVending:InvokeServer("RarePotionsVendingMachine1", 1)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
+    end
+end
+
+local function AutoClaimVending8()
+    while _G.autoClaimVending8 do
+        RootPart = GetPlayer()
+	scr = require(RareEnchantsVendingMachine1)
+	if RootPart and scr.Stock == 1 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(854.337, 20.497, 2109.328)
+            wait(0.3)
+	    claimVending:InvokeServer("RareEnchantsVendingMachine1", 1)
+	    RootPart.CFrame = CFrame.new(CFramePart)
+	end
+    wait(1)
+    end
+end
+
+local function AutoClaimVending9()
+    while _G.autoClaimVending9 do
+        RootPart = GetPlayer()
+	scr = require(OPPotionsVendingMachine1)
+	if RootPart and scr.Stock == 1 then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(1167.327, 17.665, 2855.184)
+            wait(0.3)
+	    claimVending:InvokeServer("OPPotionsVendingMachine1", 1)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(1)
