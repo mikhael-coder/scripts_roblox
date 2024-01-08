@@ -1,5 +1,6 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
 local scripts = game:GetService("ReplicatedStorage"):WaitForChild("__DIRECTORY")
+local space = game:GetService("Workspace")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
 local claimVending = networkService:WaitForChild("VendingMachines_Purchase")
@@ -13,6 +14,7 @@ local EnchantVendingMachine2 = vendingMachines["VendingMachine | EnchantVendingM
 local RareEnchantsVendingMachine1 = vendingMachines["VendingMachine | RareEnchantsVendingMachine1"]
 local FruitVendingMachine1 = vendingMachines["VendingMachine | FruitVendingMachine1"]
 local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachine2"]
+local Orbs = space.__THINGS.Orbs
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
@@ -34,6 +36,7 @@ _G.autoClaimVending6 = false
 _G.autoClaimVending7 = false
 _G.autoClaimVending8 = false
 _G.autoClaimVending9 = false
+_G.autoCollect = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -348,9 +351,43 @@ local function AutoClaimVending9()
     end
 end
 
+local function AutoCollect()
+    while _G.autoCollect do
+        RootPart = GetPlayer()
+	if RootPart then
+	    for i,v in ipairs(Orbs:GetChildren()) do
+	        if v ~= nil then
+		    v.CFrame = RootPart.CFrame
+		end
+		wait(0.00000001)
+	    end
+	end
+        wait(0.001)
+    end
+end
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
+
+    local TabAutoFarm = Window:MakeTab({
+	    Name = "AutoFarm",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
+
+        local Section6 = TabAutoFarm:AddSection({
+	    Name = "Farm"
+        })
+
+            TabAutoFarm:AddToggle({
+	        Name = "AutoCollect Tokens",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoCollect = Value
+		    AutoCollect()
+	        end    
+            })
 
     local TabAutoDo = Window:MakeTab({
 	    Name = "AutoDo",
