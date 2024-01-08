@@ -431,7 +431,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Default = false,
 	        Callback = function(Value)
 		    _G.autoClaimVending5 = Value
-		    autoClaimVending5()
+		    AutoClaimVending5()
 	        end    
             })
 
