@@ -142,7 +142,7 @@ local function AutoClaimSmallDiamonds()
 	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(561.092224, 17.6505299, -148.544724)
-            wait(0.5)
+            wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(260)
@@ -155,7 +155,7 @@ local function AutoClaimFreePotions()
 	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(695.568, 21.601, 559.959)
-            wait(0.5)
+            wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(270)
@@ -168,7 +168,7 @@ local function AutoClaimFreeEnchants()
 	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(212.173, -29.367, 844.209)
-            wait(2)
+            wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(280)
@@ -181,7 +181,7 @@ local function AutoClaimFreeItems()
 	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(810.242, 20.559, 846.899)
-            wait(0.5)
+            wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(290)
@@ -194,7 +194,7 @@ local function AutoClaimBigDiamonds()
 	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(512.058, 20.628, 1316.557)
-            wait(0.5)
+            wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
     wait(300)
@@ -208,7 +208,9 @@ local function AutoClaimVending1()
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(894.108, 17.653, -8.541)
             wait(0.3)
-	    claimVending:InvokeServer("PotionVendingMachine1", 4)
+	    for i = 1, 4 do
+	        claimVending:InvokeServer("PotionVendingMachine1", 1)
+	    end
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
@@ -223,7 +225,9 @@ local function AutoClaimVending2()
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(367.222, 17.650, 78.061)
             wait(0.3)
-	    claimVending:InvokeServer("EnchantVendingMachine1", 4)
+	    for i = 1, 4 do
+	        claimVending:InvokeServer("EnchantVendingMachine1", 1)
+	    end
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
@@ -238,7 +242,9 @@ local function AutoClaimVending3()
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(695.167, 17.650, 315.120)
             wait(0.3)
-	    claimVending:InvokeServer("FruitVendingMachine1", 4)
+	    for i = 1, 4 do
+	        claimVending:InvokeServer("FruitVendingMachine1", 1)
+	    end
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
@@ -253,7 +259,9 @@ local function AutoClaimVending4()
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(1021.298, 17.648, 1032.59)
             wait(0.3)
-	    claimVending:InvokeServer("FruitVendingMachine2", 4)
+	    for i = 1, 4 do
+	        claimVending:InvokeServer("FruitVendingMachine2", 1)
+	    end
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
@@ -268,7 +276,9 @@ local function AutoClaimVending5()
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(987.965, 17.665, 1302.139)
             wait(0.3)
-	    claimVending:InvokeServer("PotionVendingMachine2", 4)
+	    for i = 1, 4 do
+	        claimVending:InvokeServer("PotionVendingMachine2", 1)
+	    end
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
@@ -283,7 +293,9 @@ local function AutoClaimVending6()
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(793.054, 17.665, 1779.194)
             wait(0.3)
-	    claimVending:InvokeServer("EnchantVendingMachine2", 4)
+	    for i = 1, 4 do
+	        claimVending:InvokeServer("EnchantVendingMachine2", 1)
+	    end
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
