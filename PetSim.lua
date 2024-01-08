@@ -204,135 +204,135 @@ end
 local function AutoClaimVending1()
     while _G.autoClaimVending1 do
         RootPart = GetPlayer()
-	scr = require(PotionVendingMachine1)
-	if RootPart and scr.Stock == 4 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(894.108, 17.653, -8.541)
             wait(0.3)
 	    claimVending:InvokeServer("PotionVendingMachine1", 4)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(310)
     end
 end
 
 local function AutoClaimVending2()
     while _G.autoClaimVending2 do
         RootPart = GetPlayer()
-	scr = require(EnchantVendingMachine1)
-	if RootPart and scr.Stock == 4 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(367.222, 17.650, 78.061)
             wait(0.3)
 	    claimVending:InvokeServer("EnchantVendingMachine1", 4)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(320)
     end
 end
 
 local function AutoClaimVending3()
     while _G.autoClaimVending3 do
         RootPart = GetPlayer()
-	scr = require(FruitVendingMachine1)
-	if RootPart and scr.Stock == 4 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(695.167, 17.650, 315.120)
             wait(0.3)
 	    claimVending:InvokeServer("FruitVendingMachine1", 4)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(330)
     end
 end
 
 local function AutoClaimVending4()
     while _G.autoClaimVending4 do
         RootPart = GetPlayer()
-	scr = require(FruitVendingMachine2)
-	if RootPart and scr.Stock == 4 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(1021.298, 17.648, 1032.59)
             wait(0.3)
 	    claimVending:InvokeServer("FruitVendingMachine2", 4)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(340)
     end
 end
 
 local function AutoClaimVending5()
     while _G.autoClaimVending5 do
         RootPart = GetPlayer()
-	scr = require(PotionVendingMachine2)
-	if RootPart and scr.Stock == 4 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(987.965, 17.665, 1302.139)
             wait(0.3)
 	    claimVending:InvokeServer("PotionVendingMachine2", 4)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(350)
     end
 end
 
 local function AutoClaimVending6()
     while _G.autoClaimVending6 do
         RootPart = GetPlayer()
-	scr = require(EnchantVendingMachine2)
-	if RootPart and scr.Stock == 4 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(793.054, 17.665, 1779.194)
             wait(0.3)
 	    claimVending:InvokeServer("EnchantVendingMachine2", 4)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(360)
     end
 end
 
 local function AutoClaimVending7()
     while _G.autoClaimVending7 do
         RootPart = GetPlayer()
-	scr = require(RarePotionsVendingMachine1)
-	if RootPart and scr.Stock == 1 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(1468.531, 17.657, 1927.468)
             wait(0.3)
 	    claimVending:InvokeServer("RarePotionsVendingMachine1", 1)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(370)
     end
 end
 
 local function AutoClaimVending8()
     while _G.autoClaimVending8 do
         RootPart = GetPlayer()
-	scr = require(RareEnchantsVendingMachine1)
-	if RootPart and scr.Stock == 1 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(854.337, 20.497, 2109.328)
             wait(0.3)
 	    claimVending:InvokeServer("RareEnchantsVendingMachine1", 1)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(380)
     end
 end
 
 local function AutoClaimVending9()
     while _G.autoClaimVending9 do
         RootPart = GetPlayer()
-	scr = require(OPPotionsVendingMachine1)
-	if RootPart and scr.Stock == 1 then
+	if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(1167.327, 17.665, 2855.184)
             wait(0.3)
 	    claimVending:InvokeServer("OPPotionsVendingMachine1", 1)
+	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(1)
+    wait(390)
     end
 end
 
@@ -389,6 +389,87 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
         local Section5 = TabAutoDo:AddSection({
 	    Name = "Vending Machines"
         })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Potion Vending I",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending1 = Value
+		    AutoClaimVending1()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Enchant Vending I",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending2 = Value
+		    AutoClaimVending2()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Fruit Vending I",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending3 = Value
+		    AutoClaimVending3()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Fruit Vending II",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending4 = Value
+		    AutoClaimVending4()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Potion Vending II",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending5 = Value
+		    AutoClaimVending5()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Enchant Vending II",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending6 = Value
+		    AutoClaimVending6()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Rare Potion Vending",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending7 = Value
+		    AutoClaimVending7()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy Rare Enchant Vending",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending8 = Value
+		    AutoClaimVending8()
+	        end    
+            })
+
+            TabAutoDo:AddToggle({
+	        Name = "AutoBuy OP Potion Vending",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.AutoClaimVending9 = Value
+		    AutoClaimVending9()
+	        end    
+            })
 
         local Section3 = TabAutoDo:AddSection({
 	    Name = "Gifts"
