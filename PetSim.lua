@@ -55,9 +55,9 @@ local function AutoBuyRegularMerchant()
             for i = 1,6 do
                 for j = 1,10 do
                     merchantRequest:InvokeServer("RegularMerchant", i)
-                    wait(0.001)
+                    wait(0.0001)
                 end
-                wait(0.01)                    
+                wait(0.001)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
@@ -76,9 +76,9 @@ local function AutoBuyAdvancedMerchant()
             for i = 1,6 do
                 for j = 1,10 do
                     merchantRequest:InvokeServer("AdvancedMerchant", i)
-                    wait(0.001)
+                    wait(0.0001)
                 end
-                wait(0.01)                    
+                wait(0.001)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
@@ -97,9 +97,9 @@ local function AutoBuyGardenMerchant()
             for i = 1,6 do
                 for j = 1,10 do
                     merchantRequest:InvokeServer("GardenMerchant", i)
-                    wait(0.001)
+                    wait(0.0001)
                 end
-                wait(0.01)                    
+                wait(0.001)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
@@ -118,9 +118,9 @@ local function AutoBuySnowMerchant()
             for i = 2,6 do
                 for j = 1,10 do
                         merchantRequest:InvokeServer("SnowMerchant", i)
-                    wait(0.001)
+                    wait(0.0001)
                 end
-                wait(0.01)                    
+                wait(0.001)                    
             end
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
@@ -394,8 +394,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Potion Vending I",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending1 = Value
-		    AutoClaimVending1()
+		    _G.autoClaimVending1 = Value
+		    autoClaimVending1()
 	        end    
             })
 
@@ -403,8 +403,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Enchant Vending I",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending2 = Value
-		    AutoClaimVending2()
+		    _G.autoClaimVending2 = Value
+		    autoClaimVending2()
 	        end    
             })
 
@@ -412,8 +412,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Fruit Vending I",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending3 = Value
-		    AutoClaimVending3()
+		    _G.autoClaimVending3 = Value
+		    autoClaimVending3()
 	        end    
             })
 
@@ -421,8 +421,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Fruit Vending II",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending4 = Value
-		    AutoClaimVending4()
+		    _G.autoClaimVending4 = Value
+		    autoClaimVending4()
 	        end    
             })
 
@@ -430,8 +430,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Potion Vending II",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending5 = Value
-		    AutoClaimVending5()
+		    _G.autoClaimVending5 = Value
+		    autoClaimVending5()
 	        end    
             })
 
@@ -439,8 +439,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Enchant Vending II",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending6 = Value
-		    AutoClaimVending6()
+		    _G.autoClaimVending6 = Value
+		    autoClaimVending6()
 	        end    
             })
 
@@ -448,8 +448,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Rare Potion Vending",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending7 = Value
-		    AutoClaimVending7()
+		    _G.autoClaimVending7 = Value
+		    autoClaimVending7()
 	        end    
             })
 
@@ -457,8 +457,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy Rare Enchant Vending",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending8 = Value
-		    AutoClaimVending8()
+		    _G.autoClaimVending8 = Value
+		    autoClaimVending8()
 	        end    
             })
 
@@ -466,8 +466,8 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Name = "AutoBuy OP Potion Vending",
 	        Default = false,
 	        Callback = function(Value)
-		    _G.AutoClaimVending9 = Value
-		    AutoClaimVending9()
+		    _G.autoClaimVending9 = Value
+		    autoClaimVending9()
 	        end    
             })
 
