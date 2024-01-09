@@ -4,6 +4,7 @@ local space = game:GetService("Workspace")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
 local claimVending = networkService:WaitForChild("VendingMachines_Purchase")
+local claimCoin = networkService:WaitForChild("Orbs: Collect")
 local vendingMachines = scripts:WaitForChild("VendingMachines")
 local PotionVendingMachine1 = vendingMachines["VendingMachine | PotionVendingMachine1"]
 local PotionVendingMachine2 = vendingMachines["VendingMachine | PotionVendingMachine2"]
@@ -358,6 +359,7 @@ local function AutoCollect()
 	    for i,v in ipairs(Orbs:GetChildren()) do
 	        if v ~= nil then
 		    v.CFrame = RootPart.CFrame
+                    claimCoin:FireServer(v.Name)
 		end
 		wait(0.00000001)
 	    end
