@@ -612,6 +612,10 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
   	        end    
             })
 
+        local Section6 = TabOther:AddSection({
+	    Name = "Functions"
+        })
+
             TabOther:AddToggle({
 	        Name = "AntiAFK",
 	        Default = false,
