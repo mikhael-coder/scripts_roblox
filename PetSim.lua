@@ -1,6 +1,7 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
 local scripts = game:GetService("ReplicatedStorage"):WaitForChild("__DIRECTORY")
 local space = game:GetService("Workspace")
+local keyboard = game:GetService("VirtualInputManager")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
 local claimVending = networkService:WaitForChild("VendingMachines_Purchase")
@@ -38,6 +39,7 @@ _G.autoClaimVending7 = false
 _G.autoClaimVending8 = false
 _G.autoClaimVending9 = false
 _G.autoCollect = false
+_G.autoAFK = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -368,6 +370,15 @@ local function AutoCollect()
     end
 end
 
+local function AutoAFK()
+    while _G.autoAFK do
+        keyboard:SendKeyEvent(true, "W", false, game)
+	wait(0.1)
+	keyboard:SendKeyEvent(false, "W", false, game)
+	wait(300)
+    end
+end
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
@@ -599,6 +610,15 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        Callback = function()
       		    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
   	        end    
+            })
+
+            TabOther:AddToggle({
+	        Name = "AntiAFK",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoAFK = Value
+		    AutoAFK()
+	        end    
             })
 
 OrionLib:Init()
