@@ -2,6 +2,7 @@ local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Networ
 local scripts = game:GetService("ReplicatedStorage"):WaitForChild("__DIRECTORY")
 local space = game:GetService("Workspace")
 local keyboard = game:GetService("VirtualInputManager")
+local mineDig = networkService:WaitForChild("Instancing_FireCustomFromClient")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
 local claimVending = networkService:WaitForChild("VendingMachines_Purchase")
@@ -17,6 +18,9 @@ local RareEnchantsVendingMachine1 = vendingMachines["VendingMachine | RareEnchan
 local FruitVendingMachine1 = vendingMachines["VendingMachine | FruitVendingMachine1"]
 local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachine2"]
 local Orbs = space.__THINGS.Orbs
+local Mine = space.__THINGS.__INSTANCE_CONTAINER.Active.Digsite.Important
+local MineBlocks = Mine.ActiveBlocks
+local MineChests = Mine.ActiveChests
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
@@ -40,6 +44,8 @@ _G.autoClaimVending8 = false
 _G.autoClaimVending9 = false
 _G.autoCollect = false
 _G.autoAFK = false
+_G.typeMine = ""
+_G.autoMine = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -379,6 +385,38 @@ local function AutoAFK()
     end
 end
 
+local function AutoMine()
+    while _G.autoMine do
+        if _G.typeMine == "All" then
+	    RootPart = GetPlayer()
+	    if RootPart then
+		for i,v in ipairs(MineBlocks:GetChildren()) do
+		    if MineChests:GetChildren() ~= nil then
+			i = i - 1
+			for i1,v1 in ipairs(MineChests:GetChildren()) do
+	                    RootPart.CFrame = CFrame.new(v1.Position)
+		            coord = v1:GetAttribute("Coord")
+		            mineDig:FireServer("Digsite", "DigChest", coord)
+		            wait(2)
+		        end
+		    elseif v1:FindFirstChild("Ore") ~= nil then
+	                RootPart.CFrame = CFrame.new(v.Position)
+		        coord = v:GetAttribute("Coord")
+		        mineDig:FireServer("Digsite", "DigBlock", coord)
+		        wait(2)
+		    else
+			RootPart.CFrame = CFrame.new(v.Position)
+		        coord = v:GetAttribute("Coord")
+		        mineDig:FireServer("Digsite", "DigBlock", coord)
+		        wait(2)
+		    end
+		end
+	    end
+	end
+	wait(0.01)
+    end
+end
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
@@ -402,17 +440,47 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-    local TabAutoDo = Window:MakeTab({
-	    Name = "AutoDo",
+    local TabMine = Window:MakeTab({
+	    Name = "Mine",
 	    Icon = "rbxassetid://12767693169",
 	    PremiumOnly = false
     })
 
-        local Section1 = TabAutoDo:AddSection({
+        local Section7 = TabMine:AddSection({
+	    Name = "Mine"
+        })
+
+            TabMine:AddDropdown({
+	        Name = "Dropdown",
+	        Default = "All",
+	        Options = {"All", "Only blocks", "Only ores", "Only chests", "Only blocks/chests", "Only blocks/ores", "Only ores/chests"},
+	        Callback = function(Value)
+		    _G.typeMine = Value
+	        end    
+            })
+
+            TabMine:AddParagraph("Type mine", "Mining priority goes like this: 1) Chest; 2) Ore; 3) Block.")
+
+            TabMine:AddToggle({
+	        Name = "AutoMine",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoMine = Value
+		    AutoMine()
+	        end    
+            })
+
+    local TabMerchant = Window:MakeTab({
+	    Name = "Merchant",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
+
+        local Section1 = TabMerchant:AddSection({
 	    Name = "Merchant"
         })
 
-            TabAutoDo:AddToggle({
+            TabMerchant:AddToggle({
 	        Name = "AutoBuy Regular Merchant",
 	        Default = false,
 	        Callback = function(Value)
@@ -421,7 +489,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabMerchant:AddToggle({
 	        Name = "AutoBuy Advanced Merchant",
 	        Default = false,
 	        Callback = function(Value)
@@ -430,7 +498,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabMerchant:AddToggle({
 	        Name = "AutoBuy Garden Merchant",
 	        Default = false,
 	        Callback = function(Value)
@@ -439,7 +507,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabMerchant:AddToggle({
 	        Name = "AutoBuy Snow Merchant",
 	        Default = false,
 	        Callback = function(Value)
@@ -448,11 +516,17 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-        local Section5 = TabAutoDo:AddSection({
+    local TabVendingMachine = Window:MakeTab({
+	    Name = "Vending Machines",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
+
+        local Section5 = TabVendingMachine:AddSection({
 	    Name = "Vending Machines"
         })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Potion Vending I",
 	        Default = false,
 	        Callback = function(Value)
@@ -461,7 +535,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Enchant Vending I",
 	        Default = false,
 	        Callback = function(Value)
@@ -470,7 +544,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Fruit Vending I",
 	        Default = false,
 	        Callback = function(Value)
@@ -479,7 +553,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Fruit Vending II",
 	        Default = false,
 	        Callback = function(Value)
@@ -488,7 +562,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Potion Vending II",
 	        Default = false,
 	        Callback = function(Value)
@@ -497,7 +571,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Enchant Vending II",
 	        Default = false,
 	        Callback = function(Value)
@@ -506,7 +580,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Rare Potion Vending",
 	        Default = false,
 	        Callback = function(Value)
@@ -515,7 +589,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy Rare Enchant Vending",
 	        Default = false,
 	        Callback = function(Value)
@@ -524,7 +598,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabVendingMachine:AddToggle({
 	        Name = "AutoBuy OP Potion Vending",
 	        Default = false,
 	        Callback = function(Value)
@@ -533,24 +607,17 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-        local Section3 = TabAutoDo:AddSection({
-	    Name = "Gifts"
+    local TabItems = Window:MakeTab({
+	    Name = "Items",
+	    Icon = "rbxassetid://12767693169",
+	    PremiumOnly = false
+    })
+
+        local Section4 = TabItems:AddSection({
+	    Name = "Items"
         })
 
-            TabAutoDo:AddToggle({
-	        Name = "AutoClaim Gifts",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimGifts = Value
-		    AutoClaimGifts()
-	        end    
-            })
-
-        local Section4 = TabAutoDo:AddSection({
-	    Name = "Diamonds/Items"
-        })
-
-            TabAutoDo:AddToggle({
+            TabItems:AddToggle({
 	        Name = "AutoClaim Small Diamonds",
 	        Default = false,
 	        Callback = function(Value)
@@ -559,7 +626,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabItems:AddToggle({
 	        Name = "AutoClaim Free Potions",
 	        Default = false,
 	        Callback = function(Value)
@@ -568,7 +635,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabItems:AddToggle({
 	        Name = "AutoClaim Free Enchants",
 	        Default = false,
 	        Callback = function(Value)
@@ -577,7 +644,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabItems:AddToggle({
 	        Name = "AutoClaim Free Items",
 	        Default = false,
 	        Callback = function(Value)
@@ -586,7 +653,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
             })
 
-            TabAutoDo:AddToggle({
+            TabItems:AddToggle({
 	        Name = "AutoClaim Big Diamonds",
 	        Default = false,
 	        Callback = function(Value)
@@ -613,7 +680,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
             })
 
         local Section6 = TabOther:AddSection({
-	    Name = "Functions"
+	    Name = "Other Functions"
         })
 
             TabOther:AddToggle({
@@ -624,5 +691,21 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 		    AutoAFK()
 	        end    
             })
+
+            TabOther:AddToggle({
+	        Name = "AutoClaim Gifts",
+	        Default = false,
+	        Callback = function(Value)
+		    _G.autoClaimGifts = Value
+		    AutoClaimGifts()
+	        end    
+            })
+
+            TabOther:AddButton({
+	        Name = "Destroy GUI",
+	        Callback = function()
+	            OrionLib:Destroy()
+	        end    
+	    })
 
 OrionLib:Init()
