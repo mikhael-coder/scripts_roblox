@@ -387,39 +387,35 @@ end
 
 local function AutoMine()
     while _G.autoMine do
-	print("Прошёл!")
         if _G.typeMine == "All" then
 	    RootPart = GetPlayer()
 	    if RootPart then
-		print("Получил персонажа")
-		for i,v in ipairs(MineBlocks:GetChildren()) do
-		    print("Получил блоки")
-		    if MineChests:GetChildren() ~= nil then
-			i = i - 1
+		i = 0
+		while i <= #MineBlocks:GetChildren() do
+		    v = MineBlocks:GetChildren()[i]
+		    if #MineChests:GetChildren() > 0 then
 			for i1,v1 in ipairs(MineChests:GetChildren()) do
 	                    RootPart.CFrame = CFrame.new(v1.Position)
 		            coord = v1:GetAttribute("Coord")
 		            mineDig:FireServer("Digsite", "DigChest", coord)
 		            wait(2)
 		        end
-		    elseif v1:FindFirstChild("Ore") ~= nil then
-			print("Нету сундуков")
+		    elseif v:FindFirstChild("Ore") ~= nil then
 	                RootPart.CFrame = CFrame.new(v.Position)
 		        coord = v:GetAttribute("Coord")
 		        mineDig:FireServer("Digsite", "DigBlock", coord)
+			i = i + 1
 		        wait(2)
 		    else
-			print("Нету и сундуков и ископаемых")
 			RootPart.CFrame = CFrame.new(v.Position)
 		        coord = v:GetAttribute("Coord")
 		        mineDig:FireServer("Digsite", "DigBlock", coord)
+			i = i + 1
 		        wait(2)
 		    end
 		end
-		print("ХУета блоков нету")
 	    end
 	end
-        print("ХУета не прошёл проверку")
 	wait(0.01)
     end
 end
