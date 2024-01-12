@@ -18,9 +18,9 @@ local RareEnchantsVendingMachine1 = vendingMachines["VendingMachine | RareEnchan
 local FruitVendingMachine1 = vendingMachines["VendingMachine | FruitVendingMachine1"]
 local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachine2"]
 local Orbs = space.__THINGS.Orbs
-local Mine = space.__THINGS.__INSTANCE_CONTAINER.Active.Digsite.Important
-local MineBlocks = Mine.ActiveBlocks
-local MineChests = Mine.ActiveChests
+local Mine = space.__THINGS.__INSTANCE_CONTAINER.Active:WaitForChild("Digsite"):WaitForChild("Important")
+local MineBlocks = Mine:WaitForChild("ActiveBlocks")
+local MineChests = Mine:WaitForChild("ActiveChests")
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
