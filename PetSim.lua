@@ -393,33 +393,42 @@ local function AutoMine()
             MineChests = Mine:WaitForChild("ActiveChests")
 	end
         if _G.typeMine == "All" then
-	    RootPart = GetPlayer()
+            RootPart = GetPlayer()
 	    if RootPart then
 		i = 0
 		while i <= #MineBlocks:GetChildren() do
 		    v = MineBlocks:GetChildren()[i]
+                    if v ~= nil then
+                        ore = v:FindFirstChild("Ore")
+                    end
 		    if #MineChests:GetChildren() > 0 then
 			for i1,v1 in ipairs(MineChests:GetChildren()) do
-	                    RootPart.CFrame = CFrame.new(v1.Position)
-		            coord = v1:GetAttribute("Coord")
-		            mineDig:FireServer("Digsite", "DigChest", coord)
-		            wait(2)
+			    while v1 do
+	                        RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
+		                coord = v1:GetAttribute("Coord")
+		                mineDig:FireServer("Digsite", "DigChest", coord)
+		                wait(0.01)
+			    end
 		        end
-		    elseif v:FindFirstChild("Ore") ~= nil then
-	                RootPart.CFrame = CFrame.new(v.Position)
-		        coord = v:GetAttribute("Coord")
-		        mineDig:FireServer("Digsite", "DigBlock", coord)
-			i = i + 1
-		        wait(2)
-		    else
-			RootPart.CFrame = CFrame.new(v.Position)
-		        coord = v:GetAttribute("Coord")
-		        mineDig:FireServer("Digsite", "DigBlock", coord)
-			i = i + 1
-		        wait(2)
+		    elseif ore ~= nil then
+			while v do
+			    RootPart.CFrame = CFrame.new(v.Position)
+		            coord = v:GetAttribute("Coord")
+		            mineDig:FireServer("Digsite", "DigBlock", coord)
+		            wait(0.01)
+			end
+		    elseif v then
+			while v do
+			    RootPart.CFrame = CFrame.new(v.Position)
+		            coord = v:GetAttribute("Coord")
+		            mineDig:FireServer("Digsite", "DigBlock", coord)
+		            wait(0.01)
+			end
 		    end
+                    i = i + 1
+                    wait(0.000001)
 		end
-	    end
+            end
 	end
 	wait(0.01)
     end
