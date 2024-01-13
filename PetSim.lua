@@ -407,6 +407,7 @@ local function AutoMine()
 	                        RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
 		                coord = v1:GetAttribute("Coord")
 		                mineDig:FireServer("Digsite", "DigChest", coord)
+				print("Чехия!")
 		                wait(0.01)
 			    end
 		        end
