@@ -403,29 +403,40 @@ local function AutoMine()
                     end
 		    if #MineChests:GetChildren() > 0 then
 			for i1,v1 in ipairs(MineChests:GetChildren()) do
-			    while v1 do
-	                        RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
-		                coord = v1:GetAttribute("Coord")
-		                mineDig:FireServer("Digsite", "DigChest", coord)
-				print("Чехия!")
-		                wait(0.01)
+			    while true do
+				if v1 == nil then
+			            break
+				else
+				    RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
+		                    coord = v1:GetAttribute("Coord")
+		                    mineDig:FireServer("Digsite", "DigChest", coord)
+		                    wait(0.01)
+				end
 			    end
 		        end
 		        i = i - 1
 		    elseif ore ~= nil then
-			while v do
-			    RootPart.CFrame = CFrame.new(v.Position)
-		            coord = v:GetAttribute("Coord")
-		            mineDig:FireServer("Digsite", "DigBlock", coord)
-		            wait(0.01)
-			end
+		        while true do
+			    if v1 == nil then
+			        break
+			    else
+			        RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
+		                coord = v1:GetAttribute("Coord")
+		                mineDig:FireServer("Digsite", "DigBlock", coord)
+		                wait(0.01)
+			    end
+		        end
 		    elseif v then
-			while v do
-			    RootPart.CFrame = CFrame.new(v.Position)
-		            coord = v:GetAttribute("Coord")
-		            mineDig:FireServer("Digsite", "DigBlock", coord)
-		            wait(0.01)
-			end
+		        while true do
+			    if v1 == nil then
+			        break
+			    else
+			        RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
+		                coord = v1:GetAttribute("Coord")
+		                mineDig:FireServer("Digsite", "DigBlock", coord)
+		                wait(0.01)
+			    end
+		        end
 		    end
                     i = i + 1
                     wait(0.000001)
