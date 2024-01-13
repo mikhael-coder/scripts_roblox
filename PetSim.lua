@@ -18,9 +18,7 @@ local RareEnchantsVendingMachine1 = vendingMachines["VendingMachine | RareEnchan
 local FruitVendingMachine1 = vendingMachines["VendingMachine | FruitVendingMachine1"]
 local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachine2"]
 local Orbs = space.__THINGS.Orbs
-local Mine = space.__THINGS.__INSTANCE_CONTAINER.Active:WaitForChild("Digsite"):WaitForChild("Important")
-local MineBlocks = Mine:WaitForChild("ActiveBlocks")
-local MineChests = Mine:WaitForChild("ActiveChests")
+local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
 
 _G.autoBuyRegularMerchant = false
@@ -387,6 +385,13 @@ end
 
 local function AutoMine()
     while _G.autoMine do
+	Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
+	if Mine == nil then
+	    return
+	elseif Mine ~= nil then
+	    MineBlocks = Mine:WaitForChild("ActiveBlocks")
+            MineChests = Mine:WaitForChild("ActiveChests")
+	end
         if _G.typeMine == "All" then
 	    RootPart = GetPlayer()
 	    if RootPart then
