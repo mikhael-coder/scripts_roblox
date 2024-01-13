@@ -409,6 +409,7 @@ local function AutoMine()
 		                mineDig:FireServer("Digsite", "DigChest", coord)
 		                wait(0.01)
 			    end
+			    i = i - 1
 		        end
 		    elseif ore ~= nil then
 			while v do
