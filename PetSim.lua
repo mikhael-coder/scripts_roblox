@@ -1,6 +1,7 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
 local scripts = game:GetService("ReplicatedStorage"):WaitForChild("__DIRECTORY")
 local space = game:GetService("Workspace")
+local run = game:GetService("RunService")
 local keyboard = game:GetService("VirtualInputManager")
 local mineDig = networkService:WaitForChild("Instancing_FireCustomFromClient")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
@@ -20,14 +21,11 @@ local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachi
 local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
-local onOreAdded = space.Changed:Connect(printsomeval)
-local onChestAdded = space.Changed:Connect(printsomeval)
+local onOreAdded = run.RenderStepped:Connect(printsomeval)
+local onChestAdded = run.RenderStepped:Connect(printsomeval)
 
 local function printsomeval()
-    while true do
-        print("loading...")
-        wait(0.1)
-    end
+    print("loading...")
 end
 
 _G.autoBuyRegularMerchant = false
@@ -394,9 +392,6 @@ local function AutoAFK()
 	wait(300)
     end
 end
-
-onOreAdded = MineBlocks.ChildAdded:Connect(onOreAdded)
-onChestAdded = MineChests.ChildAdded:Connect(onChestAdded)
 
 local function processQueue()
     while _G.autoMine and #queue > 0 do
