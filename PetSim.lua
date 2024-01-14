@@ -22,13 +22,6 @@ local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
 
-local function printsomeval()
-    print("loading...")
-end
-
-_G.OreConnection = run.RenderStepped:Connect(printsomeval)
-_G.ChestConnection = run.RenderStepped:Connect(printsomeval)
-
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
 _G.autoBuyGardenMerchant = false
@@ -475,16 +468,16 @@ local function AutoMine()
 	end
         if _G.typeMine == "All" then
             RootPart = GetPlayer()
-	        if RootPart then
-	            for i,v in ipairs(MineChests:GetChildren()) do
-                        while v.Parent do
-                            RootPart.CFrame = CFrame.new(v:FindFirstChild("Bottom").Position)
-                            coord = v:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigChest", coord)
-                            wait(0.01)
-                        end
+	    if RootPart then
+	        for i,v in ipairs(MineChests:GetChildren()) do
+                    while v.Parent do
+                        RootPart.CFrame = CFrame.new(v:FindFirstChild("Bottom").Position)
+                        coord = v:GetAttribute("Coord")
+                        mineDig:FireServer("Digsite", "DigChest", coord)
                         wait(0.01)
-	            end
+                    end
+                    wait(0.01)
+	        end
                 for i,v in ipairs(MineBlocks:GetChildren()) do
                     ore = v:FindFirstChild("Ore")
                     if ore then
@@ -501,9 +494,11 @@ local function AutoMine()
                 DigBlock(MineBlocks)
                 _G.OreConnection = MineBlocks.ChildAdded:Connect(onOreAdded)
                 _G.ChestConnection = MineChests.ChildAdded:Connect(onChestAdded)
-	        end
+	    end
         end
     else
+        _G.OreConnection = MineBlocks.ChildAdded:Connect(onOreAdded)
+        _G.ChestConnection = MineChests.ChildAdded:Connect(onChestAdded)
         _G.OreConnection:Disconnect()
         _G.ChestConnection:Disconnect()
     end
@@ -799,8 +794,5 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	            OrionLib:Destroy()
 	        end    
 	    })
-
-onOreAdded:Disconnect()
-onChestAdded:Disconnect()
 
 OrionLib:Init()
