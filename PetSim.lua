@@ -407,6 +407,10 @@ local function processQueue()
         end
         wait(0.01)
     end
+    if #queue == 0 then
+        MineBlocks = Mine:WaitForChild("ActiveBlocks")
+	DigBlock(MineBlocks)
+    end
 end
 
 local function addToQueue(object, digType)
@@ -461,7 +465,7 @@ local function AutoMine()
 	        return
 	    elseif Mine then
 	        MineBlocks = Mine:WaitForChild("ActiveBlocks")
-            MineChests = Mine:WaitForChild("ActiveChests")
+                MineChests = Mine:WaitForChild("ActiveChests")
 	    end
         if _G.typeMine == "All" then
             RootPart = GetPlayer()
