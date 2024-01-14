@@ -20,8 +20,15 @@ local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachi
 local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
-local onOreAdded = nil
-local onChestAdded = nil
+local onOreAdded = space.Changed:Connect(printsomeval)
+local onChestAdded = space.Changed:Connect(printsomeval)
+
+local function printsomeval()
+    while true do
+        print("loading...")
+        wait(0.1)
+    end
+end
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
@@ -388,6 +395,9 @@ local function AutoAFK()
     end
 end
 
+onOreAdded = MineBlocks.ChildAdded:Connect(onOreAdded)
+onChestAdded = MineChests.ChildAdded:Connect(onChestAdded)
+
 local function processQueue()
     while _G.autoMine and #queue > 0 do
         local item = table.remove(queue, 1)
@@ -460,24 +470,24 @@ end
 
 local function AutoMine()
     if _G.autoMine then
-	    Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
-	    if not Mine then
-	        return
-	    elseif Mine then
-	        MineBlocks = Mine:WaitForChild("ActiveBlocks")
-                MineChests = Mine:WaitForChild("ActiveChests")
-	    end
+	Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
+	if not Mine then
+	    return
+	elseif Mine then
+	    MineBlocks = Mine:WaitForChild("ActiveBlocks")
+            MineChests = Mine:WaitForChild("ActiveChests")
+	end
         if _G.typeMine == "All" then
             RootPart = GetPlayer()
 	        if RootPart then
 	            for i,v in ipairs(MineChests:GetChildren()) do
-                    while v.Parent do
-                        RootPart.CFrame = CFrame.new(v:FindFirstChild("Bottom").Position)
-                        coord = v:GetAttribute("Coord")
-                        mineDig:FireServer("Digsite", "DigChest", coord)
+                        while v.Parent do
+                            RootPart.CFrame = CFrame.new(v:FindFirstChild("Bottom").Position)
+                            coord = v:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigChest", coord)
+                            wait(0.01)
+                        end
                         wait(0.01)
-                    end
-                    wait(0.01)
 	            end
                 for i,v in ipairs(MineBlocks:GetChildren()) do
                     ore = v:FindFirstChild("Ore")
@@ -491,17 +501,15 @@ local function AutoMine()
                         wait(0.01)
                     end
                     wait(0.01)
-	            end
+	        end
                 DigBlock(MineBlocks)
                 onOreAdded = MineBlocks.ChildAdded:Connect(onOreAdded)
                 onChestAdded = MineChests.ChildAdded:Connect(onChestAdded)
 	        end
         end
     else
-	if onOreAdded and onChestAdded then
-            onOreAdded:Disconnect()
-            onChestAdded:Disconnect()
-        end
+        onOreAdded:Disconnect()
+        onChestAdded:Disconnect()
     end
 end
 
