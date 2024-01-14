@@ -800,4 +800,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	        end    
 	    })
 
+onOreAdded:Disconnect()
+onChestAdded:Disconnect()
+
 OrionLib:Init()
