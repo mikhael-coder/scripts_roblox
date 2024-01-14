@@ -47,7 +47,6 @@ _G.autoAFK = false
 _G.typeMine = ""
 _G.autoMine = false
 _G.queue = {}
-_G.queueContinue = true
 
 local function GetPlayer()
     playerHumanoid = player.Character
