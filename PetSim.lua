@@ -20,6 +20,8 @@ local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachi
 local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
+local onOreAdded = nil
+local onChestAdded = nil
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
@@ -44,14 +46,18 @@ _G.autoCollect = false
 _G.autoAFK = false
 _G.typeMine = ""
 _G.autoMine = false
+_G.queue = {}
+_G.queueContinue = true
 
 local function GetPlayer()
     playerHumanoid = player.Character
     if playerHumanoid then
         RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
-	return RootPart
-    elseif playerHumanoid == nil then
-	return nil
+	if RootPart then
+	    return RootPart
+        else
+	    return nil
+        end
     end
 end
 
@@ -383,67 +389,114 @@ local function AutoAFK()
     end
 end
 
-local function AutoMine()
+local function processQueue()
+    while _G.autoMine and #queue > 0 do
+        local item = table.remove(queue, 1)
+        while item.object.Parent do
+            if item.object.Name == "Part" then
+                RootPart.CFrame = CFrame.new(item.object.Position)
+                coord = item.object:GetAttribute("Coord")
+                mineDig:FireServer("Digsite", item.digType, coord)
+                wait(0.01)
+            elseif item.object.Name == "Animated" then
+                RootPart.CFrame = CFrame.new(item.object:FindFirstChild("Bottom").Position)
+                coord = item.object:GetAttribute("Coord")
+                mineDig:FireServer("Digsite", item.digType, coord)
+                wait(0.01)
+            end
+            wait(0.01)
+        end
+        wait(0.01)
+    end
+end
+
+local function addToQueue(object, digType)
+    table.insert(queue, { object = object, digType = digType })
+end
+
+local function onChestAdded(chest)
+    addToQueue(chest, "DigChest")
+end
+
+local function onOreAdded(ore)
+    ore2 = ore:FindFirstChild("Ore")
+    if ore2 then
+        addToQueue(ore, "DigBlock")
+    end
+end
+
+local function DigBlock(MineBlocks)
     while _G.autoMine do
-	Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
-	if Mine == nil then
-	    return
-	elseif Mine ~= nil then
-	    MineBlocks = Mine:WaitForChild("ActiveBlocks")
+        RootPart = GetPlayer()
+        if RootPart then
+            for i,v in ipairs(MineBlocks:GetChildren()) do
+                ore = v:FindFirstChild("Ore")
+                if #queue == 0 then
+                    if not ore then
+                        while v.Parent do
+                            RootPart.CFrame = CFrame.new(v.Position)
+                            coord = v:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigBlock", coord)
+                            wait(0.01)
+                        end
+                        wait(0.01)
+                    end
+                    wait(0.01)
+                else
+                    processQueue()
+                    wait(0.01)
+                    return
+                end
+                wait(0.01)
+            end
+            wait(0.0001)
+        end
+        wait(0.001)
+    end
+end
+
+local function AutoMine()
+    if _G.autoMine then
+	    Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
+	    if not Mine then
+	        return
+	    elseif Mine then
+	        MineBlocks = Mine:WaitForChild("ActiveBlocks")
             MineChests = Mine:WaitForChild("ActiveChests")
-	end
+	    end
         if _G.typeMine == "All" then
             RootPart = GetPlayer()
-	    if RootPart then
-		i = 0
-		while i <= #MineBlocks:GetChildren() do
-		    v = MineBlocks:GetChildren()[i]
-                    if v ~= nil then
-                        ore = v:FindFirstChild("Ore")
+	        if RootPart then
+	            for i,v in ipairs(MineChests:GetChildren()) do
+                    while v.Parent do
+                        RootPart.CFrame = CFrame.new(v:FindFirstChild("Bottom").Position)
+                        coord = v:GetAttribute("Coord")
+                        mineDig:FireServer("Digsite", "DigChest", coord)
+                        wait(0.01)
                     end
-		    if #MineChests:GetChildren() > 0 then
-			for i1,v1 in ipairs(MineChests:GetChildren()) do
-			    while true do
-				if v1 == nil then
-			            break
-				else
-				    RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
-		                    coord = v1:GetAttribute("Coord")
-		                    mineDig:FireServer("Digsite", "DigChest", coord)
-		                    wait(0.01)
-				end
-			    end
-		        end
-		        i = i - 1
-		    elseif ore ~= nil then
-		        while true do
-			    if v1 == nil then
-			        break
-			    else
-			        RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
-		                coord = v1:GetAttribute("Coord")
-		                mineDig:FireServer("Digsite", "DigBlock", coord)
-		                wait(0.01)
-			    end
-		        end
-		    elseif v then
-		        while true do
-			    if v1 == nil then
-			        break
-			    else
-			        RootPart.CFrame = CFrame.new(v1:FindFirstChild("Bottom").Position)
-		                coord = v1:GetAttribute("Coord")
-		                mineDig:FireServer("Digsite", "DigBlock", coord)
-		                wait(0.01)
-			    end
-		        end
-		    end
-                    i = i + 1
-                    wait(0.000001)
-		end
-            end
-	end
-	wait(0.01)
+                    wait(0.01)
+	            end
+                for i,v in ipairs(MineBlocks:GetChildren()) do
+                    ore = v:FindFirstChild("Ore")
+                    if ore then
+                        while v.Parent do
+                            RootPart.CFrame = CFrame.new(v.Position)
+                            coord = v:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigBlock", coord)
+                            wait(0.01)
+                        end
+                        wait(0.01)
+                    end
+                    wait(0.01)
+	            end
+                DigBlock(MineBlocks)
+                onOreAdded = MineBlocks.ChildAdded:Connect(onOreAdded)
+                onChestAdded = MineChests.ChildAdded:Connect(onChestAdded)
+	        end
+        end
+    else
+        onOreAdded:Disconnect()
+        onChestAdded:Disconnect()
     end
 end
 
