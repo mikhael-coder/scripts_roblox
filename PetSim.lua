@@ -389,7 +389,7 @@ end
 
 local function processQueue()
     while _G.autoMine and #_G.queue > 0 do
-        local item = table.remove(queue, 1)
+        local item = table.remove(_G.queue, 1)
         while item.object.Parent do
             if item.object.Name == "Part" then
                 RootPart.CFrame = CFrame.new(item.object.Position)
