@@ -498,8 +498,10 @@ local function AutoMine()
 	        end
         end
     else
-        onOreAdded:Disconnect()
-        onChestAdded:Disconnect()
+	if onOreAdded and onChestAdded then
+            onOreAdded:Disconnect()
+            onChestAdded:Disconnect()
+        end
     end
 end
 
