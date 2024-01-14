@@ -26,8 +26,8 @@ local function printsomeval()
     print("loading...")
 end
 
-local onOreAdded = run.RenderStepped:Connect(printsomeval)
-local onChestAdded = run.RenderStepped:Connect(printsomeval)
+_G.OreConnection = run.RenderStepped:Connect(printsomeval)
+_G.ChestConnection = run.RenderStepped:Connect(printsomeval)
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
@@ -499,13 +499,13 @@ local function AutoMine()
                     wait(0.01)
 	        end
                 DigBlock(MineBlocks)
-                onOreAdded = MineBlocks.ChildAdded:Connect(onOreAdded)
-                onChestAdded = MineChests.ChildAdded:Connect(onChestAdded)
+                _G.OreConnection = MineBlocks.ChildAdded:Connect(onOreAdded)
+                _G.ChestConnection = MineChests.ChildAdded:Connect(onChestAdded)
 	        end
         end
     else
-        onOreAdded:Disconnect()
-        onChestAdded:Disconnect()
+        _G.OreConnection:Disconnect()
+        _G.ChestConnection:Disconnect()
     end
 end
 
