@@ -21,12 +21,13 @@ local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachi
 local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
-local onOreAdded = run.RenderStepped:Connect(printsomeval)
-local onChestAdded = run.RenderStepped:Connect(printsomeval)
 
 local function printsomeval()
     print("loading...")
 end
+
+local onOreAdded = run.RenderStepped:Connect(printsomeval)
+local onChestAdded = run.RenderStepped:Connect(printsomeval)
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
