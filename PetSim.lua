@@ -395,7 +395,7 @@ local function AutoAFK()
 end
 
 local function processQueue()
-    while _G.autoMine and #queue > 0 do
+    while _G.autoMine and #_G.queue > 0 do
         local item = table.remove(queue, 1)
         while item.object.Parent do
             if item.object.Name == "Part" then
@@ -413,14 +413,14 @@ local function processQueue()
         end
         wait(0.01)
     end
-    if #queue == 0 then
+    if #_G.queue == 0 then
         MineBlocks = Mine:WaitForChild("ActiveBlocks")
 	DigBlock(MineBlocks)
     end
 end
 
 local function addToQueue(object, digType)
-    table.insert(queue, { object = object, digType = digType })
+    table.insert(_G.queue, { object = object, digType = digType })
 end
 
 local function onChestAdded(chest)
@@ -440,7 +440,7 @@ local function DigBlock(MineBlocks)
         if RootPart then
             for i,v in ipairs(MineBlocks:GetChildren()) do
                 ore = v:FindFirstChild("Ore")
-                if #queue == 0 then
+                if #_G.queue == 0 then
                     if not ore then
                         while v.Parent do
                             RootPart.CFrame = CFrame.new(v.Position)
