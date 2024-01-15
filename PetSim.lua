@@ -47,6 +47,10 @@ _G.typeMine = ""
 _G.autoMine = false
 _G.queue = {}
 
+local function dosomething()
+    u = 1
+end
+
 local function GetPlayer()
     playerHumanoid = player.Character
     if playerHumanoid then
@@ -497,8 +501,8 @@ local function AutoMine()
 	    end
         end
     else
-        _G.OreConnection = MineBlocks.ChildAdded:Connect(onOreAdded)
-        _G.ChestConnection = MineChests.ChildAdded:Connect(onChestAdded)
+        _G.OreConnection = run.RenderStepped:Connect(dosomething)
+        _G.ChestConnection = run.RenderStepped:Connect(dosomething)
         _G.OreConnection:Disconnect()
         _G.ChestConnection:Disconnect()
     end
