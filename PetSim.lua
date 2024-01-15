@@ -394,6 +394,7 @@ end
 local function processQueue()
     while _G.autoMine and #_G.queue > 0 do
         local item = table.remove(_G.queue, 1)
+	print("Взят элемент " .. #_G.queue)
         while item.object.Parent do
             if item.object.Name == "Part" then
                 RootPart.CFrame = CFrame.new(item.object.Position)
@@ -422,6 +423,7 @@ end
 
 local function onChestAdded(chest)
     addToQueue(chest, "DigChest")
+    print("Найден сундучок")
 end
 
 local function onOreAdded(ore)
@@ -437,6 +439,7 @@ local function DigBlock(MineBlocks)
         if RootPart then
             for i,v in ipairs(MineBlocks:GetChildren()) do
                 ore = v:FindFirstChild("Ore")
+		print("Сколько ? " .. #_G.queue)
                 if #_G.queue == 0 then
                     if not ore then
                         while v.Parent do
