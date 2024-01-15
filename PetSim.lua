@@ -391,10 +391,43 @@ local function AutoAFK()
     end
 end
 
-local function processQueue()
+local processQueue = function()
+    u = 1
+end
+
+local function DigBlock(MineBlocks)
+    while _G.autoMine do
+        RootPart = GetPlayer()
+        if RootPart then
+            for i,v in ipairs(MineBlocks:GetChildren()) do
+                ore = v:FindFirstChild("Ore")
+                if #_G.queue == 0 then
+                    if not ore then
+                        while v.Parent do
+                            RootPart.CFrame = CFrame.new(v.Position)
+                            coord = v:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigBlock", coord)
+                            wait(0.01)
+                        end
+                        wait(0.01)
+                    end
+                    wait(0.01)
+                else
+                    processQueue()
+                    wait(0.01)
+                    return
+                end
+                wait(0.01)
+            end
+            wait(0.0001)
+        end
+        wait(0.001)
+    end
+end
+
+processQueue = function()
     while _G.autoMine and #_G.queue > 0 do
         local item = table.remove(_G.queue, 1)
-	print("Взят элемент " .. #_G.queue)
         while item.object.Parent do
             if item.object.Name == "Part" then
                 RootPart.CFrame = CFrame.new(item.object.Position)
@@ -419,48 +452,17 @@ end
 
 local function addToQueue(object, digType)
     table.insert(_G.queue, { object = object, digType = digType })
+    processQueue()
 end
 
 local function onChestAdded(chest)
     addToQueue(chest, "DigChest")
-    print("Найден сундучок")
 end
 
 local function onOreAdded(ore)
     ore2 = ore:FindFirstChild("Ore")
     if ore2 then
         addToQueue(ore, "DigBlock")
-    end
-end
-
-local function DigBlock(MineBlocks)
-    while _G.autoMine do
-        RootPart = GetPlayer()
-        if RootPart then
-            for i,v in ipairs(MineBlocks:GetChildren()) do
-                ore = v:FindFirstChild("Ore")
-		print("Сколько ? " .. #_G.queue)
-                if #_G.queue == 0 then
-                    if not ore then
-                        while v.Parent do
-                            RootPart.CFrame = CFrame.new(v.Position)
-                            coord = v:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigBlock", coord)
-                            wait(0.01)
-                        end
-                        wait(0.01)
-                    end
-                    wait(0.01)
-                else
-                    processQueue()
-                    wait(0.01)
-                    return
-                end
-                wait(0.01)
-            end
-            wait(0.0001)
-        end
-        wait(0.001)
     end
 end
 
