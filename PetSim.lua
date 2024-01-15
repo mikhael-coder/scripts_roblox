@@ -45,11 +45,6 @@ _G.autoCollect = false
 _G.autoAFK = false
 _G.typeMine = ""
 _G.autoMine = false
-_G.queue = {}
-
-local function dosomething()
-    u = 1
-end
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -67,20 +62,18 @@ local function AutoBuyRegularMerchant()
     while _G.autoBuyRegularMerchant do
         RootPart = GetPlayer()
         if RootPart then
-            CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(368.82782, 17.6504326, 543.36051)
             wait(0.1)
             for i = 1,6 do
-                for j = 1,10 do
+                for j = 1,5 do
                     merchantRequest:InvokeServer("RegularMerchant", i)
                     wait(0.0001)
                 end
                 wait(0.001)                    
             end
             wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(220)
+    wait(1)
     end
 end
 
@@ -92,7 +85,7 @@ local function AutoBuyAdvancedMerchant()
             RootPart.CFrame = CFrame.new(818.6481323, 17.66573, 1539.2429199)
             wait(0.1)
             for i = 1,6 do
-                for j = 1,10 do
+                for j = 1,5 do
                     merchantRequest:InvokeServer("AdvancedMerchant", i)
                     wait(0.0001)
                 end
@@ -101,7 +94,7 @@ local function AutoBuyAdvancedMerchant()
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(230)
+    wait(1)
     end
 end
 
@@ -113,7 +106,7 @@ local function AutoBuyGardenMerchant()
             RootPart.CFrame = CFrame.new(259.746124267, 17.6442584, 2073.28051757)
             wait(0.1)
             for i = 1,6 do
-                for j = 1,10 do
+                for j = 1,5 do
                     merchantRequest:InvokeServer("GardenMerchant", i)
                     wait(0.0001)
                 end
@@ -122,7 +115,7 @@ local function AutoBuyGardenMerchant()
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(240)
+    wait(1)
     end
 end
 
@@ -134,7 +127,7 @@ local function AutoBuySnowMerchant()
             RootPart.CFrame = CFrame.new(1258.35363769531, 17.64980506, 2649.2119140625)
             wait(0.1)
             for i = 2,6 do
-                for j = 1,10 do
+                for j = 1,5 do
                         merchantRequest:InvokeServer("SnowMerchant", i)
                     wait(0.0001)
                 end
@@ -143,7 +136,7 @@ local function AutoBuySnowMerchant()
             wait(0.1)
             RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(250)
+    wait(1)
     end
 end
 
@@ -163,7 +156,7 @@ local function AutoClaimSmallDiamonds()
             wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(260)
+    wait(1)
     end
 end
 
@@ -176,7 +169,7 @@ local function AutoClaimFreePotions()
             wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(270)
+    wait(1)
     end
 end
 
@@ -189,7 +182,7 @@ local function AutoClaimFreeEnchants()
             wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(280)
+    wait(1)
     end
 end
 
@@ -202,7 +195,7 @@ local function AutoClaimFreeItems()
             wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(290)
+    wait(1)
     end
 end
 
@@ -215,7 +208,7 @@ local function AutoClaimBigDiamonds()
             wait(3)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(300)
+    wait(1)
     end
 end
 
@@ -232,7 +225,7 @@ local function AutoClaimVending1()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(310)
+    wait(1)
     end
 end
 
@@ -249,7 +242,7 @@ local function AutoClaimVending2()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(320)
+    wait(1)
     end
 end
 
@@ -266,7 +259,7 @@ local function AutoClaimVending3()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(330)
+    wait(1)
     end
 end
 
@@ -283,7 +276,7 @@ local function AutoClaimVending4()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(340)
+    wait(1)
     end
 end
 
@@ -300,7 +293,7 @@ local function AutoClaimVending5()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(350)
+    wait(1)
     end
 end
 
@@ -317,7 +310,7 @@ local function AutoClaimVending6()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(360)
+    wait(1)
     end
 end
 
@@ -332,7 +325,7 @@ local function AutoClaimVending7()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(370)
+    wait(1)
     end
 end
 
@@ -347,7 +340,7 @@ local function AutoClaimVending8()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(380)
+    wait(1)
     end
 end
 
@@ -362,7 +355,7 @@ local function AutoClaimVending9()
 	    wait(0.5)
 	    RootPart.CFrame = CFrame.new(CFramePart)
 	end
-    wait(390)
+    wait(1)
     end
 end
 
@@ -388,81 +381,6 @@ local function AutoAFK()
 	wait(0.1)
 	keyboard:SendKeyEvent(false, "W", false, game)
 	wait(300)
-    end
-end
-
-local processQueue = function()
-    u = 1
-end
-
-local function DigBlock(MineBlocks)
-    while _G.autoMine do
-        RootPart = GetPlayer()
-        if RootPart then
-            for i,v in ipairs(MineBlocks:GetChildren()) do
-                ore = v:FindFirstChild("Ore")
-                if #_G.queue == 0 then
-                    if not ore then
-                        while v.Parent do
-                            RootPart.CFrame = CFrame.new(v.Position)
-                            coord = v:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigBlock", coord)
-                            wait(0.01)
-                        end
-                        wait(0.01)
-                    end
-                    wait(0.01)
-                else
-                    processQueue()
-                    wait(0.01)
-                    return
-                end
-                wait(0.01)
-            end
-            wait(0.0001)
-        end
-        wait(0.001)
-    end
-end
-
-processQueue = function()
-    while _G.autoMine and #_G.queue > 0 do
-        local item = table.remove(_G.queue, 1)
-        while item.object.Parent do
-            if item.object.Name == "Part" then
-                RootPart.CFrame = CFrame.new(item.object.Position)
-                coord = item.object:GetAttribute("Coord")
-                mineDig:FireServer("Digsite", item.digType, coord)
-                wait(0.01)
-            elseif item.object.Name == "Animated" then
-                RootPart.CFrame = CFrame.new(item.object:FindFirstChild("Bottom").Position)
-                coord = item.object:GetAttribute("Coord")
-                mineDig:FireServer("Digsite", item.digType, coord)
-                wait(0.01)
-            end
-            wait(0.01)
-        end
-        wait(0.01)
-    end
-    if #_G.queue == 0 then
-        MineBlocks = Mine:WaitForChild("ActiveBlocks")
-	DigBlock(MineBlocks)
-    end
-end
-
-local function addToQueue(object, digType)
-    table.insert(_G.queue, { object = object, digType = digType })
-    processQueue()
-end
-
-local function onChestAdded(chest)
-    addToQueue(chest, "DigChest")
-end
-
-local function onOreAdded(ore)
-    ore2 = ore:FindFirstChild("Ore")
-    if ore2 then
-        addToQueue(ore, "DigBlock")
     end
 end
 
@@ -505,11 +423,6 @@ local function AutoMine()
                 _G.ChestConnection = MineChests.ChildAdded:Connect(onChestAdded)
 	    end
         end
-    else
-        _G.OreConnection = run.RenderStepped:Connect(dosomething)
-        _G.ChestConnection = run.RenderStepped:Connect(dosomething)
-        _G.OreConnection:Disconnect()
-        _G.ChestConnection:Disconnect()
     end
 end
 
