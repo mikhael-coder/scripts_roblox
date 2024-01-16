@@ -43,7 +43,7 @@ _G.autoClaimVending8 = false
 _G.autoClaimVending9 = false
 _G.autoCollect = false
 _G.autoAFK = false
-_G.typeMine = ""
+_G.typeMine = "All"
 _G.autoMine = false
 
 local function GetPlayer()
