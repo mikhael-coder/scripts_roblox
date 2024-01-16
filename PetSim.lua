@@ -376,7 +376,7 @@ local function AutoCollect()
 end
 
 local function AutoMine()
-    Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
+    Mine = ActiveContainer:FindFirstChild("Digsite"):FindFirstChild("Important")
     if not Mine then
         OrionLib:MakeNotification({
             Name = "Mine!",
@@ -397,10 +397,12 @@ local function AutoMine()
                 i = 1
                 while #parts <= i do
                     if not _G.autoMine then
+                        wait(0.000001)
                         return
                     end
                     part = parts[i]
                     if not part then
+                        wait(0.000001)
                         i = i + 1
                     else
                         chest = MineChests:FindFirstChild("Animated")
@@ -414,6 +416,7 @@ local function AutoMine()
                             if i > 1 then
                                 i = i - 1
                             end
+                            wait(0.000001)
                         else
                             while part.Parent do
                                 RootPart.CFrame = CFrame.new(part.Position)
@@ -422,13 +425,17 @@ local function AutoMine()
                                 wait(0.000001)
                             end
                             i = i + 1
+                            wait(0.000001)
                         end
+                        wait(0.000001)
                     end
                     wait(0.000001)
                 end
             end
         end
+        wait(0.000001)
     end
+    wait(0.000001)
 end
 
 local function AutoAFK()
