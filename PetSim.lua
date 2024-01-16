@@ -50,10 +50,10 @@ local function GetPlayer()
     playerHumanoid = player.Character
     if playerHumanoid then
         RootPart = playerHumanoid:FindFirstChild("HumanoidRootPart")
-	if RootPart then
-	    return RootPart
+        if RootPart then
+            return RootPart
         else
-	    return nil
+            return nil
         end
     end
 end
@@ -67,13 +67,12 @@ local function AutoBuyRegularMerchant()
             for i = 1,6 do
                 for j = 1,5 do
                     merchantRequest:InvokeServer("RegularMerchant", i)
-                    wait(0.0001)
+                    wait(0.000000001)
                 end
-                wait(0.001)                    
+                wait(0.000000001)                    
             end
-            wait(0.1)
         end
-    wait(1)
+        wait(1)
     end
 end
 
@@ -87,14 +86,12 @@ local function AutoBuyAdvancedMerchant()
             for i = 1,6 do
                 for j = 1,5 do
                     merchantRequest:InvokeServer("AdvancedMerchant", i)
-                    wait(0.0001)
+                    wait(0.000000001)
                 end
-                wait(0.001)                    
+                wait(0.000000001)                    
             end
-            wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(1)
+        wait(1)
     end
 end
 
@@ -108,14 +105,12 @@ local function AutoBuyGardenMerchant()
             for i = 1,6 do
                 for j = 1,5 do
                     merchantRequest:InvokeServer("GardenMerchant", i)
-                    wait(0.0001)
+                    wait(0.000000001)
                 end
-                wait(0.001)                    
+                wait(0.000000001)                    
             end
-            wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(1)
+        wait(1)
     end
 end
 
@@ -127,309 +122,328 @@ local function AutoBuySnowMerchant()
             RootPart.CFrame = CFrame.new(1258.35363769531, 17.64980506, 2649.2119140625)
             wait(0.1)
             for i = 2,6 do
-                for j = 1,5 do
-                        merchantRequest:InvokeServer("SnowMerchant", i)
-                    wait(0.0001)
+                for j = 1,2 do
+                    merchantRequest:InvokeServer("SnowMerchant", i)
+                    wait(0.000000001)
                 end
-                wait(0.001)                    
+                wait(0.000000001)                    
             end
-            wait(0.1)
-            RootPart.CFrame = CFrame.new(CFramePart)
         end
-    wait(1)
+        wait(1)
     end
 end
 
 local function AutoClaimGifts()
     for i = 1, 12 do
         claimGift:InvokeServer(i)
-        wait(0.1)
+        wait(0.01)
     end
 end
 
 local function AutoClaimSmallDiamonds()
     while _G.autoClaimSmallDiamonds do
         RootPart = GetPlayer()
-	if RootPart then
+        if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(561.092224, 17.6505299, -148.544724)
-            wait(3)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
     end
 end
 
 local function AutoClaimFreePotions()
     while _G.autoClaimFreePotions do
         RootPart = GetPlayer()
-	if RootPart then
+        if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(695.568, 21.601, 559.959)
-            wait(3)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
     end
 end
 
 local function AutoClaimFreeEnchants()
     while _G.autoClaimFreeEnchants do
         RootPart = GetPlayer()
-	if RootPart then
+        if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(212.173, -29.367, 844.209)
-            wait(3)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
     end
 end
 
 local function AutoClaimFreeItems()
     while _G.autoClaimFreeItems do
         RootPart = GetPlayer()
-	if RootPart then
+        if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(810.242, 20.559, 846.899)
-            wait(3)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
     end
 end
 
 local function AutoClaimBigDiamonds()
     while _G.autoClaimBigDiamonds do
         RootPart = GetPlayer()
-	if RootPart then
+        if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(512.058, 20.628, 1316.557)
-            wait(3)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
     end
 end
 
 local function AutoClaimVending1()
     while _G.autoClaimVending1 do
         RootPart = GetPlayer()
-	if RootPart then
+        if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(894.108, 17.653, -8.541)
-            wait(0.3)
-	    for i = 1, 4 do
-	        claimVending:InvokeServer("PotionVendingMachine1", 1)
-	    end
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            wait(0.1)
+            for i = 1, 4 do
+                claimVending:InvokeServer("PotionVendingMachine1", 1)
+            end
+        end
+        wait(1)
     end
 end
 
 local function AutoClaimVending2()
     while _G.autoClaimVending2 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(367.222, 17.650, 78.061)
-            wait(0.3)
-	    for i = 1, 4 do
-	        claimVending:InvokeServer("EnchantVendingMachine1", 1)
+            wait(0.1)
+	        for i = 1, 4 do
+	            claimVending:InvokeServer("EnchantVendingMachine1", 1)
+	        end
 	    end
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+        wait(1)
     end
 end
 
 local function AutoClaimVending3()
     while _G.autoClaimVending3 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(695.167, 17.650, 315.120)
-            wait(0.3)
-	    for i = 1, 4 do
-	        claimVending:InvokeServer("FruitVendingMachine1", 1)
+            wait(0.1)
+	        for i = 1, 4 do
+	            claimVending:InvokeServer("FruitVendingMachine1", 1)
+	        end
 	    end
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+        wait(1)
     end
 end
 
 local function AutoClaimVending4()
     while _G.autoClaimVending4 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(1021.298, 17.648, 1032.59)
-            wait(0.3)
-	    for i = 1, 4 do
-	        claimVending:InvokeServer("FruitVendingMachine2", 1)
+            wait(0.1)
+	        for i = 1, 4 do
+	            claimVending:InvokeServer("FruitVendingMachine2", 1)
+	        end
 	    end
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+        wait(1)
     end
 end
 
 local function AutoClaimVending5()
     while _G.autoClaimVending5 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(987.965, 17.665, 1302.139)
-            wait(0.3)
-	    for i = 1, 4 do
-	        claimVending:InvokeServer("PotionVendingMachine2", 1)
+            wait(0.1)
+	        for i = 1, 4 do
+	            claimVending:InvokeServer("PotionVendingMachine2", 1)
+	        end
 	    end
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+        wait(1)
     end
 end
 
 local function AutoClaimVending6()
     while _G.autoClaimVending6 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(793.054, 17.665, 1779.194)
-            wait(0.3)
-	    for i = 1, 4 do
-	        claimVending:InvokeServer("EnchantVendingMachine2", 1)
+            wait(0.1)
+	        for i = 1, 4 do
+	            claimVending:InvokeServer("EnchantVendingMachine2", 1)
+	        end
 	    end
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+        wait(1)
     end
 end
 
 local function AutoClaimVending7()
     while _G.autoClaimVending7 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(1468.531, 17.657, 1927.468)
-            wait(0.3)
-	    claimVending:InvokeServer("RarePotionsVendingMachine1", 1)
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            wait(0.1)
+	        claimVending:InvokeServer("RarePotionsVendingMachine1", 1)
+	    end
+        wait(1)
     end
 end
 
 local function AutoClaimVending8()
     while _G.autoClaimVending8 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(854.337, 20.497, 2109.328)
-            wait(0.3)
-	    claimVending:InvokeServer("RareEnchantsVendingMachine1", 1)
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            wait(0.1)
+	        claimVending:InvokeServer("RareEnchantsVendingMachine1", 1)
+	    end
+        wait(1)
     end
 end
 
 local function AutoClaimVending9()
     while _G.autoClaimVending9 do
         RootPart = GetPlayer()
-	if RootPart then
+	    if RootPart then
             CFramePart = RootPart.Position
             RootPart.CFrame = CFrame.new(1167.327, 17.665, 2855.184)
-            wait(0.3)
-	    claimVending:InvokeServer("OPPotionsVendingMachine1", 1)
-	    wait(0.5)
-	    RootPart.CFrame = CFrame.new(CFramePart)
-	end
-    wait(1)
+            wait(0.1)
+	        claimVending:InvokeServer("OPPotionsVendingMachine1", 1)
+	    end
+        wait(1)
     end
 end
 
 local function AutoCollect()
-    while _G.autoCollect do
-        RootPart = GetPlayer()
-	if RootPart then
-	    for i,v in ipairs(Orbs:GetChildren()) do
-	        if v ~= nil then
-		    v.CFrame = RootPart.CFrame
-                    claimCoin:FireServer(v.Name)
-		end
-		wait(0.00000001)
-	    end
-	end
-        wait(0.001)
+    --while _G.autoCollect do
+        --RootPart = GetPlayer()
+	--if RootPart then
+	    --for i,v in ipairs(Orbs:GetChildren()) do
+	        --if v ~= nil then
+		    --v.CFrame = RootPart.CFrame
+                    --claimCoin:FireServer(v.Name)
+		--end
+		--wait(0.00000001)
+	    --end
+	--end
+        --wait(0.001)
+    --end
+end
+
+local function AutoMine()
+    Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
+    if not Mine then
+        OrionLib:MakeNotification({
+            Name = "Mine!",
+	        Content = "Please go into the mine to activate the script!",
+	        Image = "rbxassetid://4483345998",
+	        Time = 3
+        })
+	    return
+    elseif Mine then
+	    MineBlocks = Mine:WaitForChild("ActiveBlocks")
+        MineChests = Mine:WaitForChild("ActiveChests")
+    end
+    while _G.autoMine do
+        if _G.typeMine == "All" then
+            RootPart = GetPlayer()
+	        if RootPart then
+                parts = MineBlocks:GetChildren()
+                i = 1
+                while #parts <= i do
+                    if not _G.autoMine then
+                        return
+                    end
+                    part = parts[i]
+                    if not part then
+                        i = i + 1
+                    else
+                        chest = MineChests:FindFirstChild("Animated")
+                        if chest then
+                            while chest.Parent do
+                                RootPart.CFrame = CFrame.new(chest:FindFirstChild("Bottom").Position)
+                                coord = chest:GetAttribute("Coord")
+                                mineDig:FireServer("Digsite", "DigChest", coord)
+                                wait(0.000001)
+                            end
+                            if i > 1 then
+                                i = i - 1
+                            end
+                        else
+                            while part.Parent do
+                                RootPart.CFrame = CFrame.new(part.Position)
+                                coord = part:GetAttribute("Coord")
+                                mineDig:FireServer("Digsite", "DigBlock", coord)
+                                wait(0.000001)
+                            end
+                            i = i + 1
+                        end
+                    end
+                    wait(0.000001)
+                end
+            end
+        end
     end
 end
 
 local function AutoAFK()
     while _G.autoAFK do
         keyboard:SendKeyEvent(true, "W", false, game)
-	wait(0.1)
-	keyboard:SendKeyEvent(false, "W", false, game)
-	wait(300)
-    end
-end
-
-local function AutoMine()
-    if _G.autoMine then
-	Mine = ActiveContainer:WaitForChild("Digsite"):WaitForChild("Important")
-	if not Mine then
-	    return
-	elseif Mine then
-	    MineBlocks = Mine:WaitForChild("ActiveBlocks")
-            MineChests = Mine:WaitForChild("ActiveChests")
-	end
-        if _G.typeMine == "All" then
-            RootPart = GetPlayer()
-	    if RootPart then
-	        for i,v in ipairs(MineChests:GetChildren()) do
-                    while v.Parent do
-                        RootPart.CFrame = CFrame.new(v:FindFirstChild("Bottom").Position)
-                        coord = v:GetAttribute("Coord")
-                        mineDig:FireServer("Digsite", "DigChest", coord)
-                        wait(0.01)
-                    end
-                    wait(0.01)
-	        end
-                for i,v in ipairs(MineBlocks:GetChildren()) do
-                    ore = v:FindFirstChild("Ore")
-                    if ore then
-                        while v.Parent do
-                            RootPart.CFrame = CFrame.new(v.Position)
-                            coord = v:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigBlock", coord)
-                            wait(0.01)
-                        end
-                        wait(0.01)
-                    end
-                    wait(0.01)
-	        end
-                DigBlock(MineBlocks)
-                _G.OreConnection = MineBlocks.ChildAdded:Connect(onOreAdded)
-                _G.ChestConnection = MineChests.ChildAdded:Connect(onChestAdded)
-	    end
-        end
+	    wait(0.1)
+	    keyboard:SendKeyEvent(false, "W", false, game)
+	    wait(300)
     end
 end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
-
+	
     local TabAutoFarm = Window:MakeTab({
 	    Name = "AutoFarm",
 	    Icon = "rbxassetid://12767693169",
@@ -437,16 +451,16 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
     })
 
         local Section6 = TabAutoFarm:AddSection({
-	    Name = "Farm"
+	        Name = "Farm"
         })
 
             TabAutoFarm:AddToggle({
-	        Name = "AutoCollect Tokens",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoCollect = Value
-		    AutoCollect()
-	        end    
+	            Name = "AutoCollect Tokens",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoCollect = Value
+		            AutoCollect()
+	            end    
             })
 
     local TabMine = Window:MakeTab({
@@ -456,27 +470,27 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
     })
 
         local Section7 = TabMine:AddSection({
-	    Name = "Mine"
+	        Name = "Mine"
         })
 
             TabMine:AddDropdown({
-	        Name = "Dropdown",
-	        Default = "All",
-	        Options = {"All", "Only blocks", "Only ores", "Only chests", "Only blocks/chests", "Only blocks/ores", "Only ores/chests"},
-	        Callback = function(Value)
-		    _G.typeMine = Value
-	        end    
+	            Name = "Dropdown",
+	            Default = "All",
+	            Options = {"All", "Only blocks", "Only ores", "Only chests", "Only blocks/chests", "Only blocks/ores", "Only ores/chests"},
+	            Callback = function(Value)
+		            _G.typeMine = Value
+	            end    
             })
 
-            TabMine:AddParagraph("Type mine", "Mining priority goes like this: 1) Chest; 2) Ore; 3) Block.")
+            TabMine:AddParagraph("Type mine", "Mining priority goes like this: 1) Chest; 2) Ore/Block")
 
             TabMine:AddToggle({
-	        Name = "AutoMine",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoMine = Value
-		    AutoMine()
-	        end    
+	            Name = "AutoMine",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoMine = Value
+                    AutoMine()
+	            end    
             })
 
     local TabMerchant = Window:MakeTab({
@@ -486,43 +500,43 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
     })
 
         local Section1 = TabMerchant:AddSection({
-	    Name = "Merchant"
+	        Name = "Merchant"
         })
 
             TabMerchant:AddToggle({
-	        Name = "AutoBuy Regular Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuyRegularMerchant = Value
-		    AutoBuyRegularMerchant()
-	        end    
+	            Name = "AutoBuy Regular Merchant",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoBuyRegularMerchant = Value
+		            AutoBuyRegularMerchant()
+	            end    
             })
 
             TabMerchant:AddToggle({
-	        Name = "AutoBuy Advanced Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuyAdvancedMerchant = Value
-		    AutoBuyAdvancedMerchant()
-	        end    
+	            Name = "AutoBuy Advanced Merchant",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoBuyAdvancedMerchant = Value
+		            AutoBuyAdvancedMerchant()
+	            end    
             })
 
             TabMerchant:AddToggle({
-	        Name = "AutoBuy Garden Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuyGardenMerchant = Value
-		    AutoBuyGardenMerchant()
-	        end    
+	            Name = "AutoBuy Garden Merchant",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoBuyGardenMerchant = Value
+		            AutoBuyGardenMerchant()
+	            end    
             })
 
             TabMerchant:AddToggle({
-	        Name = "AutoBuy Snow Merchant",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoBuySnowMerchant = Value
-		    AutoBuySnowMerchant()
-	        end    
+	            Name = "AutoBuy Snow Merchant",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoBuySnowMerchant = Value
+		            AutoBuySnowMerchant()
+	            end    
             })
 
     local TabVendingMachine = Window:MakeTab({
@@ -532,88 +546,88 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
     })
 
         local Section5 = TabVendingMachine:AddSection({
-	    Name = "Vending Machines"
+	        Name = "Vending Machines"
         })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Potion Vending I",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending1 = Value
-		    AutoClaimVending1()
-	        end    
+	            Name = "AutoBuy Potion Vending I",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending1 = Value
+		            AutoClaimVending1()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Enchant Vending I",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending2 = Value
-		    AutoClaimVending2()
-	        end    
+	            Name = "AutoBuy Enchant Vending I",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending2 = Value
+		            AutoClaimVending2()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Fruit Vending I",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending3 = Value
-		    AutoClaimVending3()
-	        end    
+	            Name = "AutoBuy Fruit Vending I",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending3 = Value
+		            AutoClaimVending3()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Fruit Vending II",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending4 = Value
-		    AutoClaimVending4()
-	        end    
+	            Name = "AutoBuy Fruit Vending II",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending4 = Value
+		            AutoClaimVending4()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Potion Vending II",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending5 = Value
-		    AutoClaimVending5()
-	        end    
+	            Name = "AutoBuy Potion Vending II",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending5 = Value
+		            AutoClaimVending5()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Enchant Vending II",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending6 = Value
-		    AutoClaimVending6()
-	        end    
+	            Name = "AutoBuy Enchant Vending II",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending6 = Value
+		            AutoClaimVending6()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Rare Potion Vending",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending7 = Value
-		    AutoClaimVending7()
-	        end    
+	            Name = "AutoBuy Rare Potion Vending",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending7 = Value
+		            AutoClaimVending7()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy Rare Enchant Vending",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending8 = Value
-		    AutoClaimVending8()
-	        end    
+	            Name = "AutoBuy Rare Enchant Vending",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending8 = Value
+		            AutoClaimVending8()
+	            end    
             })
 
             TabVendingMachine:AddToggle({
-	        Name = "AutoBuy OP Potion Vending",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimVending9 = Value
-		    AutoClaimVending9()
-	        end    
+	            Name = "AutoBuy OP Potion Vending",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimVending9 = Value
+		            AutoClaimVending9()
+	            end    
             })
 
     local TabItems = Window:MakeTab({
@@ -623,52 +637,52 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
     })
 
         local Section4 = TabItems:AddSection({
-	    Name = "Items"
+	        Name = "Items"
         })
 
             TabItems:AddToggle({
-	        Name = "AutoClaim Small Diamonds",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimSmallDiamonds = Value
-		    AutoClaimSmallDiamonds()
-	        end    
+	            Name = "AutoClaim Small Diamonds",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimSmallDiamonds = Value
+		            AutoClaimSmallDiamonds()
+	            end    
             })
 
             TabItems:AddToggle({
-	        Name = "AutoClaim Free Potions",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimFreePotions = Value
-		    AutoClaimFreePotions()
-	        end    
+	            Name = "AutoClaim Free Potions",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimFreePotions = Value
+		            AutoClaimFreePotions()
+	            end    
             })
 
             TabItems:AddToggle({
-	        Name = "AutoClaim Free Enchants",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimFreeEnchants = Value
-		    AutoClaimFreeEnchants()
-	        end    
+	            Name = "AutoClaim Free Enchants",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimFreeEnchants = Value
+		            AutoClaimFreeEnchants()
+	            end    
             })
 
             TabItems:AddToggle({
-	        Name = "AutoClaim Free Items",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimFreeItems = Value
-		    AutoClaimFreeItems()
-	        end    
+	            Name = "AutoClaim Free Items",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimFreeItems = Value
+		            AutoClaimFreeItems()
+	            end    
             })
 
             TabItems:AddToggle({
-	        Name = "AutoClaim Big Diamonds",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimBigDiamonds = Value
-		    AutoClaimBigDiamonds()
-	        end    
+	            Name = "AutoClaim Big Diamonds",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimBigDiamonds = Value
+		            AutoClaimBigDiamonds()
+	            end    
             })
 
     local TabOther = Window:MakeTab({
@@ -678,43 +692,43 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
     })
 
         local Section2 = TabOther:AddSection({
-	    Name = "Scripts"
+	        Name = "Scripts"
         })
 
             TabOther:AddButton({
-	        Name = "IY",
-	        Callback = function()
-      		    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
-  	        end    
+	            Name = "IY",
+	            Callback = function()
+      		        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
+  	            end    
             })
 
         local Section6 = TabOther:AddSection({
-	    Name = "Other Functions"
+	        Name = "Other Functions"
         })
 
             TabOther:AddToggle({
-	        Name = "AntiAFK",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoAFK = Value
-		    AutoAFK()
-	        end    
+	            Name = "AntiAFK",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoAFK = Value
+		            AutoAFK()
+	            end    
             })
 
             TabOther:AddToggle({
-	        Name = "AutoClaim Gifts",
-	        Default = false,
-	        Callback = function(Value)
-		    _G.autoClaimGifts = Value
-		    AutoClaimGifts()
-	        end    
+	            Name = "AutoClaim Gifts",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimGifts = Value
+		            AutoClaimGifts()
+	            end    
             })
 
             TabOther:AddButton({
-	        Name = "Destroy GUI",
-	        Callback = function()
-	            OrionLib:Destroy()
-	        end    
-	    })
+	            Name = "Destroy GUI",
+	            Callback = function()
+	                OrionLib:Destroy()
+	            end    
+	        })
 
 OrionLib:Init()
