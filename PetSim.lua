@@ -385,7 +385,7 @@ local function AutoMine()
 	        Time = 3
         })
 	    return
-    elseif Mine then
+    else
 	    MineBlocks = Mine:WaitForChild("ActiveBlocks")
         MineChests = Mine:WaitForChild("ActiveChests")
     end
@@ -395,7 +395,7 @@ local function AutoMine()
 	        if RootPart then
                 parts = MineBlocks:GetChildren()
                 i = 1
-                while #parts <= i do
+                while #parts >= i do
                     if not _G.autoMine then
                         wait(0.000001)
                         return
