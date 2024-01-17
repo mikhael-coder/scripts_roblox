@@ -376,7 +376,7 @@ local function AutoCollect()
 end
 
 local function AutoMine()
-    Mine = ActiveContainer:FindFirstChild("Digsite"):FindFirstChild("Important")
+    Mine = ActiveContainer:FindFirstChild("Digsite")
     if not Mine then
         OrionLib:MakeNotification({
             Name = "Mine!",
@@ -386,6 +386,7 @@ local function AutoMine()
         })
 	    return
     else
+        Mine = Mine:FindFirstChild("Important")
 	    MineBlocks = Mine:WaitForChild("ActiveBlocks")
         MineChests = Mine:WaitForChild("ActiveChests")
     end
@@ -427,6 +428,142 @@ local function AutoMine()
                             i = i + 1
                             wait(0.000001)
                         end
+                        wait(0.000001)
+                    end
+                    wait(0.000001)
+                end
+            end
+        elseif _G.typeMine == "Only blocks" then
+            RootPart = GetPlayer()
+	        if RootPart then
+                parts = MineBlocks:GetChildren()
+                i = 1
+                while #parts >= i do
+                    if not _G.autoMine then
+                        wait(0.000001)
+                        return
+                    end
+                    part = parts[i]
+                    if not part then
+                        wait(0.000001)
+                        i = i + 1
+                    else
+                        while part.Parent do
+                            RootPart.CFrame = CFrame.new(part.Position)
+                            coord = part:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigBlock", coord)
+                            wait(0.000001)
+                        end
+                        i = i + 1
+                        wait(0.000001)
+                    end
+                    wait(0.000001)
+                end
+            end
+        elseif _G.typeMine == "Only ores" then
+            RootPart = GetPlayer()
+	        if RootPart then
+                parts = MineBlocks:GetChildren()
+                i = 1
+                while #parts >= i do
+                    if not _G.autoMine then
+                        wait(0.000001)
+                        return
+                    end
+                    part = parts[i]
+                    if not part then
+                        wait(0.000001)
+                        i = i + 1
+                    else
+                        ore = part:FindFirstChild("Ore")
+                        if ore then
+                            while part.Parent do
+                                RootPart.CFrame = CFrame.new(part.Position)
+                                coord = part:GetAttribute("Coord")
+                                mineDig:FireServer("Digsite", "DigBlock", coord)
+                                wait(0.000001)
+                            end
+                            i = i + 1
+                            wait(0.000001)
+                        else
+                            i = i + 1
+                            wait(0.000001)
+                        end
+                    end
+                    wait(0.000001)
+                end
+            end
+        elseif _G.typeMine == "Only chests" then
+            RootPart = GetPlayer()
+	        if RootPart then
+                parts = MineChests:GetChildren()
+                i = 1
+                while #parts >= i do
+                    if not _G.autoMine then
+                        wait(0.000001)
+                        return
+                    end
+                    part = parts[i]
+                    if not part then
+                        wait(0.000001)
+                        i = i + 1
+                    else
+                        while part.Parent do
+                            RootPart.CFrame = CFrame.new(part:FindFirstChild("Bottom").Position)
+                            coord = part:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigCbest", coord)
+                            wait(0.000001)
+                        end
+                        i = i + 1
+                        wait(0.000001)
+                    end
+                    wait(0.000001)
+                end
+            end
+        elseif _G.typeMine == "Only blocks/ores" then
+            RootPart = GetPlayer()
+	        if RootPart then
+                parts = MineBlocks:GetDescendants()
+                names = {}
+                parents {}
+                for i,v in ipairs(parts) do
+                    table.insert(names, v.Name)
+                    table.insert(parents, v.Parent)
+                    wait(0.000001)
+                end
+                i = 1
+                index = table.find(names, "Ore")
+                
+                if index then
+                    part = parts[index]
+                    if part and part.Name == "Ore" then
+                        parent = parents[index]
+                        while parent do
+                            RootPart.CFrame = CFrame.new(parent.Position)
+                            coord = part:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigCbest", coord)
+                            wait(0.000001)
+                        end
+                    elseif part and part.Name == ""
+                    end
+                end
+                while #parts >= i do
+                    if not _G.autoMine then
+                        wait(0.000001)
+                        return
+                    end
+                    part = parts[i]
+                    if not part then
+                        wait(0.000001)
+                        i = i + 1
+                    else
+                        while part.Parent do
+                            RootPart.CFrame = CFrame.new(part:FindFirstChild("Bottom").Position)
+                            coord = part:GetAttribute("Coord")
+                            mineDig:FireServer("Digsite", "DigCbest", coord)
+                            wait(0.000001)
+                        end
+                        i = i + 1
                         wait(0.000001)
                     end
                     wait(0.000001)
@@ -483,7 +620,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
             TabMine:AddDropdown({
 	            Name = "Dropdown",
 	            Default = "All",
-	            Options = {"All", "Only blocks", "Only ores", "Only chests", "Only blocks/chests", "Only blocks/ores", "Only ores/chests"},
+	            Options = {"All", "Only blocks", "Only ores", "Only chests", "Only blocks/ores", "Only ores/chests"},
 	            Callback = function(Value)
 		            _G.typeMine = Value
 	            end    
