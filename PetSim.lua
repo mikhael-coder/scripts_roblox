@@ -45,6 +45,7 @@ _G.autoCollect = false
 _G.autoAFK = false
 _G.typeMine = "All"
 _G.autoMine = false
+_G.autoFish = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -520,59 +521,28 @@ local function AutoMine()
                     wait(0.000001)
                 end
             end
-        elseif _G.typeMine == "Only blocks/ores" then
-            RootPart = GetPlayer()
-	        if RootPart then
-                parts = MineBlocks:GetDescendants()
-                names = {}
-                parents {}
-                for i,v in ipairs(parts) do
-                    table.insert(names, v.Name)
-                    table.insert(parents, v.Parent)
-                    wait(0.000001)
-                end
-                i = 1
-                index = table.find(names, "Ore")
-                
-                if index then
-                    part = parts[index]
-                    if part and part.Name == "Ore" then
-                        parent = parents[index]
-                        while parent do
-                            RootPart.CFrame = CFrame.new(parent.Position)
-                            coord = part:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigCbest", coord)
-                            wait(0.000001)
-                        end
-                    elseif part and part.Name == ""
-                    end
-                end
-                while #parts >= i do
-                    if not _G.autoMine then
-                        wait(0.000001)
-                        return
-                    end
-                    part = parts[i]
-                    if not part then
-                        wait(0.000001)
-                        i = i + 1
-                    else
-                        while part.Parent do
-                            RootPart.CFrame = CFrame.new(part:FindFirstChild("Bottom").Position)
-                            coord = part:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigCbest", coord)
-                            wait(0.000001)
-                        end
-                        i = i + 1
-                        wait(0.000001)
-                    end
-                    wait(0.000001)
-                end
-            end
         end
         wait(0.000001)
     end
     wait(0.000001)
+end
+
+local function AutoFish()
+    while _G.autoFish do
+        fol = ActiveContainer:FindFirstChild("Fishing")
+        if fol then
+            scr = fol:FindFirstChild("Common")
+            scr["DefaultFillSpeed"] = 0
+            scr["DefaultDepleteSpeed"] = 0
+            mineDig:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
+            wait(4)
+            mineDig:FireServer("Fishing", "RequestReel")
+            wait(2.1)
+            mineDig:FireServer("Fishing", "FishingResult", true)
+            wait(0.00000000001)
+        end
+        wait(0.00000000001)
+    end
 end
 
 local function AutoAFK()
@@ -608,10 +578,23 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
             })
 
     local TabMine = Window:MakeTab({
-	    Name = "Mine",
+	    Name = "MiniGames",
 	    Icon = "rbxassetid://12767693169",
 	    PremiumOnly = false
     })
+
+        local Section8 = TabMine:AddSection({
+	        Name = "Fish"
+        })
+
+            TabMine:AddToggle({
+	            Name = "AutoFish",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoFish = Value
+                    AutoFish()
+	            end    
+            })
 
         local Section7 = TabMine:AddSection({
 	        Name = "Mine"
