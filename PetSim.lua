@@ -515,6 +515,52 @@ local function AutoMine()
                     wait(0.000001)
                 end
             end
+        elseif _G.typeMine == "Only ores/chests" then
+            RootPart = GetPlayer()
+	        if RootPart then
+                parts = MineBlocks:GetChildren()
+                i = 1
+                while #parts >= i do
+                    if not _G.autoMine then
+                        wait(0.000001)
+                        return
+                    end
+                    part = parts[i]
+                    if not part then
+                        wait(0.000001)
+                        i = i + 1
+                    else
+                        chest = MineChests:FindFirstChild("Animated")
+                        if chest then
+                            while chest.Parent do
+                                RootPart.CFrame = CFrame.new(chest:FindFirstChild("Bottom").Position)
+                                coord = chest:GetAttribute("Coord")
+                                mineDig:FireServer("Digsite", "DigChest", coord)
+                                wait(0.000001)
+                            end
+                            if i > 1 then
+                                i = i - 1
+                            end
+                            wait(0.000001)
+                        else
+                            ore = part:FindFirstChild("Ore")
+                            if ore then
+                                while part.Parent do
+                                    RootPart.CFrame = CFrame.new(part.Position)
+                                    coord = part:GetAttribute("Coord")
+                                    mineDig:FireServer("Digsite", "DigBlock", coord)
+                                    wait(0.000001)
+                                end
+                                wait(0.000001)
+                            end
+                            i = i + 1
+                            wait(0.000001)
+                        end
+                        wait(0.000001)
+                    end
+                    wait(0.000001)
+                end
+            end
         end
         wait(0.000001)
     end
@@ -597,13 +643,13 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
             TabMine:AddDropdown({
 	            Name = "Dropdown",
 	            Default = "All",
-	            Options = {"All", "Only blocks", "Only ores", "Only chests", "Only blocks/ores", "Only ores/chests"},
+	            Options = {"All", "Only blocks", "Only ores", "Only chests", "Only ores/chests"},
 	            Callback = function(Value)
 		            _G.typeMine = Value
 	            end    
             })
 
-            TabMine:AddParagraph("Type mine", "Mining priority goes like this: 1) Chest; 2) Ore/Block")
+            TabMine:AddParagraph("Type mine", "Mining priority goes like this: 1) Chest; 2) Ore; 3) Block.")
 
             TabMine:AddToggle({
 	            Name = "AutoMine",
