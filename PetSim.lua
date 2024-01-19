@@ -379,12 +379,6 @@ end
 local function AutoMine()
     Mine = ActiveContainer:FindFirstChild("Digsite")
     if not Mine then
-        OrionLib:MakeNotification({
-            Name = "Mine!",
-	        Content = "Please go into the mine to activate the script!",
-	        Image = "rbxassetid://4483345998",
-	        Time = 3
-        })
 	    return
     else
         Mine = Mine:FindFirstChild("Important")
