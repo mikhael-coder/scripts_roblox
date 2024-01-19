@@ -525,7 +525,7 @@ local function AutoFish()
     while _G.autoFish do
         fol = ActiveContainer:FindFirstChild("Fishing")
         if fol then
-            scr = fol:FindFirstChild("Common")
+            scr = require(fol:FindFirstChild("Common"))
             scr["DefaultFillSpeed"] = 0
             scr["DefaultDepleteSpeed"] = 0
             mineDig:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
