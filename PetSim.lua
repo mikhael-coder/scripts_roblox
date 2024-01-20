@@ -504,10 +504,13 @@ local function AutoMine()
                         i = i + 1
                     else
                         while part.Parent do
-                            RootPart.CFrame = CFrame.new(part:FindFirstChild("Bottom").Position)
-                            coord = part:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigCbest", coord)
-                            wait(0.000001)
+                            bot = part:FindFirstChild("Bottom")
+                            if bot then
+                                RootPart.CFrame = CFrame.new(bot.Position)
+                                coord = part:GetAttribute("Coord")
+                                mineDig:FireServer("Digsite", "DigChest", coord)
+                                wait(0.000001)
+                            end
                         end
                         i = i + 1
                         wait(0.000001)
