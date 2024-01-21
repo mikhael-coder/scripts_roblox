@@ -1,9 +1,10 @@
 local networkService = game:GetService("ReplicatedStorage"):WaitForChild("Network")
+local click = networkService:WaitForChild("Click")
 local scripts = game:GetService("ReplicatedStorage"):WaitForChild("__DIRECTORY")
 local space = game:GetService("Workspace")
 local run = game:GetService("RunService")
 local keyboard = game:GetService("VirtualInputManager")
-local mineDig = networkService:WaitForChild("Instancing_FireCustomFromClient")
+local fireClient = networkService:WaitForChild("Instancing_FireCustomFromClient")
 local merchantRequest = networkService:WaitForChild("Merchant_RequestPurchase")
 local claimGift = networkService:WaitForChild("Redeem Free Gift")
 local claimVending = networkService:WaitForChild("VendingMachines_Purchase")
@@ -407,7 +408,7 @@ local function AutoMine()
                             while chest.Parent do
                                 RootPart.CFrame = CFrame.new(chest:FindFirstChild("Bottom").Position)
                                 coord = chest:GetAttribute("Coord")
-                                mineDig:FireServer("Digsite", "DigChest", coord)
+                                fireClient:FireServer("Digsite", "DigChest", coord)
                                 wait(0.000001)
                             end
                             if i > 1 then
@@ -418,7 +419,7 @@ local function AutoMine()
                             while part.Parent do
                                 RootPart.CFrame = CFrame.new(part.Position)
                                 coord = part:GetAttribute("Coord")
-                                mineDig:FireServer("Digsite", "DigBlock", coord)
+                                fireClient:FireServer("Digsite", "DigBlock", coord)
                                 wait(0.000001)
                             end
                             i = i + 1
@@ -447,7 +448,7 @@ local function AutoMine()
                         while part.Parent do
                             RootPart.CFrame = CFrame.new(part.Position)
                             coord = part:GetAttribute("Coord")
-                            mineDig:FireServer("Digsite", "DigBlock", coord)
+                            fireClient:FireServer("Digsite", "DigBlock", coord)
                             wait(0.000001)
                         end
                         i = i + 1
@@ -476,7 +477,7 @@ local function AutoMine()
                             while part.Parent do
                                 RootPart.CFrame = CFrame.new(part.Position)
                                 coord = part:GetAttribute("Coord")
-                                mineDig:FireServer("Digsite", "DigBlock", coord)
+                                fireClient:FireServer("Digsite", "DigBlock", coord)
                                 wait(0.000001)
                             end
                             i = i + 1
@@ -509,7 +510,7 @@ local function AutoMine()
                             if bot then
                                 RootPart.CFrame = CFrame.new(bot.Position)
                                 coord = part:GetAttribute("Coord")
-                                mineDig:FireServer("Digsite", "DigChest", coord)
+                                fireClient:FireServer("Digsite", "DigChest", coord)
                                 wait(0.000001)
                             end
                         end
@@ -539,7 +540,7 @@ local function AutoMine()
                             while chest.Parent do
                                 RootPart.CFrame = CFrame.new(chest:FindFirstChild("Bottom").Position)
                                 coord = chest:GetAttribute("Coord")
-                                mineDig:FireServer("Digsite", "DigChest", coord)
+                                fireClient:FireServer("Digsite", "DigChest", coord)
                                 wait(0.000001)
                             end
                             if i > 1 then
@@ -552,7 +553,7 @@ local function AutoMine()
                                 while part.Parent do
                                     RootPart.CFrame = CFrame.new(part.Position)
                                     coord = part:GetAttribute("Coord")
-                                    mineDig:FireServer("Digsite", "DigBlock", coord)
+                                    fireClient:FireServer("Digsite", "DigBlock", coord)
                                     wait(0.000001)
                                 end
                                 wait(0.000001)
@@ -575,29 +576,27 @@ local function AutoFish()
     fish = ActiveContainer:FindFirstChild("Fishing")
     if fish then
         while _G.autoFish do
-            mineDig:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
-            tab = fish.Bobbers:GetChildren()
-            bob = nil
-            pos = nil
-            tru = false
-	    wait(1.2)
-            for i,v in ipairs(tab) do
-                bob = v:FindFirstChild("Bobber")
-                pos = bob.Position
-                wait(0.00000000001)
-            end
+            fireClient:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
+            wait(1.5)
+            activation = false
+			bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
+            pos = bobber.Position
             while true do
-                if pos ~= bob.Position then
-                    tru = true
+                if pos ~= bobber.Position then
+                    activation = true
                     wait(0.00000000001)
                     break
                 end
                 wait(0.00000000001)
             end
-            if tru then
-                mineDig:FireServer("Fishing", "RequestReel")
+            if activation then
+                fireClient:FireServer("Fishing", "RequestReel")
+                if not guiFish.Enabled then
+                    wait(0.1)
+                end
                 while guiFish.Enabled do
-                    mineDig:InvokeServer("Fishing", "Clicked")
+                    fireClient:FireServer("Fishing", "Clicked")
+                    click:FireServer(Ray.new(Vector3.new(1112.3214111328125, 95.98894500732422, -3475.504638671875), Vector3.new(-0.3040708005428314, -0.6958338618278503, 0.6506581902503967)))
                     wait(0.00000000001)
                 end
                 wait(0.00000000001)
