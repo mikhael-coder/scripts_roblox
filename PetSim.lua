@@ -21,7 +21,7 @@ local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachi
 local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
-local guiFish = player._INSTANCES.FishingGame
+local guiFish = player.PlayerGui._INSTANCES.FishingGame
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
