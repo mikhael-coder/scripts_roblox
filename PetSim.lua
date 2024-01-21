@@ -21,6 +21,7 @@ local FruitVendingMachine2 = vendingMachines["VendingMachine | FruitVendingMachi
 local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
+local guiFish = player._INSTANCES.FishingGame
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
@@ -571,20 +572,39 @@ local function AutoMine()
 end
 
 local function AutoFish()
-    while _G.autoFish do
-        fol = ActiveContainer:FindFirstChild("Fishing")
-        if fol then
-            scr = require(fol:FindFirstChild("Common"))
-            scr["DefaultFillSpeed"] = 0
-            scr["DefaultDepleteSpeed"] = 0
+    fish = ActiveContainer:FindFirstChild("Fishing")
+    if fish then
+        while _G.autoFish do
             mineDig:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
-            wait(4)
-            mineDig:FireServer("Fishing", "RequestReel")
-            wait(2.1)
-            mineDig:FireServer("Fishing", "FishingResult", true)
+            tab = fish.Bobbers:GetChildren()
+            bob = nil
+            pos = nil
+            tru = false
+            for i,v in ipairs(tab) do
+                bob = v:FindFirstChild("Bobber")
+                pos = bob.Position
+                wait(0.00000000001)
+            end
+            while true do
+                if pos ~= bob.Position then
+                    tru = true
+                    wait(0.00000000001)
+                    break
+                end
+                wait(0.00000000001)
+            end
+            if tru then
+                mineDig:FireServer("Fishing", "RequestReel")
+                while guiFish.Enabled do
+                    mineDig:InvokeServer("Fishing", "Clicked")
+                    wait(0.00000000001)
+                end
+                wait(0.00000000001)
+            end
             wait(0.00000000001)
         end
-        wait(0.00000000001)
+    else
+        return
     end
 end
 
