@@ -580,6 +580,7 @@ local function AutoFish()
             bob = nil
             pos = nil
             tru = false
+	    wait(1.2)
             for i,v in ipairs(tab) do
                 bob = v:FindFirstChild("Bobber")
                 pos = bob.Position
