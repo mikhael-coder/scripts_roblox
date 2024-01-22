@@ -640,7 +640,8 @@ local function AutoFish()
             fireClient:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
             wait(1.5)
             activation = false
-			bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
+            wait(0.1)
+            bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
             pos = bobber.Position
             while true do
                 if pos ~= bobber.Position then
