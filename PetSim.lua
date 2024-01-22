@@ -50,6 +50,7 @@ _G.autoAFK = false
 _G.typeMine = "All"
 _G.autoMine = false
 _G.autoFish = false
+_G.autoAdvancedFish = false
 
 local function GetPlayer()
     playerHumanoid = player.Character
@@ -580,6 +581,50 @@ local function AutoFish()
     end
 end
 
+local function AutoAdvancedFish()
+    fish = ActiveContainer:FindFirstChild("AdvancedFishing")
+    if fish then
+        script = require(fish.Common)
+        script["ClickSpeed"] = 0.000001
+        script["DefaultFillSpeed"] = 1000
+        script["LootTravelTime"] = 0.0000000001
+        script["MinTravelTime"] = 0.005
+        script["MaxTravelTime"] = 0.015
+        script["CastDelay"] = 0.01
+        script["CatchInterval"] = 0.01
+        while _G.autoFish do
+            fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
+            wait(1)
+            activation = false
+            bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
+            pos = bobber.Position
+            while true do
+                if pos ~= bobber.Position then
+                    activation = true
+                    wait(0.00000000001)
+                    break
+                end
+                wait(0.00000000001)
+            end
+            if activation then
+                fireClient:FireServer("Fishing", "RequestReel")
+                if not guiFish.Enabled then
+                    wait(0.1)
+                end
+                while guiFish.Enabled do
+                    fireClient:FireServer("AdvancedFishing", "Clicked")
+                    click:FireServer(Ray.new(Vector3.new(1112.3214111328125, 95.98894500732422, -3475.504638671875), Vector3.new(-0.3040708005428314, -0.6958338618278503, 0.6506581902503967)))
+                    wait(0.00000000001)
+                end
+                wait(0.00000000001)
+            end
+            wait(0.00000000001)
+        end
+    else
+        return
+    end
+end
+
 local function AutoAFK()
     while _G.autoAFK do
         keyboard:SendKeyEvent(true, "W", false, game)
@@ -628,6 +673,15 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	            Callback = function(Value)
 		            _G.autoFish = Value
                     AutoFish()
+	            end    
+            })
+
+            TabMine:AddToggle({
+	            Name = "Auto AdvancedFish",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoAdvancedFish = Value
+                    AutoAdvancedFish()
 	            end    
             })
 
