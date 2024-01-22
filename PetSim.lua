@@ -593,7 +593,7 @@ local function AutoAdvancedFish()
         script["CastDelay"] = 0.01
         script["CatchInterval"] = 0.01
         while _G.autoFish do
-            fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
+            fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1458.8328857421875, 61.62493896484375, -4451.16796875))
             wait(1)
             activation = false
             bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
@@ -607,13 +607,13 @@ local function AutoAdvancedFish()
                 wait(0.00000000001)
             end
             if activation then
-                fireClient:FireServer("Fishing", "RequestReel")
+                fireClient:FireServer("AdvancedFishing", "RequestReel")
                 if not guiFish.Enabled then
                     wait(0.1)
                 end
                 while guiFish.Enabled do
                     fireClient:FireServer("AdvancedFishing", "Clicked")
-                    click:FireServer(Ray.new(Vector3.new(1112.3214111328125, 95.98894500732422, -3475.504638671875), Vector3.new(-0.3040708005428314, -0.6958338618278503, 0.6506581902503967)))
+                    click:FireServer(Ray.new(Vector3.new(1433.1749267578125, 74.81363677978516, -4449.09814453125), Vector3.new(0.9063082933425903, -0.3925224542617798, 0.15662501752376556)))
                     wait(0.00000000001)
                 end
                 wait(0.00000000001)
