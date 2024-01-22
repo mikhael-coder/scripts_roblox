@@ -24,6 +24,7 @@ local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
 local guiFish = player.PlayerGui._INSTANCES.FishingGame
 local sizeMine = 1
+local skip = false
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
@@ -364,19 +365,6 @@ local function AutoClaimVending9()
 end
 
 local function AutoCollect()
-    --while _G.autoCollect do
-        --RootPart = GetPlayer()
-	--if RootPart then
-	    --for i,v in ipairs(Orbs:GetChildren()) do
-	        --if v ~= nil then
-		    --v.CFrame = RootPart.CFrame
-                    --claimCoin:FireServer(v.Name)
-		--end
-		--wait(0.00000001)
-	    --end
-	--end
-        --wait(0.001)
-    --end
 end
 
 local function AutoMine()
@@ -395,22 +383,12 @@ local function AutoMine()
                 parts = MineBlocks:GetChildren()
                 sizeMine = 1
                 for i,v in ipairs(parts) do
-                    secondNumber = tonumber(string.match(tostring(v:GetAttribute("Coord")), ", (%d+),"))
-                    if secondNumber > sizeMine then
-                        sizeMine = secondNumber
-                    end
-                end
-                sizeMine = sizeMine - 1
-                i = 1
-                while #parts >= i do
                     if not _G.autoMine then
                         wait(0.000001)
                         return
                     end
-                    part = parts[i]
-                    if not part then
+                    if not v then
                         wait(0.000001)
-                        i = i + 1
                     else
                         chest = MineChests:FindFirstChild("Animated")
                         ore = MineBlocks:FindFirstChild("Ore", true)
@@ -421,10 +399,9 @@ local function AutoMine()
                                 fireClient:FireServer("Digsite", "DigChest", coord)
                                 wait(0.000001)
                             end
-                            if i > 1 then
-                                i = i - 1
-                            end
                             wait(0.000001)
+                            i = i - 1
+                            skip = false
                         elseif ore then
                             while ore.Parent do
                                 RootPart.CFrame = CFrame.new(ore.Parent.Position)
@@ -433,84 +410,52 @@ local function AutoMine()
                                 wait(0.000001)
                             end
                             wait(0.000001)
-                        else
-                            secondNumber = tonumber(string.match(tostring(part:GetAttribute("Coord")), ", (%d+),"))
-                            if secondNumber > sizeMine then
-                                while part.Parent do
-                                    RootPart.CFrame = CFrame.new(part.Position)
-                                    coord = part:GetAttribute("Coord")
-                                    fireClient:FireServer("Digsite", "DigBlock", coord)
-                                    wait(0.000001)
-                                end
-                                i = i + 1
-				                sizeMine = secondNumber
-                                wait(0.000001)
-                            else
-                                i = i + 1
-                                wait(0.000001)
-                            end
+                            skip = false
                         end
                         wait(0.000001)
                     end
-                    wait(0.000001)
+                    if skip then
+                        secondNumber = tonumber(string.match(tostring(v:GetAttribute("Coord")), ", (%d+),"))
+                        if secondNumber > sizeMine then
+                            sizeMine = secondNumber
+                            while v.Parent do
+                                RootPart.CFrame = CFrame.new(v.Position)
+                                coord = v:GetAttribute("Coord")
+                                fireClient:FireServer("Digsite", "DigBlock", coord)
+                                wait(0.000001)
+                            end
+                            wait(0.000001)
+                        end
+                        wait(0.000001)
+                        skip = true
+                    end
                 end
             end
         elseif _G.typeMine == "Only blocks" then
             RootPart = GetPlayer()
 	        if RootPart then
-                parts = MineBlocks:GetChildren()
-                i = 1
-                while #parts >= i do
-                    if not _G.autoMine then
-                        wait(0.000001)
-                        return
-                    end
-                    part = parts[i]
-                    if not part then
-                        wait(0.000001)
-                        i = i + 1
-                    else
-                        while part.Parent do
-                            RootPart.CFrame = CFrame.new(part.Position)
-                            coord = part:GetAttribute("Coord")
+                for i,v in ipairs(MineBlocks:GetChildren()) do
+                    ore = v:FindFirstChild("Ore")
+                    if not ore then
+                        while v.Parent do
+                            RootPart.CFrame = CFrame.new(v.Position)
+                            coord = v:GetAttribute("Coord")
                             fireClient:FireServer("Digsite", "DigBlock", coord)
                             wait(0.000001)
                         end
-                        i = i + 1
-                        wait(0.000001)
                     end
-                    wait(0.000001)
                 end
             end
         elseif _G.typeMine == "Only ores" then
             RootPart = GetPlayer()
 	        if RootPart then
-                parts = MineBlocks:GetChildren()
-                i = 1
-                while #parts >= i do
-                    if not _G.autoMine then
+                ore = MineBlocks:FindFirstChild("Ore", true)
+                if ore then
+                    while ore.Parent do
+                        RootPart.CFrame = CFrame.new(ore.Parent.Position)
+                        coord = ore.Parent:GetAttribute("Coord")
+                        fireClient:FireServer("Digsite", "DigBlock", coord)
                         wait(0.000001)
-                        return
-                    end
-                    part = parts[i]
-                    if not part then
-                        wait(0.000001)
-                        i = i + 1
-                    else
-                        ore = part:FindFirstChild("Ore")
-                        if ore then
-                            while part.Parent do
-                                RootPart.CFrame = CFrame.new(part.Position)
-                                coord = part:GetAttribute("Coord")
-                                fireClient:FireServer("Digsite", "DigBlock", coord)
-                                wait(0.000001)
-                            end
-                            i = i + 1
-                            wait(0.000001)
-                        else
-                            i = i + 1
-                            wait(0.000001)
-                        end
                     end
                     wait(0.000001)
                 end
@@ -518,28 +463,16 @@ local function AutoMine()
         elseif _G.typeMine == "Only chests" then
             RootPart = GetPlayer()
 	        if RootPart then
-                parts = MineChests:GetChildren()
-                i = 1
-                while #parts >= i do
-                    if not _G.autoMine then
-                        wait(0.000001)
-                        return
-                    end
-                    part = parts[i]
-                    if not part then
-                        wait(0.000001)
-                        i = i + 1
-                    else
-                        while part.Parent do
-                            bot = part:FindFirstChild("Bottom")
-                            if bot then
-                                RootPart.CFrame = CFrame.new(bot.Position)
-                                coord = part:GetAttribute("Coord")
-                                fireClient:FireServer("Digsite", "DigChest", coord)
-                                wait(0.000001)
-                            end
+                chest = MineChests:FindFirstChild("Animated")
+                if chest then
+                    while chest.Parent do
+                        bot = chest:FindFirstChild("Bottom")
+                        if bot then
+                            RootPart.CFrame = CFrame.new(bot.Position)
+                            coord = chest:GetAttribute("Coord")
+                            fireClient:FireServer("Digsite", "DigChest", coord)
+                            wait(0.000001)
                         end
-                        i = i + 1
                         wait(0.000001)
                     end
                     wait(0.000001)
@@ -548,44 +481,25 @@ local function AutoMine()
         elseif _G.typeMine == "Only ores/chests" then
             RootPart = GetPlayer()
 	        if RootPart then
-                parts = MineBlocks:GetChildren()
-                i = 1
-                while #parts >= i do
-                    if not _G.autoMine then
-                        wait(0.000001)
-                        return
-                    end
-                    part = parts[i]
-                    if not part then
-                        wait(0.000001)
-                        i = i + 1
-                    else
-                        chest = MineChests:FindFirstChild("Animated")
-                        if chest then
-                            while chest.Parent do
-                                RootPart.CFrame = CFrame.new(chest:FindFirstChild("Bottom").Position)
-                                coord = chest:GetAttribute("Coord")
-                                fireClient:FireServer("Digsite", "DigChest", coord)
-                                wait(0.000001)
-                            end
-                            if i > 1 then
-                                i = i - 1
-                            end
-                            wait(0.000001)
-                        else
-                            ore = MineBlocks:FindFirstChild("Ore", true)
-                            if ore then
-                                while ore.Parent do
-                                    RootPart.CFrame = CFrame.new(ore.Parent.Position)
-                                    coord = ore.Parent:GetAttribute("Coord")
-                                    fireClient:FireServer("Digsite", "DigBlock", coord)
-                                    wait(0.000001)
-                                end
-                                wait(0.000001)
-                            end
-                            i = i + 1
+                chest = MineChests:FindFirstChild("Animated")
+                ore = MineBlocks:FindFirstChild("Ore", true)
+                if chest then
+                    while chest.Parent do
+                        bot = chest:FindFirstChild("Bottom")
+                        if bot then
+                            RootPart.CFrame = CFrame.new(bot.Position)
+                            coord = chest:GetAttribute("Coord")
+                            fireClient:FireServer("Digsite", "DigChest", coord)
                             wait(0.000001)
                         end
+                        wait(0.000001)
+                    end
+                    wait(0.000001)
+                elseif ore then
+                    while ore.Parent do
+                        RootPart.CFrame = CFrame.new(ore.Parent.Position)
+                        coord = ore.Parent:GetAttribute("Coord")
+                        fireClient:FireServer("Digsite", "DigBlock", coord)
                         wait(0.000001)
                     end
                     wait(0.000001)
@@ -594,19 +508,9 @@ local function AutoMine()
         elseif _G.typeMine == "Only blocks/ores" then
             RootPart = GetPlayer()
 	        if RootPart then
-                parts = MineBlocks:GetChildren()
-                i = 1
-                while #parts >= i do
-                    if not _G.autoMine then
-                        wait(0.000001)
-                        return
-                    end
-                    part = parts[i]
+                for i,v in ipairs(MineBlocks:GetChildren()) do
                     ore = MineBlocks:FindFirstChild("Ore", true)
-                    if not part then
-                        wait(0.000001)
-                        i = i + 1
-                    elseif ore then
+                    if ore then
                         while ore.Parent do
                             RootPart.CFrame = CFrame.new(ore.Parent.Position)
                             coord = ore.Parent:GetAttribute("Coord")
@@ -615,13 +519,12 @@ local function AutoMine()
                         end
                         wait(0.000001)
                     else
-                        while part.Parent do
-                            RootPart.CFrame = CFrame.new(part.Position)
-                            coord = part:GetAttribute("Coord")
+                        while v.Parent do
+                            RootPart.CFrame = CFrame.new(v.Position)
+                            coord = v:GetAttribute("Coord")
                             fireClient:FireServer("Digsite", "DigBlock", coord)
                             wait(0.000001)
                         end
-                        i = i + 1
                         wait(0.000001)
                     end
                     wait(0.000001)
