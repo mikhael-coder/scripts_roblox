@@ -443,6 +443,7 @@ local function AutoMine()
                                     wait(0.000001)
                                 end
                                 i = i + 1
+				                sizeMine = secondNumber
                                 wait(0.000001)
                             else
                                 i = i + 1
