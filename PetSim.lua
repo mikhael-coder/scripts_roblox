@@ -592,7 +592,7 @@ local function AutoAdvancedFish()
         script["MaxTravelTime"] = 0.015
         script["CastDelay"] = 0.01
         script["CatchInterval"] = 0.01
-        while _G.autoFish do
+        while _G.autoAdvancedFish do
             fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1458.8328857421875, 61.62493896484375, -4451.16796875))
             wait(1)
             activation = false
