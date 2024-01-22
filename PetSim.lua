@@ -23,6 +23,7 @@ local Orbs = space.__THINGS.Orbs
 local ActiveContainer = space.__THINGS.__INSTANCE_CONTAINER.Active
 local player = game:GetService("Players").LocalPlayer
 local guiFish = player.PlayerGui._INSTANCES.FishingGame
+local sizeMine = 1
 
 _G.autoBuyRegularMerchant = false
 _G.autoBuyAdvancedMerchant = false
@@ -392,6 +393,14 @@ local function AutoMine()
             RootPart = GetPlayer()
 	        if RootPart then
                 parts = MineBlocks:GetChildren()
+                sizeMine = 1
+                for i,v in ipairs(parts) do
+                    secondNumber = tonumber(string.match(tostring(v:GetAttribute("Coord")), ", (%d+),"))
+                    if secondNumber > sizeMine then
+                        sizeMine = secondNumber
+                    end
+                end
+                sizeMine = sizeMine - 1
                 i = 1
                 while #parts >= i do
                     if not _G.autoMine then
@@ -404,6 +413,7 @@ local function AutoMine()
                         i = i + 1
                     else
                         chest = MineChests:FindFirstChild("Animated")
+                        ore = MineBlocks:FindFirstChild("Ore", true)
                         if chest then
                             while chest.Parent do
                                 RootPart.CFrame = CFrame.new(chest:FindFirstChild("Bottom").Position)
@@ -415,15 +425,29 @@ local function AutoMine()
                                 i = i - 1
                             end
                             wait(0.000001)
-                        else
-                            while part.Parent do
-                                RootPart.CFrame = CFrame.new(part.Position)
-                                coord = part:GetAttribute("Coord")
+                        elseif ore then
+                            while ore.Parent do
+                                RootPart.CFrame = CFrame.new(ore.Parent.Position)
+                                coord = ore.Parent:GetAttribute("Coord")
                                 fireClient:FireServer("Digsite", "DigBlock", coord)
                                 wait(0.000001)
                             end
-                            i = i + 1
                             wait(0.000001)
+                        else
+                            secondNumber = tonumber(string.match(tostring(part:GetAttribute("Coord")), ", (%d+),"))
+                            if secondNumber > sizeMine then
+                                while part.Parent do
+                                    RootPart.CFrame = CFrame.new(part.Position)
+                                    coord = part:GetAttribute("Coord")
+                                    fireClient:FireServer("Digsite", "DigBlock", coord)
+                                    wait(0.000001)
+                                end
+                                i = i + 1
+                                wait(0.000001)
+                            else
+                                i = i + 1
+                                wait(0.000001)
+                            end
                         end
                         wait(0.000001)
                     end
@@ -548,11 +572,11 @@ local function AutoMine()
                             end
                             wait(0.000001)
                         else
-                            ore = part:FindFirstChild("Ore")
+                            ore = MineBlocks:FindFirstChild("Ore", true)
                             if ore then
-                                while part.Parent do
-                                    RootPart.CFrame = CFrame.new(part.Position)
-                                    coord = part:GetAttribute("Coord")
+                                while ore.Parent do
+                                    RootPart.CFrame = CFrame.new(ore.Parent.Position)
+                                    coord = ore.Parent:GetAttribute("Coord")
                                     fireClient:FireServer("Digsite", "DigBlock", coord)
                                     wait(0.000001)
                                 end
@@ -561,6 +585,42 @@ local function AutoMine()
                             i = i + 1
                             wait(0.000001)
                         end
+                        wait(0.000001)
+                    end
+                    wait(0.000001)
+                end
+            end
+        elseif _G.typeMine == "Only blocks/ores" then
+            RootPart = GetPlayer()
+	        if RootPart then
+                parts = MineBlocks:GetChildren()
+                i = 1
+                while #parts >= i do
+                    if not _G.autoMine then
+                        wait(0.000001)
+                        return
+                    end
+                    part = parts[i]
+                    ore = MineBlocks:FindFirstChild("Ore", true)
+                    if not part then
+                        wait(0.000001)
+                        i = i + 1
+                    elseif ore then
+                        while ore.Parent do
+                            RootPart.CFrame = CFrame.new(ore.Parent.Position)
+                            coord = ore.Parent:GetAttribute("Coord")
+                            fireClient:FireServer("Digsite", "DigBlock", coord)
+                            wait(0.000001)
+                        end
+                        wait(0.000001)
+                    else
+                        while part.Parent do
+                            RootPart.CFrame = CFrame.new(part.Position)
+                            coord = part:GetAttribute("Coord")
+                            fireClient:FireServer("Digsite", "DigBlock", coord)
+                            wait(0.000001)
+                        end
+                        i = i + 1
                         wait(0.000001)
                     end
                     wait(0.000001)
@@ -651,7 +711,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
         })
 
             TabMine:AddToggle({
-	            Name = "AutoFish",
+	            Name = "Auto BasicFish",
 	            Default = false,
 	            Callback = function(Value)
 		            _G.autoFish = Value
@@ -660,13 +720,13 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
             })
 
         local Section7 = TabMine:AddSection({
-	        Name = "Mine"
+	        Name = "BasicMine"
         })
 
             TabMine:AddDropdown({
 	            Name = "Dropdown",
 	            Default = "All",
-	            Options = {"All", "Only blocks", "Only ores", "Only chests", "Only ores/chests"},
+	            Options = {"All", "Only blocks", "Only ores", "Only chests", "Only ores/chests", "Only blocks/ores"},
 	            Callback = function(Value)
 		            _G.typeMine = Value
 	            end    
@@ -675,7 +735,7 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
             TabMine:AddParagraph("Type mine", "Mining priority goes like this: 1) Chest; 2) Ore; 3) Block.")
 
             TabMine:AddToggle({
-	            Name = "AutoMine",
+	            Name = "AutoBasicMine",
 	            Default = false,
 	            Callback = function(Value)
 		            _G.autoMine = Value
