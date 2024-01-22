@@ -539,11 +539,18 @@ end
 local function AutoFish()
     fish = ActiveContainer:FindFirstChild("Fishing")
     if fish then
+        script = require(fish.Common)
+        script["ClickSpeed"] = 0.000001
+        script["DefaultFillSpeed"] = 1000
+        script["LootTravelTime"] = 0.0000000001
+        script["MinTravelTime"] = 0.005
+        script["MaxTravelTime"] = 0.015
+        script["CastDelay"] = 0.01
+        script["CatchInterval"] = 0.01
         while _G.autoFish do
             fireClient:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
-            wait(1.5)
+            wait(1)
             activation = false
-            wait(0.1)
             bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
             pos = bobber.Position
             while true do
