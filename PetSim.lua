@@ -553,6 +553,7 @@ local function AutoFish()
             activation = false
             bobber = fish.Bobbers:GetChildren()
             while #bobber == 0 do
+                bobber = fish.Bobbers:GetChildren()
                 wait(0.00000000001)
             end
             bobber = bobber[1]:FindFirstChild("Bobber")
@@ -600,7 +601,7 @@ local function AutoAdvancedFish()
             activation = false
             bobber = fish.Bobbers:GetChildren()
             while #bobber == 0 do
-		bobber = fish.Bobbers:GetChildren()
+		        bobber = fish.Bobbers:GetChildren()
                 wait(0.01)
             end
             bobber = bobber[1]:FindFirstChild("Bobber")
