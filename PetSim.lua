@@ -600,7 +600,8 @@ local function AutoAdvancedFish()
             activation = false
             bobber = fish.Bobbers:GetChildren()
             while #bobber == 0 do
-                wait(0.00000000001)
+		bobber = fish.Bobbers:GetChildren()
+                wait(0.01)
             end
             bobber = bobber[1]:FindFirstChild("Bobber")
             pos = bobber.Position
