@@ -36,6 +36,10 @@ _G.autoClaimFreePotions = false
 _G.autoClaimFreeEnchants = false
 _G.autoClaimFreeItems = false
 _G.autoClaimBigDiamonds = false
+_G.autoClaimSmallDiamonds2 = false
+_G.autoClaimFreePotions2 = false
+_G.autoClaimFreeEnchants2 = false
+_G.autoClaimFreeItems2 = false
 _G.autoClaimVending1 = false
 _G.autoClaimVending2 = false
 _G.autoClaimVending3 = false
@@ -236,6 +240,78 @@ local function AutoClaimBigDiamonds()
     end
 end
 
+local function AutoClaimSmallDiamonds2()
+    while _G.autoClaimSmallDiamonds2 do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(561.092224, 17.6505299, -148.544724)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
+    end
+end
+
+local function AutoClaimFreePotions2()
+    while _G.autoClaimFreePotions2 do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(695.568, 21.601, 559.959)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
+    end
+end
+
+local function AutoClaimFreeEnchants2()
+    while _G.autoClaimFreeEnchants2 do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(212.173, -29.367, 844.209)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
+    end
+end
+
+local function AutoClaimFreeItems2()
+    while _G.autoClaimFreeItems2 do
+        RootPart = GetPlayer()
+        if RootPart then
+            CFramePart = RootPart.Position
+            RootPart.CFrame = CFrame.new(810.242, 20.559, 846.899)
+            keyboard:SendKeyEvent(true, "S", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "S", false, game)
+            wait(0.0000001)
+            keyboard:SendKeyEvent(true, "W", false, game)
+            wait(0.5)
+            keyboard:SendKeyEvent(false, "W", false, game)
+        end
+        wait(1)
+    end
+end
+
 local function AutoClaimVending1()
     while _G.autoClaimVending1 do
         RootPart = GetPlayer()
@@ -388,9 +464,10 @@ local function AutoMine()
                         wait(0.000001)
                         return
                     end
-                    if not v then
+                    if not v.Parent then
                         wait(0.000001)
                     else
+                        skip = true
                         chest = MineChests:FindFirstChild("Animated")
                         ore = MineBlocks:FindFirstChild("Ore", true)
                         if chest then
@@ -906,6 +983,42 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 	            Callback = function(Value)
 		            _G.autoClaimBigDiamonds = Value
 		            AutoClaimBigDiamonds()
+	            end    
+            })
+
+            TabItems:AddToggle({
+	            Name = "AutoClaim Small Diamonds 2",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimSmallDiamonds2 = Value
+		            AutoClaimSmallDiamonds2()
+	            end    
+            })
+
+            TabItems:AddToggle({
+	            Name = "AutoClaim Free Potions 2",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimFreePotions2 = Value
+		            AutoClaimFreePotions2()
+	            end    
+            })
+
+            TabItems:AddToggle({
+	            Name = "AutoClaim Free Enchants 2",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimFreeEnchants2 = Value
+		            AutoClaimFreeEnchants2()
+	            end    
+            })
+
+            TabItems:AddToggle({
+	            Name = "AutoClaim Free Items 2",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoClaimFreeItems2 = Value
+		            AutoClaimFreeItems2()
 	            end    
             })
 
