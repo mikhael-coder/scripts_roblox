@@ -550,9 +550,12 @@ local function AutoFish()
         script["CatchInterval"] = 0.01
         while _G.autoFish do
             fireClient:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
-            wait(1)
             activation = false
-            bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
+            bobber = fish.Bobbers:GetChildren()
+            while #bobber == 0 do
+                wait(0.00000000001)
+            end
+            bobber = bobber[1]:FindFirstChild("Bobber")
             pos = bobber.Position
             while true do
                 if pos ~= bobber.Position then
@@ -594,9 +597,12 @@ local function AutoAdvancedFish()
         script["CatchInterval"] = 0.01
         while _G.autoAdvancedFish do
             fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1458.8328857421875, 61.62493896484375, -4451.16796875))
-            wait(1)
             activation = false
-            bobber = fish.Bobbers:GetChildren()[1]:FindFirstChild("Bobber")
+            bobber = fish.Bobbers:GetChildren()
+            while #bobber == 0 do
+                wait(0.00000000001)
+            end
+            bobber = bobber[1]:FindFirstChild("Bobber")
             pos = bobber.Position
             while true do
                 if pos ~= bobber.Position then
