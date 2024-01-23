@@ -245,7 +245,7 @@ local function AutoClaimSmallDiamonds2()
         RootPart = GetPlayer()
         if RootPart then
             CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(561.092224, 17.6505299, -148.544724)
+            RootPart.CFrame = CFrame.new(908.126, -32.37, 3679.395)
             keyboard:SendKeyEvent(true, "S", false, game)
             wait(0.5)
             keyboard:SendKeyEvent(false, "S", false, game)
@@ -263,7 +263,7 @@ local function AutoClaimFreePotions2()
         RootPart = GetPlayer()
         if RootPart then
             CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(695.568, 21.601, 559.959)
+            RootPart.CFrame = CFrame.new(751.897, 17.629, 4226.899)
             keyboard:SendKeyEvent(true, "S", false, game)
             wait(0.5)
             keyboard:SendKeyEvent(false, "S", false, game)
@@ -281,7 +281,7 @@ local function AutoClaimFreeEnchants2()
         RootPart = GetPlayer()
         if RootPart then
             CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(212.173, -29.367, 844.209)
+            RootPart.CFrame = CFrame.new(-128.293, 17.637, 4270.317)
             keyboard:SendKeyEvent(true, "S", false, game)
             wait(0.5)
             keyboard:SendKeyEvent(false, "S", false, game)
@@ -299,7 +299,7 @@ local function AutoClaimFreeItems2()
         RootPart = GetPlayer()
         if RootPart then
             CFramePart = RootPart.Position
-            RootPart.CFrame = CFrame.new(810.242, 20.559, 846.899)
+            RootPart.CFrame = CFrame.new(-130.416, 117.629, 4846.753)
             keyboard:SendKeyEvent(true, "S", false, game)
             wait(0.5)
             keyboard:SendKeyEvent(false, "S", false, game)
