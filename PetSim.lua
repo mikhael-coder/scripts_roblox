@@ -631,7 +631,7 @@ local function AutoFish()
             activation2 = false
             bobber = fish.Bobbers:GetChildren()
             bobrs = nil
-            while true do
+            while not activation2 do
                 bobber = fish.Bobbers:GetChildren()
                 if #bobber > 1 then
                     for i,v in ipairs(bobber) do
@@ -643,9 +643,6 @@ local function AutoFish()
                         wait(0.00000000001)
                     end
                     wait(0.00000000001)
-                end
-                if activation2 then
-                    break
                 end
                 wait(0.00000000001)
             end
@@ -694,7 +691,7 @@ local function AutoAdvancedFish()
             bobber = fish.Bobbers:GetChildren()
             activation2 = false
             bobrs = nil
-            while true do
+            while not activation2 do
                 bobber = fish.Bobbers:GetChildren()
                 if #bobber > 1 then
                     for i,v in ipairs(bobber) do
@@ -706,9 +703,6 @@ local function AutoAdvancedFish()
                         wait(0.00000000001)
                     end
                     wait(0.00000000001)
-                end
-                if activation2 then
-                    break
                 end
                 wait(0.00000000001)
             end
