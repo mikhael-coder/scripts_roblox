@@ -633,7 +633,7 @@ local function AutoFish()
             bobrs = nil
             while activation2 do
                 bobber = fish.Bobbers:GetChildren()
-                if #bobber > 1 then
+                if #bobber ~= 0 then
                     for i,v in ipairs(bobber) do
                         if math.abs(v:FindFirstChild("Bobber").Position.X - 1458.833) < 0.8 then
                             bobrs = v:FindFirstChild("Bobber")
@@ -644,7 +644,6 @@ local function AutoFish()
                     end
                     wait(0.00000000001)
                 end
-                wait(0.00000000001)
             end
             pos = bobrs.Position
             while true do
@@ -693,7 +692,7 @@ local function AutoAdvancedFish()
             bobrs = nil
             while activation2 do
                 bobber = fish.Bobbers:GetChildren()
-                if #bobber > 1 then
+                if #bobber ~= 0 then
                     for i,v in ipairs(bobber) do
                         if math.abs(v:FindFirstChild("Bobber").Position.X - 1458.833) < 0.8 then
                             bobrs = v:FindFirstChild("Bobber")
@@ -704,7 +703,6 @@ local function AutoAdvancedFish()
                     end
                     wait(0.00000000001)
                 end
-                wait(0.00000000001)
             end
             pos = bobrs.Position
             while true do
