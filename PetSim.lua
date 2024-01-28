@@ -644,6 +644,7 @@ local function AutoFish()
                     end
                     wait(0.00000000001)
                 end
+				wait(0.00000000001)
             end
             pos = bobrs.Position
             while true do
@@ -703,6 +704,7 @@ local function AutoAdvancedFish()
                     end
                     wait(0.00000000001)
                 end
+                wait(0.00000000001)
             end
             pos = bobrs.Position
             while true do
