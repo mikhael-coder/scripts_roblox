@@ -630,7 +630,9 @@ local function AutoFish()
             if #bobbers > 1 then
                 for i,v in ipairs(bobbers) do
                     v:Destroy()
+                    wait(0.00000000001)
                 end
+                wait(0.00000000001)
             end
             fireClient:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
             activation = false
@@ -684,7 +686,9 @@ local function AutoAdvancedFish()
             if #bobbers > 1 then
                 for i,v in ipairs(bobbers) do
                     v:Destroy()
+                    wait(0.00000000001)
                 end
+                wait(0.00000000001)
             end
             fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1458.8328857421875, 61.62493896484375, -4451.16796875))
             activation = false
