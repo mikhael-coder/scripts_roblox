@@ -626,6 +626,12 @@ local function AutoFish()
         script["CastDelay"] = 0.01
         script["CatchInterval"] = 0.01
         while _G.autoFish do
+	        bobbers = fish.Bobbers:GetChildren()
+            if #bobbers > 1 then
+                for i,v in ipairs(bobbers) do
+                    v:Destroy()
+                end
+            end
             fireClient:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
             activation = false
             bobber = fish.Bobbers:GetChildren()
@@ -674,6 +680,12 @@ local function AutoAdvancedFish()
         script["CastDelay"] = 0.01
         script["CatchInterval"] = 0.01
         while _G.autoAdvancedFish do
+	        bobbers = fish.Bobbers:GetChildren()
+            if #bobbers > 1 then
+                for i,v in ipairs(bobbers) do
+                    v:Destroy()
+                end
+            end
             fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1458.8328857421875, 61.62493896484375, -4451.16796875))
             activation = false
             bobber = fish.Bobbers:GetChildren()
