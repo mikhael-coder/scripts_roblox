@@ -628,16 +628,16 @@ local function AutoFish()
         while _G.autoFish do
             fireClient:FireServer("Fishing", "RequestCast", Vector3.new(1134.7392578125, 75.91407775878906, -3462.708740234375))
             activation = false
-            activation2 = false
+            activation2 = true
             bobber = fish.Bobbers:GetChildren()
             bobrs = nil
-            while not activation2 do
+            while activation2 do
                 bobber = fish.Bobbers:GetChildren()
                 if #bobber > 1 then
                     for i,v in ipairs(bobber) do
                         if math.abs(v:FindFirstChild("Bobber").Position.X - 1458.833) < 0.8 then
                             bobrs = v:FindFirstChild("Bobber")
-                            activation2 = true
+                            activation2 = false
                             wait(0.00000000001)
                         end
                         wait(0.00000000001)
@@ -689,15 +689,15 @@ local function AutoAdvancedFish()
             fireClient:FireServer("AdvancedFishing", "RequestCast", Vector3.new(1458.8328857421875, 61.62493896484375, -4451.16796875))
             activation = false
             bobber = fish.Bobbers:GetChildren()
-            activation2 = false
+            activation2 = true
             bobrs = nil
-            while not activation2 do
+            while activation2 do
                 bobber = fish.Bobbers:GetChildren()
                 if #bobber > 1 then
                     for i,v in ipairs(bobber) do
                         if math.abs(v:FindFirstChild("Bobber").Position.X - 1458.833) < 0.8 then
                             bobrs = v:FindFirstChild("Bobber")
-                            activation2 = true
+                            activation2 = false
                             wait(0.00000000001)
                         end
                         wait(0.00000000001)
