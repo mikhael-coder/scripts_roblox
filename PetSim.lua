@@ -627,7 +627,7 @@ local function AutoFish()
         script["CatchInterval"] = 0.01
         while _G.autoFish do
 	        bobbers = fish.Bobbers:GetChildren()
-            if #bobbers > 0 then
+            if #bobbers > 1 then
                 for i,v in ipairs(bobbers) do
                     v:Destroy()
                     wait(0.00000000001)
@@ -683,7 +683,7 @@ local function AutoAdvancedFish()
         script["CatchInterval"] = 0.01
         while _G.autoAdvancedFish do
 	        bobbers = fish.Bobbers:GetChildren()
-            if #bobbers > 0 then
+            if #bobbers > 1 then
                 for i,v in ipairs(bobbers) do
                     v:Destroy()
                     wait(0.00000000001)
