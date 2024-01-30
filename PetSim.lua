@@ -638,7 +638,7 @@ local function AutoFish()
                         if v.Parent then
                             bob = v:FindFirstChild("Bobber")
                             if bob then
-                                if math.abs(bob.Position.X - 1458.833) < 0.8 then
+                                if math.abs(bob.Position.X - 1486.355) < 0.8 and math.abs(math.abs(bob.Position.Z) - 4488.366) < 0.8 then
                                     bobrs = v:FindFirstChild("Bobber")
                                     activation2 = false
                                     wait(0.00000000001)
@@ -703,7 +703,7 @@ local function AutoAdvancedFish()
                         if v.Parent then
                             bob = v:FindFirstChild("Bobber")
                             if bob then
-                                if math.abs(bob.Position.X - 1458.833) < 0.8 then
+                                if math.abs(bob.Position.X - 1486.355) < 0.8 and math.abs(math.abs(bob.Position.Z) - 4488.366) < 0.8 then
                                     bobrs = v:FindFirstChild("Bobber")
                                     activation2 = false
                                     wait(0.00000000001)
