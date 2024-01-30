@@ -635,10 +635,15 @@ local function AutoFish()
                 bobber = fish.Bobbers:GetChildren()
                 if #bobber ~= 0 then
                     for i,v in ipairs(bobber) do
-                        if math.abs(v:FindFirstChild("Bobber").Position.X - 1458.833) < 0.8 then
-                            bobrs = v:FindFirstChild("Bobber")
-                            activation2 = false
-                            wait(0.00000000001)
+                        if v.Parent then
+                            bob = v:FindFirstChild("Bobber")
+                            if bob then
+                                if math.abs(bob.Position.X - 1458.833) < 0.8 then
+                                    bobrs = v:FindFirstChild("Bobber")
+                                    activation2 = false
+                                    wait(0.00000000001)
+                                end
+                            end
                         end
                         wait(0.00000000001)
                     end
@@ -695,10 +700,15 @@ local function AutoAdvancedFish()
                 bobber = fish.Bobbers:GetChildren()
                 if #bobber ~= 0 then
                     for i,v in ipairs(bobber) do
-                        if math.abs(v:FindFirstChild("Bobber").Position.X - 1458.833) < 0.8 then
-                            bobrs = v:FindFirstChild("Bobber")
-                            activation2 = false
-                            wait(0.00000000001)
+                        if v.Parent then
+                            bob = v:FindFirstChild("Bobber")
+                            if bob then
+                                if math.abs(bob.Position.X - 1458.833) < 0.8 then
+                                    bobrs = v:FindFirstChild("Bobber")
+                                    activation2 = false
+                                    wait(0.00000000001)
+                                end
+                            end
                         end
                         wait(0.00000000001)
                     end
