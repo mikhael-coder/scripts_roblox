@@ -15,9 +15,6 @@ local nw = rs.Network
 local bu = th.Breakables
 local b_pdd = nw["Breakables_PlayerDealDamage"]
 
--- Removing unnecessary objects that interfere with the script
-bu.Highlight:Destroy()
-
 -- Global variables controlling the operation of repeating functions
 _G.autoTap = false
 
@@ -28,6 +25,10 @@ end
 
 local function IS(fun, args)
     fun:InvokeServer(unpack(args))
+end
+
+local function SD(ob)
+    if ob then ob:Destroy() end
 end
 
 local function AutoTap()
@@ -41,6 +42,9 @@ local function AutoTap()
         wait(0.000000001)
     end
 end
+
+-- Removing unnecessary objects that interfere with the script
+SD(bu:FindFirstChild("Highlight"))
 
     -- Tabs
     local TabAutoFarm = Window:MakeTab({
