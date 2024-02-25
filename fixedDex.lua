@@ -10411,7 +10411,7 @@ Main = (function()
 					Main.DepsVersionData[1] = ""
 				end
 			end
-			rawAPI = rawAPI or game:HttpGet("http://setup.roblox.com/"..Main.RobloxVersion.."-API-Dump.json")
+			rawAPI = nil
 		else
 			if script:FindFirstChild("API") then
 				rawAPI = require(script.API)
@@ -10419,8 +10419,6 @@ Main = (function()
 				error("NO API EXISTS")
 			end
 		end
-		Main.RawAPI = rawAPI
-		api = service.HttpService:JSONDecode(rawAPI)
 		
 		local classes,enums = {},{}
 		local categoryOrder,seenCategories = {},{}
