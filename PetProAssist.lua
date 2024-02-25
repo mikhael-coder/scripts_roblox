@@ -44,7 +44,7 @@ end
 local function CR(n)
     if _G.posOfPlayer then
         region = Region3.new(_G.posOfPlayer - Vector3.new(n, n, n), _G.posOfPlayer + Vector3.new(n, n, n))
-        return bu:FindPartsInRegion3(region, nil, math.huge)
+        return workspace:FindPartsInRegion3(region, nil, math.huge)
     end
 end
 
