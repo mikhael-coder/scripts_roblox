@@ -6,10 +6,12 @@ local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = fal
 -- 1 Level
 local ws = game:GetService("Workspace")
 local rs = game:GetService("ReplicatedStorage")
+local p = game:GetService("Players")
 
 -- 2 Level
 local th = ws["__THINGS"]
 local nw = rs.Network
+local lp = p.LocalPlayer
 
 -- 3 Level
 local bu = th.Breakables
@@ -17,8 +19,16 @@ local b_pdd = nw["Breakables_PlayerDealDamage"]
 
 -- Global variables controlling the operation of repeating functions
 _G.autoTap = false
+_G.posOfPlayer = nil
 
 -- Functions
+local function GP()
+    if lp.Character then
+        h = lp.Character:FindFirstChild("HumanoidRootPart")
+        if h then return true else return false end
+    end
+end
+
 local function FS(fun, args)
     fun:FireServer(unpack(args))
 end
@@ -31,9 +41,17 @@ local function SD(ob)
     if ob then ob:Destroy() end
 end
 
+local function CR(n)
+    if _G.posOfPlayer then
+        region = Region3.new(_G.posOfPlayer - Vector3.new(n, n, n), _G.posOfPlayer + Vector3.new(n, n, n))
+        return bu:FindPartsInRegion3(region, nil, math.huge)
+    end
+end
+
 local function AutoTap()
     while _G.autoTap do
-        for i,v in ipairs(bu:GetChildren()) do
+        tab = CR(50)
+        for i,v in ipairs(tab) do
             if not _G.autoTap then return end
             tab = {[1] = v.Name}
             FS(b_pdd, tab)
@@ -67,3 +85,15 @@ SD(bu:FindFirstChild("Highlight"))
 		            AutoTap()
 	            end    
             })
+
+            TabAutoFarm:AddButton({
+	            Name = "Setup Position",
+	            Callback = function()
+                    if GP() then
+      		            _G.posOfPlayer = lp.Character.HumanoidRootPart.Position
+                    end
+  	            end    
+            })
+
+-- Init (REQUIRED)
+OrionLib:Init()
