@@ -50,8 +50,9 @@ end
 
 local function AutoTap()
     while _G.autoTap do
-        tab = CR(10)
+        tab = CR(35)
         for i,v in ipairs(tab) do
+	        print(v.Name)
             if not _G.autoTap then return end
             tab = {[1] = v.Name}
             FS(b_pdd, tab)
