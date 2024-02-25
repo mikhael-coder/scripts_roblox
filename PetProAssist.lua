@@ -8,7 +8,7 @@ local rs = game:GetService("ReplicatedStorage")
 local th = ws["__THINGS"]
 local nw = rs.Network
 
-local bu = th.Buildings
+local bu = th.Breakables
 local b_pdd = nw["Breakables_PlayerDealDamage"]
 
 _G.autoTap = false
