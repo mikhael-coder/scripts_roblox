@@ -50,7 +50,7 @@ end
 
 local function AutoTap()
     while _G.autoTap do
-        tab = CR(50)
+        tab = CR(400)
         for i,v in ipairs(tab) do
             if not _G.autoTap then return end
             tab = {[1] = v.Name}
