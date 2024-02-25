@@ -50,7 +50,7 @@ local function CR(n)
         tab = {}
         region = Region3.new(_G.posOfPlayer - Vector3.new(n, n, n), _G.posOfPlayer + Vector3.new(n, n, n))
         for i,v in ipairs(bu:GetChildren()) do
-            if region:ContainsPoint(v.Position) then
+            if region:ContainsPoint(v.PrimaryPart.Position) then
                 table.insert(tab, v)
             end
         end
