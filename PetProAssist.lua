@@ -22,6 +22,10 @@ _G.autoTap = false
 _G.posOfPlayer = nil
 
 -- Functions
+local function IsN(str)
+    return tonumber(str) ~= nil
+end
+
 local function GP()
     if lp.Character then
         h = lp.Character:FindFirstChild("HumanoidRootPart")
@@ -44,13 +48,18 @@ end
 local function CR(n)
     if _G.posOfPlayer then
         region = Region3.new(_G.posOfPlayer - Vector3.new(n, n, n), _G.posOfPlayer + Vector3.new(n, n, n))
-        return workspace:FindPartsInRegion3(region, nil, math.huge)
+        parts = workspace:FindPartsInRegion3(region, nil, math.huge)
+        tab = {}
+        for i,v in ipairs(parts) do
+            if IsN(v.Name) then table.insert(tab, v) end
+        end
+        return tab
     end
 end
 
 local function AutoTap()
     while _G.autoTap do
-        tab = CR(35)
+        tab = CR(200)
         for i,v in ipairs(tab) do
 	        print(v.Name)
             if not _G.autoTap then return end
