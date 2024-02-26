@@ -49,6 +49,7 @@ local function CR(n)
         for i,v in ipairs(bu:GetChildren()) do
 			obj = v.PrimaryPart
             if obj then
+                obj = obj.Position
                 if obj.X >= Rmi.X and obj.X <= Rma.X and obj.Y >= Rmi.Y and obj.Y <= Rma.Y and obj.Z >= Rmi.Z and obj.Z <= Rma.Z then
                     table.insert(tab, v.Name)
                 end
