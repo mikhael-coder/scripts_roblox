@@ -16,10 +16,14 @@ local lp = p.LocalPlayer
 -- 3 Level
 local bu = th.Breakables
 local b_pdd = nw["Breakables_PlayerDealDamage"]
+local ua = nw["Ultimates: Activate"]
 
 -- Global variables controlling the operation of repeating functions
 _G.autoTap = false
+_G.autoFarmGroundPound = false
 _G.posOfPlayer = nil
+_G.distance = 0
+_G.interval = 0
 
 -- Local variables
 local Rmi = nil
@@ -33,9 +37,9 @@ local function GP()
     end
 end
 
-local function SR(n)
-    Rmi = _G.posOfPlayer - Vector3.new(n, n, n)
-    Rma = _G.posOfPlayer + Vector3.new(n, n, n)
+local function SR()
+    Rmi = _G.posOfPlayer - Vector3.new(_G.distance, _G.distance, _G.distance)
+    Rma = _G.posOfPlayer + Vector3.new(_G.distance, _G.distance, _G.distance)
 end
 
 local function FS(fun, args)
@@ -69,15 +73,28 @@ end
 
 local function AutoTap()
     while _G.autoTap do
-        SR(100)
+        SR()
         local TRP = CR()
         for i = 1, #TRP do
-	        print(TRP[i])
             if not _G.autoTap then return end
             FS(b_pdd, {[1] = TRP[i]})
-            wait(0.000000001)
+            wait(_G.interval)
         end
-        wait(0.000000001)
+        wait(0.00000000000001)
+    end
+end
+
+local function AutoFarmGroundPound()
+    while _G.autoFarmGroundPound do
+        FS(b_pdd, {[1] = "1"})
+        wait(0.00000000000001)
+    end
+end
+
+local function AutoUseGroundPound()
+    while _G.autoUseGroundPound do
+        IS(ua, {[1] = "Ground Pound"})
+        wait(1)
     end
 end
 
@@ -93,10 +110,10 @@ SD(bu:FindFirstChild("Highlight"))
 
         -- Sections
         local STAF = TabAutoFarm:AddSection({
-	        Name = "Farm"
+	        Name = "AutoTaps"
         })
 
-            -- Toggles
+            -- Different elements
             TabAutoFarm:AddToggle({
 	            Name = "AutoTap Buildings",
 	            Default = false,
@@ -106,6 +123,24 @@ SD(bu:FindFirstChild("Highlight"))
 	            end    
             })
 
+            TabAutoFarm:AddTextbox({
+	            Name = "Distance",
+	            Default = "Distance, the field under which objects will fit",
+	            TextDisappear = true,
+	            Callback = function(Value)
+		            _G.distance = tonumber(Value)
+	            end	  
+            })
+
+            TabAutoFarm:AddTextbox({
+	            Name = "Interval",
+	            Default = "Interval between clicks on buildings",
+	            TextDisappear = true,
+	            Callback = function(Value)
+		            _G.interval = tonumber(Value)
+	            end	  
+            })
+
             TabAutoFarm:AddButton({
 	            Name = "Setup Position",
 	            Callback = function()
@@ -113,6 +148,28 @@ SD(bu:FindFirstChild("Highlight"))
       		            _G.posOfPlayer = lp.Character.HumanoidRootPart.Position
                     end
   	            end    
+            })
+
+        local STAF = TabAutoFarm:AddSection({
+	        Name = "AutoGroundPound"
+        })
+
+            TabAutoFarm:AddToggle({
+	            Name = "AutoFarm Ground Pound",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoFarmGroundPound = Value
+		            AutoFarmGroundPound()
+	            end    
+            })
+
+            TabAutoFarm:AddToggle({
+	            Name = "AutoUse Ground Pound",
+	            Default = false,
+	            Callback = function(Value)
+		            _G.autoUseGroundPound = Value
+		            AutoUseGroundPound()
+	            end    
             })
 
 -- Init (REQUIRED)
