@@ -21,12 +21,21 @@ local b_pdd = nw["Breakables_PlayerDealDamage"]
 _G.autoTap = false
 _G.posOfPlayer = nil
 
+-- Local variables
+local Rmi = nil
+local Rma = nil
+
 -- Functions
 local function GP()
     if lp.Character then
-        h = lp.Character:FindFirstChild("HumanoidRootPart")
+        local h = lp.Character:FindFirstChild("HumanoidRootPart")
         if h then return true else return false end
     end
+end
+
+local function SR()
+    Rmi = _G.posOfPlayer - Vector3.new(n, n, n)
+    Rma = _G.posOfPlayer + Vector3.new(n, n, n)
 end
 
 local function FS(fun, args)
@@ -43,30 +52,29 @@ end
 
 local function CR(n)
     if _G.posOfPlayer then
-        tab = {}
-        Rmi = _G.posOfPlayer - Vector3.new(n, n, n)
-        Rma = _G.posOfPlayer + Vector3.new(n, n, n)
-        for i,v in ipairs(bu:GetChildren()) do
-			obj = v.PrimaryPart
-            if obj then
-                obj = obj.Position
-                if obj.X >= Rmi.X and obj.X <= Rma.X and obj.Y >= Rmi.Y and obj.Y <= Rma.Y and obj.Z >= Rmi.Z and obj.Z <= Rma.Z then
-                    table.insert(tab, v.Name)
+        local TRP2 = {}
+        local CB = bu:GetChildren()
+        for i = 1, #CB do
+			local OPP = CB[i].PrimaryPart
+            if OPP then
+                OPP = OPP.Position
+                if OPP.X >= Rmi.X and OPP.X <= Rma.X and OPP.Y >= Rmi.Y and OPP.Y <= Rma.Y and OPP.Z >= Rmi.Z and OPP.Z <= Rma.Z then
+                    table.insert(TRP2, CB[i].Name)
                 end
             end
-            wait(0.000000001)
         end
-        return tab
+        return TRP2
     end
 end
 
 local function AutoTap()
     while _G.autoTap do
-        tab = CR(50)
-        for i,v in ipairs(tab) do
-	        print(v)
+        SR()
+        local TRP = CR(50)
+        for i = 1, #TRP do
+	        print(TRP[i])
             if not _G.autoTap then return end
-            FS(b_pdd, {[1] = v})
+            FS(b_pdd, {[1] = TRP[i]})
             wait(0.000000001)
         end
         wait(0.000000001)
