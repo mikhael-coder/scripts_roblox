@@ -67,8 +67,8 @@ local function AutoTap()
         for i,v in ipairs(tab) do
 	        print(v.Name)
             if not _G.autoTap then return end
-            tab = {[1] = v.Name}
-            FS(b_pdd, tab)
+            args = {[1] = v.Name}
+            FS(b_pdd, args)
             wait(0.000000001)
         end
         wait(0.000000001)
