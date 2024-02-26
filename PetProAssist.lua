@@ -22,10 +22,6 @@ _G.autoTap = false
 _G.posOfPlayer = nil
 
 -- Functions
-local function IsN(str)
-    return tonumber(str) ~= nil
-end
-
 local function GP()
     if lp.Character then
         h = lp.Character:FindFirstChild("HumanoidRootPart")
@@ -51,9 +47,11 @@ local function CR(n)
         Rmi = _G.posOfPlayer - Vector3.new(n, n, n)
         Rma = _G.posOfPlayer + Vector3.new(n, n, n)
         for i,v in ipairs(bu:GetChildren()) do
-			obj = v.PrimaryPart.Position
-            if obj.X >= Rmi.X and obj.X <= Rma.X and obj.Y >= Rmi.Y and obj.Y <= Rma.Y and obj.Z >= Rmi.Z and obj.Z <= Rma.Z then
-                table.insert(tab, v)
+			obj = v.PrimaryPart
+            if obj then
+                if obj.X >= Rmi.X and obj.X <= Rma.X and obj.Y >= Rmi.Y and obj.Y <= Rma.Y and obj.Z >= Rmi.Z and obj.Z <= Rma.Z then
+                    table.insert(tab, v.Name)
+                end
             end
             wait(0.000000001)
         end
@@ -63,12 +61,11 @@ end
 
 local function AutoTap()
     while _G.autoTap do
-        tab = CR(20)
+        tab = CR(50)
         for i,v in ipairs(tab) do
-	        print(v.Name)
+	        print(v)
             if not _G.autoTap then return end
-            args = {[1] = v.Name}
-            FS(b_pdd, args)
+            FS(b_pdd, {[1] = v})
             wait(0.000000001)
         end
         wait(0.000000001)
