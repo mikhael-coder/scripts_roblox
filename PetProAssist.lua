@@ -1,5 +1,5 @@
 -- Library of GUI Hub
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 
 local Window = OrionLib:MakeWindow({Name = "Pet Simulator 99", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "Hi! It's best script for Pet Sim 99!"})
 
@@ -49,7 +49,7 @@ local function CR(n)
     if _G.posOfPlayer then
         tab = {}
         Rmi = _G.posOfPlayer - Vector3.new(n, n, n)
-        Rma = = _G.posOfPlayer + Vector3.new(n, n, n)
+        Rma = _G.posOfPlayer + Vector3.new(n, n, n)
         for i,v in ipairs(bu:GetChildren()) do
 			obj = v.PrimaryPart.Position
             if obj.X >= Rmi.X and obj.X <= Rma.X and obj.Y >= Rmi.Y and obj.Y <= Rma.Y and obj.Z >= Rmi.Z and obj.Z <= Rma.Z then
