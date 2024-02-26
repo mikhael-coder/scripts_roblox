@@ -57,8 +57,8 @@ local function CR(n)
         for i = 1, #CB do
 			local OPP = CB[i].PrimaryPart
             if OPP then
-                OPP = OPP.Position
-                if OPP.X >= Rmi.X and OPP.X <= Rma.X and OPP.Y >= Rmi.Y and OPP.Y <= Rma.Y and OPP.Z >= Rmi.Z and OPP.Z <= Rma.Z then
+                local OPP2 = OPP.Position
+                if OPP2.X >= Rmi.X and OPP2.X <= Rma.X and OPP2.Y >= Rmi.Y and OPP2.Y <= Rma.Y and OPP2.Z >= Rmi.Z and OPP2.Z <= Rma.Z then
                     table.insert(TRP2, CB[i].Name)
                 end
             end
@@ -70,7 +70,7 @@ end
 local function AutoTap()
     while _G.autoTap do
         SR()
-        local TRP = CR(50)
+        local TRP = CR(100)
         for i = 1, #TRP do
 	        print(TRP[i])
             if not _G.autoTap then return end
