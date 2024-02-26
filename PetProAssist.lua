@@ -33,7 +33,7 @@ local function GP()
     end
 end
 
-local function SR()
+local function SR(n)
     Rmi = _G.posOfPlayer - Vector3.new(n, n, n)
     Rma = _G.posOfPlayer + Vector3.new(n, n, n)
 end
@@ -50,7 +50,7 @@ local function SD(ob)
     if ob then ob:Destroy() end
 end
 
-local function CR(n)
+local function CR()
     if _G.posOfPlayer then
         local TRP2 = {}
         local CB = bu:GetChildren()
@@ -69,8 +69,8 @@ end
 
 local function AutoTap()
     while _G.autoTap do
-        SR()
-        local TRP = CR(100)
+        SR(100)
+        local TRP = CR()
         for i = 1, #TRP do
 	        print(TRP[i])
             if not _G.autoTap then return end
