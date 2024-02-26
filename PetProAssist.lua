@@ -22,8 +22,7 @@ local ua = nw["Ultimates: Activate"]
 _G.autoTap = false
 _G.autoFarmGroundPound = false
 _G.posOfPlayer = nil
-_G.distance = 0
-_G.interval = 0
+_G.distance = 100
 
 -- Local variables
 local Rmi = nil
@@ -78,15 +77,7 @@ local function AutoTap()
         for i = 1, #TRP do
             if not _G.autoTap then return end
             FS(b_pdd, {[1] = TRP[i]})
-            wait(_G.interval)
         end
-        wait(0.00000000000001)
-    end
-end
-
-local function AutoFarmGroundPound()
-    while _G.autoFarmGroundPound do
-        FS(b_pdd, {[1] = "1"})
         wait(0.00000000000001)
     end
 end
@@ -124,20 +115,11 @@ SD(bu:FindFirstChild("Highlight"))
             })
 
             TabAutoFarm:AddTextbox({
-	            Name = "Distance",
-	            Default = "Distance, the field under which objects will fit",
-	            TextDisappear = true,
+	            Name = "Distance (Default: 100)",
+	            Default = "",
+	            TextDisappear = false,
 	            Callback = function(Value)
 		            _G.distance = tonumber(Value)
-	            end	  
-            })
-
-            TabAutoFarm:AddTextbox({
-	            Name = "Interval",
-	            Default = "Interval between clicks on buildings",
-	            TextDisappear = true,
-	            Callback = function(Value)
-		            _G.interval = tonumber(Value)
 	            end	  
             })
 
@@ -153,15 +135,6 @@ SD(bu:FindFirstChild("Highlight"))
         local STAF = TabAutoFarm:AddSection({
 	        Name = "AutoGroundPound"
         })
-
-            TabAutoFarm:AddToggle({
-	            Name = "AutoFarm Ground Pound",
-	            Default = false,
-	            Callback = function(Value)
-		            _G.autoFarmGroundPound = Value
-		            AutoFarmGroundPound()
-	            end    
-            })
 
             TabAutoFarm:AddToggle({
 	            Name = "AutoUse Ground Pound",
