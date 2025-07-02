@@ -1,6 +1,6 @@
 local function printTable(t, indent, maxDepth, currentDepth)
     indent = indent or 0
-    maxDepth = maxDepth or math.huge -- максимальная глубина по умолчанию (бесконечность)
+    maxDepth = maxDepth or math.huge
     currentDepth = currentDepth or 0
 
     local spaces = string.rep(" ", indent)
